@@ -56,5 +56,8 @@
     "@storybook/node-logger": "^6.3.6",
     "@storybook/preset-create-react-app": "^3.2.0",
     "@storybook/react": "^6.3.6"
+  },
+  "resolutions": {
+    "babel-loader": "8.1.0"
   }
 }
