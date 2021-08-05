@@ -1,10 +1,27 @@
 .event-card-container {
   display: flex;
-  flex-wrap: wrap;
   flex-direction: row;
+  justify-content: space-between;
+  background-color: aqua;
+  height: 25rem;
+}
+.img-container {
+  background-color: blueviolet;
+  width: 40%;
+}
+.img {
+  width: 30rem;
+  object-fit: scale-down;
+  object-position: 50% 50%;
 }
 .info-container {
   display: flex;
-  flex-wrap: wrap;
   flex-direction: column;
+  padding: 1rem;
+  background-color: palevioletred;
+}
+.description {
+  background-color: yellowgreen;
+  padding: 2rem;
+  margin-bottom: 3rem;
 }
