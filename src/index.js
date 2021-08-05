@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Navbar from "./components/Navbar";
+import NavigationBar from "./components/NavigationBar";
 
 ReactDOM.render(
   <React.StrictMode>
     <div>
-      <Navbar> </Navbar>
+      <NavigationBar> </NavigationBar>
       <h1>Cha-Cha-Charity</h1>
     </div>
   </React.StrictMode>,
