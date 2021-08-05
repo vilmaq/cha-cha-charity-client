@@ -2,26 +2,36 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  background-color: aqua;
-  height: 25rem;
+}
+.name {
+  text-align: center;
 }
 .img-container {
-  background-color: blueviolet;
+  background-color: #2d2625;
   width: 40%;
 }
 .img {
-  width: 30rem;
-  object-fit: scale-down;
-  object-position: 50% 50%;
+  width: 30vw;
+  height: 30vw;
+  object-fit: cover;
 }
 .info-container {
   display: flex;
   flex-direction: column;
   padding: 1rem;
-  background-color: palevioletred;
+  background-color: white;
 }
 .description {
-  background-color: yellowgreen;
+  background-color: #ff8133;
   padding: 2rem;
-  margin-bottom: 3rem;
+}
+
+.when-where,
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin: auto;
+  padding: 1rem;
+  width: 60%;
 }

@@ -13,14 +13,20 @@ const EventCard = (props) => {
         </figure>
       </div>
       <div className="info-container">
-        <h3>Event Name</h3>
+        <section className="name">
+          <h3>Event Name</h3>
+        </section>
 
         <section className="description">
           Event description - this is an event, bla bla bla! Join the event!
           Event description - this is an event, bla bla bla! Join the event!
           Event description - this is an event, bla bla bla! Join the event!
         </section>
-        <section>
+        <section className="when-where">
+          <text>03/09/2021</text>
+          <text>Birmingham</text>
+        </section>
+        <section className="buttons">
           <a href="/interest">
             <button type="button">I'm interested</button>
           </a>
