@@ -25,7 +25,7 @@ const NavigationBar = () => {
           {/* {!currentUser && ( */}
           <Nav>
             <Nav.Link href="/login">Login</Nav.Link>
-            <Nav.Link href="/sign-up">Sign Up</Nav.Link>
+            <Nav.Link href="/signup">Sign Up</Nav.Link>
           </Nav>
           {/* )} */}
           {/* {currentUser && ( */}
