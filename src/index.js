@@ -1,13 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import NavigationBar from "./components/NavigationBar";
+
+import App from "./App";
+
+import "bootstrap/dist/css/bootstrap.min.css";
 
 ReactDOM.render(
   <React.StrictMode>
-    <div>
-      <NavigationBar> </NavigationBar>
-      <h1>Cha-Cha-Charity</h1>
-    </div>
+    <App />
   </React.StrictMode>,
   document.getElementById("root")
 );
