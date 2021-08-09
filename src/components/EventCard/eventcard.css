@@ -1,0 +1,37 @@
+.event-card-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.name {
+  text-align: center;
+}
+.img-container {
+  background-color: #2d2625;
+  width: 40%;
+}
+.img {
+  width: 30vw;
+  height: 30vw;
+  object-fit: cover;
+}
+.info-container {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  background-color: white;
+}
+.description {
+  background-color: #ff8133;
+  padding: 2rem;
+}
+
+.when-where,
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin: auto;
+  padding: 1rem;
+  width: 60%;
+}

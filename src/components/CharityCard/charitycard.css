@@ -1,0 +1,22 @@
+.charity-card-container {
+  padding: 2px;
+  margin: 2px;
+}
+
+.card {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.heading {
+  text-align: center;
+  padding: 2px;
+  margin: 2px;
+}
+
+.charity-info-container {
+  padding: 2px;
+  margin: 2px;
+  text-align: center;
+}
