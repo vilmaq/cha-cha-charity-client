@@ -1,11 +1,12 @@
-import React from 'react'
+import LoginForm from "../../src/components/LoginForm";
+import MainContainer from "../../components/MainContainer";
 
-function LoginForm() {
-    return (
-        <div>
-            <h1>Login Form</h1>
-        </div>
-    )
-}
+const LoginPage = () => {
+  return (
+    <MainContainer>
+      <LoginForm />
+    </MainContainer>
+  );
+};
 
-export default LoginForm
+export default LoginPage;
