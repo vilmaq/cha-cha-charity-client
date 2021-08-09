@@ -1,11 +1,7 @@
-import React from 'react'
+import MainContainer from "../components/MainContainer";
 
-function SignupForm() {
-    return (
-        <div>
-            <h1>Sign Up Form</h1>
-        </div>
-    )
-}
+const SignUp = () => {
+  return <MainContainer>Sign Up Form</MainContainer>;
+};
 
-export default SignupForm
+export default SignUp;

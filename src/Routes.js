@@ -1,24 +1,27 @@
 import { Switch, Route } from "react-router-dom";
 
 import Login from "./pages/Login";
-import Signup from "./pages/Signup";
+import SignUp from "./pages/SignUp";
 import Events from "./pages/Events";
-import Homepage from "./pages/Homepage";
+import Home from "./pages/Home";
+import { useUserContext } from "./contexts/UserProvider";
 
 const Routes = () => {
+  const { state, dispatch } = useUserContext();
+
   return (
     <Switch>
       <Route exact path="/login">
         <Login />
       </Route>
       <Route exact path="/signup">
-        <Signup />
+        <SignUp />
       </Route>
       <Route exact path="/events">
         <Events />
       </Route>
       <Route exact path="/">
-        <Homepage />
+        <Home />
       </Route>
     </Switch>
   );
