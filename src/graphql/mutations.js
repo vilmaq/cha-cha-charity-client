@@ -13,3 +13,17 @@ export const LOGIN = gql`
     }
   }
 `;
+
+export const SIGNUP = gql`
+  mutation Mutation($signUpInput: SignUpInput!) {
+    signUp(input: $signUpInput) {
+      token
+      user {
+        id
+        firstName
+        lastName
+        email
+      }
+    }
+  }
+`;

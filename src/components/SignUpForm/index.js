@@ -6,7 +6,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
 import { SIGNUP } from "../../graphql/mutations";
-import ErrorModal from "./ErrorModal";
+import ErrorModal from "../ErrorModal";
 
 const SignUpForm = () => {
   let history = useHistory();
