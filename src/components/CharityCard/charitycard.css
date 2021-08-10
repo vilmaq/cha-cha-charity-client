@@ -1,12 +1,14 @@
-.charity-card-container {
+/* .card {
   padding: 2px;
   margin: 2px;
-}
+} */
 
 .card {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
+  width: 30px;
+  height: 300px;
 }
 
 .heading {
