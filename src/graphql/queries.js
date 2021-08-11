@@ -13,7 +13,14 @@ export const EVENTS = gql`
       city
       country
       organizer
-      creator
+      creator {
+        id
+        type
+        name
+        last_name
+        password
+        email
+      }
       imageUrl
       participants {
         id
@@ -27,10 +34,46 @@ export const EVENTS = gql`
   }
 `;
 
-export const MyEvents = gql`{
-  query Query($eventsUserId:ID){
-    events(userId:$eventsUserId){
+export const MyEvents = gql`
+  query Query($userId: ID) {
+    events(userId: $userId) {
       events {
+        id
+        type
+        name
+        description
+        day
+        street
+        postcode
+        city
+        country
+        organizer
+        creator
+        creator {
+          id
+          type
+          name
+          last_name
+          password
+          email
+        }
+        imageUrl
+        participants {
+          id
+          type
+          name
+          last_name
+          password
+          email
+        }
+      }
+    }
+  }
+`;
+
+export const EVENT = gql`
+  query Query($id: ID!) {
+    event(id: id) {
       id
       type
       name
@@ -41,7 +84,14 @@ export const MyEvents = gql`{
       city
       country
       organizer
-      creator
+      creator {
+        id
+        type
+        name
+        last_name
+        password
+        email
+      }
       imageUrl
       participants {
         id
@@ -52,34 +102,5 @@ export const MyEvents = gql`{
         email
       }
     }
-    }
   }
-}`;
-
-export const EVENT = gql`{
-  query Query($eventId:ID!){
-    event(id: $eventId){
-      id
-      type
-      name
-      description
-      day
-      street
-      postcode
-      city
-      country
-      organizer
-      creator
-      imageUrl
-      participants {
-        id
-        type
-        name
-        last_name
-        password
-        email
-    }
-
-    }
-  }
-}`;
+`;

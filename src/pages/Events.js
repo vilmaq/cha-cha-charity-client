@@ -4,11 +4,14 @@ import { useUserContext } from "../contexts/UserProvider";
 import LoaderSpinner from "../components/Loader/LoaderSpinner.js";
 import { EVENTS } from "../graphql/queries";
 import EventCard from "../components/EventCard";
+import { useState } from "react";
 
 const Events = () => {
   const { data, loading, error } = useQuery(EVENTS);
   const { state } = useUserContext();
+  const [search, setSearch] = useState("");
 
+  console.log(data);
   if (loading) {
     return <LoaderSpinner />;
   }
@@ -18,9 +21,26 @@ const Events = () => {
   }
 
   if (data) {
+    const handleSearch = (e) => {
+      setSearch(e.target.value);
+    };
+    const dynamicSearch = () => {
+      return data.events.filter((event) =>
+        event.type.toLowerCase().includes(search.toLowerCase())
+      );
+    };
     return (
       <MainContainer>
-        {data.events.map((event) => {
+        <div>
+          <input
+            type="text"
+            value={search}
+            onChange={(e) => handleSearch(e)}
+            placeholder="Search by Event Type"
+          ></input>
+        </div>
+        <br></br>
+        {dynamicSearch().map((event) => {
           return (
             <EventCard
               id={event.id}
@@ -35,7 +55,7 @@ const Events = () => {
               organizer={event.organizer}
               creator={event.creator}
               imageUrl={event.imageUrl}
-              isMyEvent={state.user && user..id === state.user.id}
+              isMyEvent={state.user && event.user.id === state.user.id}
               // participants: []
             />
           );

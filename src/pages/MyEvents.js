@@ -8,44 +8,47 @@ import EventCard from "../components/EventCard";
 const MyEvents = () => {
   const { state } = useUserContext();
   const { data, loading, error } = useQuery(MY_EVENTS, {
-    variables: {???},
+    variables: {
+      userId: state.user.id,
+    },
   });
 
+  if (loading) {
+    return <Loader />;
+  }
 
-if (loading) {
-  return <LoaderSpinner />;
-}
+  if (error) {
+    return <div>Error</div>;
+  }
 
-if (error) {
-  return <div>Error</div>;
-}
-
-if (data) {
-  return (
-    <MainContainer  title={`Events by ${state.user.firstName} ${state.user.lastName}`}>
-      {data.events.map((events) => {
-        return (
-          <EventCard
-            id={event.id}
-            key={event.id}
-            name={event.name}
-            description={event.description}
-            day={event.day}
-            street={event.street}
-            postcode={event.postcode}
-            city={event.city}
-            country={event.country}
-            organizer={event.organizer}
-            creator={event.creator}
-            imageUrl={event.imageUrl}
-            // isMyEvent={state.user && user..id === state.user.id}
-            // participants: []
-          />
-        );
-      })}
-    </MainContainer>
-  );
-}
+  if (data) {
+    return (
+      <MainContainer
+        title={`Events by ${state.user.firstName} ${state.user.lastName}`}
+      >
+        {data.events.map((event) => {
+          return (
+            <EventCard
+              id={event.id}
+              key={event.id}
+              name={event.name}
+              description={event.description}
+              day={event.day}
+              street={event.street}
+              postcode={event.postcode}
+              city={event.city}
+              country={event.country}
+              organizer={event.organizer}
+              creator={event.creator}
+              imageUrl={event.imageUrl}
+              isMyEvent={state.user && event.user.id === state.user.id}
+              // participants: []
+            />
+          );
+        })}
+      </MainContainer>
+    );
+  }
 };
 
-export default Events;
+export default MyEvents;

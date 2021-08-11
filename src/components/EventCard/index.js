@@ -1,30 +1,33 @@
 import "./eventcard.css";
 
-const EventCard = (props) => {
+const EventCard = ({
+  props,
+  name,
+  description,
+  day,
+  street,
+  postcode,
+  city,
+  country,
+  organizer,
+  imageUrl,
+}) => {
   return (
     <article className="event-card-container">
       <div className="img-container">
         <figure>
-          <img
-            className="img"
-            src="https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Y2hhcml0eXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80"
-            alt="Event"
-          />
+          <img className="img" src={imageUrl} alt="Event" />
         </figure>
       </div>
       <div className="info-container">
         <section className="name">
-          <h3>Event Name</h3>
+          <h3>{name}</h3>
         </section>
 
-        <section className="description">
-          Event description - this is an event, bla bla bla! Join the event!
-          Event description - this is an event, bla bla bla! Join the event!
-          Event description - this is an event, bla bla bla! Join the event!
-        </section>
+        <section className="description">{description}</section>
         <section className="when-where">
-          <text>03/09/2021</text>
-          <text>Birmingham</text>
+          <p>{day}</p>
+          <p>{city}</p>
         </section>
         <section className="buttons">
           <a href="/interest">
