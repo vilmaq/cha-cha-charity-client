@@ -19,10 +19,24 @@ export const SIGNUP = gql`
     signUp(input: $signUpInput) {
       token
       user {
+        type
         id
-        firstName
-        lastName
+        fullName
+        password
         email
+        phoneNumber
+        street
+        postcode
+        city
+        country
+        imageUrl
+        bio
+        animals
+        environmental
+        international
+        health
+        education
+        artCulture
       }
     }
   }
