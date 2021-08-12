@@ -1,4 +1,29 @@
-import { Card } from "react-bootstrap";
+import "./charitycard.css";
+
+const CharityCard = ({ props, title, imageUrl }) => {
+  return (
+    <div className="charity-card-container">
+      <div>
+        <h3 className="heading">{title}</h3>
+        <figure>
+          <img
+            className="img"
+            src={imageUrl}
+            alt="charity"
+            // width="600"
+            // height="400"
+          />
+        </figure>
+      </div>
+      <div className="charity-info-container">
+        <button type="button">{title}</button>
+      </div>
+    </div>
+  );
+};
+export default CharityCard;
+
+/* import { Card } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 
 const CharityCard = ({ title, imageUrl }) => {
@@ -11,6 +36,4 @@ const CharityCard = ({ title, imageUrl }) => {
       </Card.Body>
     </Card>
   );
-};
-
-export default CharityCard;
+}; */
