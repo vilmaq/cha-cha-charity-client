@@ -1,6 +1,6 @@
-import "./eventcard.css";
+import "./eventCard.css";
 
-const EventCard = (props) => {
+const EventCard = props => {
   return (
     <article className="event-card-container">
       <div className="img-container">

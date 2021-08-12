@@ -1,8 +1,8 @@
-import "./charitycard.css";
+import "./charityCard.css";
 
 const CharityCard = ({ props, title, imageUrl }) => {
   return (
-    <div className="charity-card-container">
+    <div className="card">
       <div>
         <h3 className="heading">{title}</h3>
         <figure>
