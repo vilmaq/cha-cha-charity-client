@@ -4,6 +4,7 @@ import { useMutation } from "@apollo/client";
 import { useHistory } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import loginImg from "../icons/logo_re_uo4w.svg";
 
 import { SIGNUP } from "../../graphql/mutations";
 import ErrorModal from "../ErrorModal";
@@ -41,27 +42,18 @@ const SignUpForm = () => {
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
+      <div className="image">
+        <img src={loginImg} alt="" />
+      </div>
       <Form.Group className="mb-3">
         <Form.Control
           type="text"
-          placeholder="Enter first name"
-          {...register("firstName", { required: true })}
+          placeholder="Enter full name"
+          {...register("fullName", { required: true })}
         />
-        {errors.firstName && (
+        {errors.fullName && (
           <Form.Text className="text-danger">
             Please enter your first name.
-          </Form.Text>
-        )}
-      </Form.Group>
-      <Form.Group className="mb-3">
-        <Form.Control
-          type="text"
-          placeholder="Enter last name"
-          {...register("lastName", { required: true })}
-        />
-        {errors.lastName && (
-          <Form.Text className="text-danger">
-            Please enter your last name.
           </Form.Text>
         )}
       </Form.Group>
@@ -86,6 +78,66 @@ const SignUpForm = () => {
         {errors.password && (
           <Form.Text className="text-danger">
             Please enter a password.
+          </Form.Text>
+        )}
+      </Form.Group>
+      <Form.Group className="mb-3">
+        <Form.Control
+          type="text"
+          placeholder="Enter your phone number"
+          {...register("phone number", { required: true })}
+        />
+        {errors.phoneNumber && (
+          <Form.Text className="text-danger">
+            Please enter your first name.
+          </Form.Text>
+        )}
+      </Form.Group>
+      <Form.Group className="mb-3">
+        <Form.Control
+          type="text"
+          placeholder="Enter your street address"
+          {...register("phone number", { required: true })}
+        />
+        {errors.street && (
+          <Form.Text className="text-danger">
+            Please enter your first name.
+          </Form.Text>
+        )}
+      </Form.Group>
+      <Form.Group className="mb-3">
+        <Form.Control
+          type="text"
+          placeholder="Enter postcode "
+          {...register("postcode ", { required: true })}
+        />
+        {errors.postcode && (
+          <Form.Text className="text-danger">
+            Please enter your first name.
+          </Form.Text>
+        )}
+      </Form.Group>
+      <Form.Group className="mb-3">
+        <Form.Control
+          type="text"
+          placeholder="Enter city"
+          {...register("city", { required: true })}
+        />
+        {errors.city && (
+          <Form.Text className="text-danger">
+            Please enter your first name.
+          </Form.Text>
+        )}
+      </Form.Group>
+      <Form.Group className="mb-3">
+        <Form.Control
+          type="text"
+          placeholder="Enter country"
+          {...register("country", { required: true })}
+        />
+        {errors.country && (
+          <Form.Text className="text-danger">
+            Please enter your first name.
           </Form.Text>
         )}
       </Form.Group>
