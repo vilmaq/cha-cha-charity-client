@@ -1,19 +1,20 @@
 import { useQuery } from "@apollo/client";
 import MainContainer from "../components/MainContainer";
 import { useUserContext } from "../contexts/UserProvider";
-import LoaderSpinner from "../components/Loader/LoaderSpinner.js";
-import { EVENTS } from "../graphql/queries";
+import Loader from "../components/Loader";
+import { MY_EVENTS } from "../graphql/queries";
 import EventCard from "../components/EventCard";
-import { useState } from "react";
 
-const Events = () => {
-  const { data, loading, error } = useQuery(EVENTS);
+const MyEvents = () => {
   const { state } = useUserContext();
-  const [search, setSearch] = useState("");
+  const { data, loading, error } = useQuery(MY_EVENTS, {
+    variables: {
+      userId: state.user.id,
+    },
+  });
 
-  console.log(data);
   if (loading) {
-    return <LoaderSpinner />;
+    return <Loader />;
   }
 
   if (error) {
@@ -21,26 +22,11 @@ const Events = () => {
   }
 
   if (data) {
-    const handleSearch = (e) => {
-      setSearch(e.target.value);
-    };
-    const dynamicSearch = () => {
-      return data.events.filter((event) =>
-        event.type.toLowerCase().includes(search.toLowerCase())
-      );
-    };
     return (
-      <MainContainer>
-        <div>
-          <input
-            type="text"
-            value={search}
-            onChange={(e) => handleSearch(e)}
-            placeholder="Search by Event Type"
-          ></input>
-        </div>
-        <br></br>
-        {dynamicSearch().map((event) => {
+      <MainContainer
+        title={`Events by ${state.user.firstName} ${state.user.lastName}`}
+      >
+        {data.events.map((event) => {
           return (
             <EventCard
               id={event.id}
@@ -65,4 +51,4 @@ const Events = () => {
   }
 };
 
-export default Events;
+export default MyEvents;
