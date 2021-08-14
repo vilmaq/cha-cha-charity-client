@@ -1,5 +1,13 @@
 .main-content {
-  margin: 3rem 2rem 1rem 2rem;
+  /* margin: 3rem; */
+  border: 3rem;
+  width: 70%;
+  display: inline-flex;
+  flex-wrap: wrap;
+
+  align-self: center;
+  justify-content: space-between;
+  align-items: center;
 }
 
 @media screen and (max-width: 768px) {
