@@ -1,39 +1,51 @@
-import "./charityCard.css";
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 
-const CharityCard = ({ props, title, imageUrl }) => {
+import "./charitycard.css";
+
+const useStyles = makeStyles({
+  root: {
+    maxWidth: 345,
+  },
+});
+
+export default function ImgMediaCard() {
+  // const classes = useStyles();
+
   return (
-    <div className="card">
-      <div>
-        <h3 className="heading">{title}</h3>
-        <figure>
-          <img
-            className="img"
-            src={imageUrl}
-            alt="charity"
-            // width="600"
-            // height="400"
-          />
-        </figure>
-      </div>
-      <div className="charity-info-container">
-        <button type="button">{title}</button>
-      </div>
-    </div>
-  );
-};
-export default CharityCard;
-
-/* import { Card } from "react-bootstrap";
-import { Button } from "react-bootstrap";
-
-const CharityCard = ({ title, imageUrl }) => {
-  return (
-    <Card style={{ width: "18rem" }}>
-      <Card.Body>
-        <Card.Title>{title}</Card.Title>
-        <Card.Img variant="top" src={imageUrl} />
-        <Button variant="primary">{title}</Button>
-      </Card.Body>
+    <div className="charity-card-container">
+    <Card className="card">
+      <CardActionArea>
+        <CardMedia
+          component="img"
+          alt="Contemplative Reptile"
+          height="140"
+          image="/static/images/cards/contemplative-reptile.jpg"
+          title="Contemplative Reptile"
+        />
+        <CardContent className="cardContent">
+          <Typography gutterBottom variant="h5" component="h2" className="heading">
+            Charity Name
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p" className="charity-info-container">
+            Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
+            across all continents except Antarctica
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+      <CardActions className="learnMore button">
+        <Button size="medium" color="primary" >
+          Learn More
+        </Button>
+      </CardActions>
     </Card>
+    </div> 
   );
-}; */
+}

@@ -1,14 +1,23 @@
-/* .card {
-  padding: 2px;
-  margin: 2px;
-} */
+:root {
+  --jet: #353535;
+  --blue: #878DC5;
+}
 
-.card {
+.cardContent {
+  background-color: #878DC5;
+}
+.button {
+  background-color: white;
+}
+.charity-card-container {
+  padding: 20px;
+  margin: 20px;
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
-  width: 30px;
-  height: 300px;
+}
+
+.card {
+  max-width: 345px;
 }
 
 .heading {
@@ -20,5 +29,10 @@
 .charity-info-container {
   padding: 2px;
   margin: 2px;
-  text-align: center;
+  text-align:justify;
+  text-justify: inter-word;
+}
+
+.learnMore {
+  justify-content: center;
 }

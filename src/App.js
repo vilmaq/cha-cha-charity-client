@@ -10,7 +10,7 @@ import { setContext } from "@apollo/client/link/context";
 import Routes from "./Routes";
 import Navigation from "./components/NavigationBar";
 import UserProvider from "./contexts/UserProvider";
-
+import CharityCard from "./components/CharityCard";
 import "./App.css";
 
 const httpLink = createHttpLink({
@@ -39,6 +39,7 @@ const App = () => {
       <UserProvider>
         <Router>
           <Navigation />
+          <CharityCard/>
           <Routes />
         </Router>
       </UserProvider>
