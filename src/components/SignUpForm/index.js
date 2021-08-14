@@ -28,6 +28,15 @@ const useStyles = makeStyles((theme) => ({
     "& .MuiButtonBase-root": {
       margin: theme.spacing(2),
     },
+
+    button: {
+      display: "block",
+      marginTop: theme.spacing(2),
+    },
+    formControl: {
+      margin: theme.spacing(1),
+      minWidth: 120,
+    },
   },
 }));
 
@@ -46,6 +55,8 @@ const SignUpForm = ({ handleClose }) => {
   const [selectedCountryISO, setSelectedCountryISO] = useState("");
   const [selectCountry, setSelectedCountry] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
+  const [category, setCategory] = React.useState("");
+  const [open, setOpen] = React.useState(false);
 
   const onSubmit = (data) => {
     console.log(data);
@@ -81,6 +92,14 @@ const SignUpForm = ({ handleClose }) => {
 
   const handleChangeCity = (event) => {
     setSelectedCity(event.target.value);
+  };
+
+  const handleChange = (event) => {
+    setCategory(event.target.value);
+  };
+
+  const handleOpen = () => {
+    setOpen(true);
   };
 
   return (
@@ -186,6 +205,31 @@ const SignUpForm = ({ handleClose }) => {
         )}
         rules={{ required: "postcode required" }}
       />
+      <div>
+        <Button className={classes.button} onClick={handleOpen}>
+          Select the category
+        </Button>
+        <FormControl className={classes.formControl}>
+          <InputLabel id="demo-controlled-open-select-label">
+            Category
+          </InputLabel>
+          <Select
+            labelId="demo-controlled-open-select-label"
+            id="demo-controlled-open-select"
+            open={open}
+            onClose={handleClose}
+            onOpen={handleOpen}
+            onChange={handleChange}
+          >
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
+            <MenuItem value={10}>Business</MenuItem>
+            <MenuItem value={20}>Volunteer</MenuItem>
+            <MenuItem value={30}>Charity</MenuItem>
+          </Select>
+        </FormControl>
+      </div>
       <FormControlLabel
         control={
           <Checkbox
