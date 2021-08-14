@@ -30,6 +30,7 @@
   height: 250px;
   object-fit: cover;
   overflow: auto;
+  border-radius: 6px;
 }
 .info-container {
   display: flex;
