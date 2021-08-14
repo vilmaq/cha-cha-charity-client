@@ -1,101 +1,98 @@
+import React from "react";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { useMutation } from "@apollo/client";
-import { useHistory } from "react-router-dom";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
+import { makeStyles } from "@material-ui/core";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import { useForm, Controller } from "react-hook-form";
 
-import { LOGIN } from "../../graphql/mutations";
-import ErrorModal from "../ErrorModal";
-import { useUserContext } from "../../contexts/UserProvider";
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: theme.spacing(2),
 
-const LoginForm = () => {
-  let history = useHistory();
-  const { dispatch } = useUserContext();
-
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-
-  const [login, { error }] = useMutation(LOGIN, {
-    onCompleted: (data) => {
-      const payload = {
-        token: data.login.token,
-        email: data.login.user.email,
-        firstName: data.login.user.firstName,
-        lastName: data.login.user.lastName,
-        id: data.login.user.id,
-      };
-
-      localStorage.setItem("user", JSON.stringify(payload));
-
-      dispatch({
-        type: "LOGIN",
-        payload,
-      });
-
-      history.push("/");
+    "& .MuiTextField-root": {
+      margin: theme.spacing(1),
+      width: "300px",
     },
-    onError: () => {
-      handleShow();
+    "& .MuiButtonBase-root": {
+      margin: theme.spacing(2),
     },
-  });
+  },
+}));
 
-  const onSubmit = async (formData) => {
-    await login({
-      variables: {
-        loginInput: formData,
-      },
-    });
+const LoginForm = ({ handleClose }) => {
+  const classes = useStyles();
+  const { handleSubmit, control } = useForm();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [open, setOpen] = React.useState(false);
+
+  const onSubmit = (event) => {
+    event.preventDefault();
+  };
+
+  const onChangeEmail = (event) => {
+    setEmail(event.target.value);
+  };
+
+  const onChangePassword = (event) => {
+    setPassword(event.target.value);
+  };
+
+  const handleOpen = () => {
+    setOpen(true);
   };
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
-      <Form.Group className="mb-3">
-        <Form.Control
-          type="email"
-          placeholder="Enter email"
-          {...register("email", { required: true })}
-        />
-        {errors.email && (
-          <Form.Text className="text-danger">
-            Please enter an email address.
-          </Form.Text>
+    <form className={classes.root} onSubmit={handleSubmit(onSubmit)}>
+      <Controller
+        name="email"
+        control={control}
+        defaultValue=""
+        render={({ field: { onChange, value }, fieldState: { error } }) => (
+          <TextField
+            label="Email"
+            variant="filled"
+            value={value}
+            onChange={onChange}
+            error={!!error}
+            helperText={error ? error.message : null}
+            type="email"
+          />
         )}
-      </Form.Group>
-      <Form.Group className="mb-3">
-        <Form.Control
-          type="password"
-          placeholder="Enter Password"
-          {...register("password", { required: true })}
-        />
-        {errors.password && (
-          <Form.Text className="text-danger">
-            Please enter a password.
-          </Form.Text>
+        rules={{ required: "Email required" }}
+      />
+      <Controller
+        name="password"
+        control={control}
+        defaultValue=""
+        render={({ field: { onChange, value }, fieldState: { error } }) => (
+          <TextField
+            label="Password"
+            variant="filled"
+            value={value}
+            onChange={onChange}
+            error={!!error}
+            helperText={error ? error.message : null}
+            type="password"
+          />
         )}
-      </Form.Group>
-      <div className="d-grid gap-2">
-        <Button variant="primary" type="submit">
-          Login
+        rules={{ required: "Password required" }}
+      />
+
+      <div>
+        <Button variant="contained" onClick={handleClose}>
+          Cancel
+        </Button>
+        <Button type="submit" variant="contained" color="primary">
+          Signup
         </Button>
       </div>
-      {error && (
-        <ErrorModal
-          show={show}
-          handleClose={handleClose}
-          title="Login Failed"
-          message="Please enter the correct email address and/or password."
-        />
-      )}
-    </Form>
+    </form>
   );
 };
 

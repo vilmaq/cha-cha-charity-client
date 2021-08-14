@@ -44,6 +44,12 @@ const SignUpForm = ({ handleClose }) => {
   const classes = useStyles();
   const { handleSubmit, control } = useForm();
 
+  const [FullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [postcode, setPostcode] = useState("");
+  const [street, setStreet] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [animals, setAnimals] = useState(false);
   const [environmental, setEnvironmental] = useState(false);
   const [international, setInternational] = useState(false);
@@ -58,8 +64,32 @@ const SignUpForm = ({ handleClose }) => {
   const [category, setCategory] = React.useState("");
   const [open, setOpen] = React.useState(false);
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = (event) => {
+    event.preventDefault();
+  };
+
+  const onChangeFullName = (event) => {
+    setFullName(event.target.value);
+  };
+
+  const onChangeEmail = (event) => {
+    setEmail(event.target.value);
+  };
+
+  const onChangePassword = (event) => {
+    setPassword(event.target.value);
+  };
+
+  const onChangePostcode = (event) => {
+    setPostcode(event.target.value);
+  };
+
+  const onChangeStreet = (event) => {
+    setStreet(event.target.value);
+  };
+
+  const onChangePhoneNumber = (event) => {
+    setPhoneNumber(event.target.value);
   };
 
   const handleChangeAnimals = (event) => {
