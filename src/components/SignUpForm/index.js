@@ -1,160 +1,298 @@
+import React from "react";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { useMutation } from "@apollo/client";
-import { useHistory } from "react-router-dom";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import loginImg from "../icons/logo_re_uo4w.svg";
+import { makeStyles } from "@material-ui/core";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import { useForm, Controller } from "react-hook-form";
+import FormControl from "@material-ui/core/FormControl";
+import InputLabel from "@material-ui/core/InputLabel";
+import Checkbox from "@material-ui/core/Checkbox";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import Select from "@material-ui/core/Select";
+import { Box } from "@material-ui/core";
+import { Country, City } from "country-state-city";
 
-import { SIGNUP } from "../../graphql/mutations";
-import ErrorModal from "../ErrorModal";
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: theme.spacing(2),
 
-const SignUpForm = () => {
-  let history = useHistory();
-
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-
-  const [signUp, { error }] = useMutation(SIGNUP, {
-    onCompleted: () => {
-      history.push("/login");
+    "& .MuiTextField-root": {
+      margin: theme.spacing(1),
+      width: "300px",
     },
-    onError: () => {
-      handleShow();
+    "& .MuiButtonBase-root": {
+      margin: theme.spacing(2),
     },
-  });
+  },
+}));
 
-  const onSubmit = async (formData) => {
-    await signUp({
-      variables: {
-        signUpInput: formData,
-      },
-    });
+const SignUpForm = ({ handleClose }) => {
+  const classes = useStyles();
+  const { handleSubmit, control } = useForm();
+
+  const [animals, setAnimals] = useState(false);
+  const [environmental, setEnvironmental] = useState(false);
+  const [international, setInternational] = useState(false);
+  const [health, setHealth] = useState(false);
+  const [education, setEducation] = useState(false);
+  const [artCulture, setArtCulture] = useState(false);
+  const [countries] = useState(Country.getAllCountries());
+  const [cities, setCities] = useState();
+  const [selectedCountryISO, setSelectedCountryISO] = useState("");
+  const [selectCountry, setSelectedCountry] = useState("");
+  const [selectedCity, setSelectedCity] = useState("");
+
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+
+  const handleChangeAnimals = (event) => {
+    setAnimals(event.target.checked);
+  };
+
+  const handleChangeEnvironmental = (event) => {
+    setEnvironmental(event.target.checked);
+  };
+
+  const handleChangeInternational = (event) => {
+    setInternational(event.target.checked);
+  };
+  const handleChangeHealth = (event) => {
+    setHealth(event.target.checked);
+  };
+
+  const handleChangeEducation = (event) => {
+    setEducation(event.target.checked);
+  };
+
+  const handleChangeArtCulture = (event) => {
+    setArtCulture(event.target.checked);
+  };
+  const handleChangeCountry = (event) => {
+    setSelectedCountryISO(event.target.value);
+    setSelectedCountry(event.currentTarget.getAttribute("name"));
+    setCities(City.getCitiesOfCountry(event.target.value));
+  };
+
+  const handleChangeCity = (event) => {
+    setSelectedCity(event.target.value);
   };
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
-      <div className="image">
-        <img src={loginImg} alt="" />
-      </div>
-      <Form.Group className="mb-3">
-        <Form.Control
-          type="text"
-          placeholder="Enter full name"
-          {...register("fullName", { required: true })}
-        />
-        {errors.fullName && (
-          <Form.Text className="text-danger">
-            Please enter your first name.
-          </Form.Text>
+    <form className={classes.root} onSubmit={handleSubmit(onSubmit)}>
+      <Controller
+        name="fullName"
+        control={control}
+        defaultValue=""
+        render={({ field: { onChange, value }, fieldState: { error } }) => (
+          <TextField
+            label="fullName"
+            variant="filled"
+            value={value}
+            onChange={onChange}
+            error={!!error}
+            helperText={error ? error.message : null}
+          />
         )}
-      </Form.Group>
-      <Form.Group className="mb-3">
-        <Form.Control
-          type="email"
-          placeholder="Enter email"
-          {...register("email", { required: true })}
-        />
-        {errors.email && (
-          <Form.Text className="text-danger">
-            Please enter an email address.
-          </Form.Text>
+        rules={{ required: "Full name required" }}
+      />
+      <Controller
+        name="email"
+        control={control}
+        defaultValue=""
+        render={({ field: { onChange, value }, fieldState: { error } }) => (
+          <TextField
+            label="Email"
+            variant="filled"
+            value={value}
+            onChange={onChange}
+            error={!!error}
+            helperText={error ? error.message : null}
+            type="email"
+          />
         )}
-      </Form.Group>
-      <Form.Group className="mb-3">
-        <Form.Control
-          type="password"
-          placeholder="Enter Password"
-          {...register("password", { required: true })}
-        />
-        {errors.password && (
-          <Form.Text className="text-danger">
-            Please enter a password.
-          </Form.Text>
+        rules={{ required: "Email required" }}
+      />
+      <Controller
+        name="password"
+        control={control}
+        defaultValue=""
+        render={({ field: { onChange, value }, fieldState: { error } }) => (
+          <TextField
+            label="Password"
+            variant="filled"
+            value={value}
+            onChange={onChange}
+            error={!!error}
+            helperText={error ? error.message : null}
+            type="password"
+          />
         )}
-      </Form.Group>
-      <Form.Group className="mb-3">
-        <Form.Control
-          type="text"
-          placeholder="Enter your phone number"
-          {...register("phone number", { required: true })}
-        />
-        {errors.phoneNumber && (
-          <Form.Text className="text-danger">
-            Please enter your first name.
-          </Form.Text>
+        rules={{ required: "Password required" }}
+      />
+      <Controller
+        name="phoneNumber"
+        control={control}
+        defaultValue=""
+        render={({ field: { onChange, value }, fieldState: { error } }) => (
+          <TextField
+            label="phoneNumber"
+            variant="filled"
+            value={value}
+            onChange={onChange}
+            error={!!error}
+            helperText={error ? error.message : null}
+            type="phoneNumber"
+          />
         )}
-      </Form.Group>
-      <Form.Group className="mb-3">
-        <Form.Control
-          type="text"
-          placeholder="Enter your street address"
-          {...register("phone number", { required: true })}
-        />
-        {errors.street && (
-          <Form.Text className="text-danger">
-            Please enter your first name.
-          </Form.Text>
+        rules={{ required: "phone number required" }}
+      />
+      <Controller
+        name="street"
+        control={control}
+        defaultValue=""
+        render={({ field: { onChange, value }, fieldState: { error } }) => (
+          <TextField
+            label="street"
+            variant="filled"
+            value={value}
+            onChange={onChange}
+            error={!!error}
+            helperText={error ? error.message : null}
+            type="street"
+          />
         )}
-      </Form.Group>
-      <Form.Group className="mb-3">
-        <Form.Control
-          type="text"
-          placeholder="Enter postcode "
-          {...register("postcode ", { required: true })}
-        />
-        {errors.postcode && (
-          <Form.Text className="text-danger">
-            Please enter your first name.
-          </Form.Text>
+        rules={{ required: "street required" }}
+      />
+      <Controller
+        name="postcode"
+        control={control}
+        defaultValue=""
+        render={({ field: { onChange, value }, fieldState: { error } }) => (
+          <TextField
+            label="postcode"
+            variant="filled"
+            value={value}
+            onChange={onChange}
+            error={!!error}
+            helperText={error ? error.message : null}
+            type="postcode"
+          />
         )}
-      </Form.Group>
-      <Form.Group className="mb-3">
-        <Form.Control
-          type="text"
-          placeholder="Enter city"
-          {...register("city", { required: true })}
-        />
-        {errors.city && (
-          <Form.Text className="text-danger">
-            Please enter your first name.
-          </Form.Text>
-        )}
-      </Form.Group>
-      <Form.Group className="mb-3">
-        <Form.Control
-          type="text"
-          placeholder="Enter country"
-          {...register("country", { required: true })}
-        />
-        {errors.country && (
-          <Form.Text className="text-danger">
-            Please enter your first name.
-          </Form.Text>
-        )}
-      </Form.Group>
-      <div className="d-grid gap-2">
-        <Button variant="primary" type="submit">
-          Sign Up
+        rules={{ required: "postcode required" }}
+      />
+      <FormControlLabel
+        control={
+          <Checkbox
+            checked={animals}
+            onChange={handleChangeAnimals}
+            name="animals"
+            color="primary"
+          />
+        }
+        label="Animals"
+      />
+      <FormControlLabel
+        control={
+          <Checkbox
+            checked={environmental}
+            onChange={handleChangeEnvironmental}
+            name="environmental"
+            color="primary"
+          />
+        }
+        label="Environmental"
+      />
+      <FormControlLabel
+        control={
+          <Checkbox
+            checked={international}
+            onChange={handleChangeInternational}
+            name="international"
+            color="primary"
+          />
+        }
+        label="International"
+      />
+      <FormControlLabel
+        control={
+          <Checkbox
+            checked={health}
+            onChange={handleChangeHealth}
+            name="health"
+            color="primary"
+          />
+        }
+        label="Health"
+      />
+      <FormControlLabel
+        control={
+          <Checkbox
+            checked={education}
+            onChange={handleChangeEducation}
+            name="education"
+            color="primary"
+          />
+        }
+        label="ArtCulture"
+      />
+      <FormControlLabel
+        control={
+          <Checkbox
+            checked={artCulture}
+            onChange={handleChangeArtCulture}
+            name="artCulture"
+            color="primary"
+          />
+        }
+        label="artCulture"
+      />
+      <FormControl>
+        <InputLabel>Country</InputLabel>
+        <Select value={selectedCountryISO} onChange={handleChangeCountry}>
+          {countries.map((country) => {
+            return (
+              <MenuItem
+                name={country.name}
+                value={country.isoCode}
+                key={country.isoCode}
+              >
+                {country.name}
+              </MenuItem>
+            );
+          })}
+        </Select>
+      </FormControl>
+      {cities && (
+        <Box component="div" m={1}>
+          <FormControl style={{ minWidth: "200px" }}>
+            <InputLabel>City</InputLabel>
+            <Select value={selectedCity} onChange={handleChangeCity}>
+              {cities.map((city, index) => {
+                return (
+                  <MenuItem value={city.name} key={`${city.name}-${index}`}>
+                    {city.name}
+                  </MenuItem>
+                );
+              })}
+            </Select>
+          </FormControl>
+        </Box>
+      )}
+      <div>
+        <Button variant="contained" onClick={handleClose}>
+          Cancel
+        </Button>
+        <Button type="submit" variant="contained" color="primary">
+          Signup
         </Button>
       </div>
-      {error && (
-        <ErrorModal
-          show={show}
-          handleClose={handleClose}
-          title="Sign Up Failed"
-          message="We are sorry for the inconvenience. Please try again."
-        />
-      )}
-    </Form>
+    </form>
   );
 };
 
