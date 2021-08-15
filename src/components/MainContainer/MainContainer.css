@@ -1,6 +1,7 @@
 .main-content {
-  /* margin: 3rem; */
+  padding: 20px;
   border: 3rem;
+  /* border-color: black; */
   width: 70%;
   display: inline-flex;
   flex-wrap: wrap;
