@@ -13,6 +13,13 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import ShareIcon from "@material-ui/icons/Share";
 import Button from "@material-ui/core/Button";
 
+import dog from "../../assets/images/illustrations/whole-images/dog.png";
+import environmental from "../../assets/images/illustrations/whole-images/pablo-201.png";
+import arts from "../../assets/images/illustrations/whole-images/pablo-956.png";
+import health from "../../assets/images/illustrations/whole-images/healthy.png";
+import education from "../../assets/images/illustrations/whole-images/school.png";
+import mrworldwide from "../../assets/images/illustrations/whole-images/pablo-873.png";
+
 // import CardContent from "@material-ui/core/CardContent";
 // import Typography from "@material-ui/core/Typography";
 // import Collapse from "@material-ui/core/Collapse";
@@ -21,7 +28,16 @@ import Button from "@material-ui/core/Button";
 
 // import animal from "../assets/image/animal.png";
 
-const useStyles = makeStyles(theme => ({
+const categoryImages = {
+  animals: dog,
+  environmental: environmental,
+  arts: arts,
+  health: health,
+  education: education,
+  international: mrworldwide,
+};
+
+const useStyles = makeStyles((theme) => ({
   root: {
     minWidth: 345,
   },
@@ -37,11 +53,7 @@ const useStyles = makeStyles(theme => ({
   },
 
   expand: {
-    transform: "rotate(0deg)",
     marginLeft: "auto",
-    transition: theme.transitions.create("transform", {
-      duration: theme.transitions.duration.shortest,
-    }),
   },
   expandOpen: {
     transform: "rotate(180deg)",
@@ -70,7 +82,11 @@ export default function CategoryCard({ title, image }) {
           }
           title={title}
         />
-        <CardMedia className={classes.media} image={image} title={title} />
+        <CardMedia
+          className={classes.media}
+          image={categoryImages[image]}
+          title={title}
+        />
 
         <CardActions disableSpacing>
           <IconButton aria-label="add to favorites">
@@ -78,11 +94,12 @@ export default function CategoryCard({ title, image }) {
           </IconButton>
           <IconButton aria-label="share">
             <ShareIcon />
-          </IconButton>
-        </CardActions>
-
-        <CardActions>
-          <Button variant="contained" color="secondary">
+          </IconButton>{" "}
+          <Button
+            className={classes.expand}
+            variant="contained"
+            color="secondary"
+          >
             More
           </Button>
         </CardActions>
