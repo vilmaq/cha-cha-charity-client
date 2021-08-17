@@ -417,45 +417,6 @@ const SignUpForm = ({ handleClose }) => {
           </Button>
         </div>
       </form>
-
-      {/* <div className={classes.root}> */}
-      {/* <FormControl component="fieldset" className={classes.formControl}>
-          <FormGroup>
-            <FormControlLabel
-              control={<Checkbox checked={false} name="gilad" />}
-              label="Gilad Gray"
-            />
-            <FormControlLabel
-              control={<Checkbox checked={false} name="jason" />}
-              label="Jason Killian"
-            />
-            <FormControlLabel
-              control={<Checkbox checked={false} name="antoine" />}
-              label="Antoine Llorca"
-            />
-          </FormGroup>
-        </FormControl>
-        <FormControl
-          required
-          component="fieldset"
-          className={classes.formControl}
-        >
-          <FormGroup>
-            <FormControlLabel
-              control={<Checkbox checked={false} name="gilad" />}
-              label="Gilad Gray"
-            />
-            <FormControlLabel
-              control={<Checkbox checked={false} name="jason" />}
-              label="Jason Killian"
-            />
-            <FormControlLabel
-              control={<Checkbox checked={false} name="antoine" />}
-              label="Antoine Llorca"
-            />
-          </FormGroup>
-        </FormControl>
-      </div> */}
     </>
   );
 };
