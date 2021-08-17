@@ -3,8 +3,10 @@ import SignUpForm from "../components/SignUpForm";
 const SignUp = () => {
   return (
     <MainContainer>
-      <h1>Sign Up Form</h1>
-
+      <div>
+        <h2 className="my-4 text-center">SignUp</h2>
+        <hr />
+      </div>
       <SignUpForm />
     </MainContainer>
   );

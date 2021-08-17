@@ -8,11 +8,11 @@ import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormGroup from "@material-ui/core/FormGroup";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import { Box } from "@material-ui/core";
 import { Country, City } from "country-state-city";
-import { Component } from "react";
 
 // export class SignUp extends Component {
 //   state = {
@@ -49,18 +49,18 @@ import { Component } from "react";
 // }
 
 const useStyles = makeStyles((theme) => ({
-  root: {
+  form: {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
     padding: theme.spacing(2),
 
-    "& .MuiTextField-root": {
+    "& .MuiTextField-form": {
       margin: theme.spacing(1),
       width: "300px",
     },
-    "& .MuiButtonBase-root": {
+    "& .MuiButtonBase-form": {
       margin: theme.spacing(2),
     },
 
@@ -68,8 +68,11 @@ const useStyles = makeStyles((theme) => ({
       display: "block",
       marginTop: theme.spacing(2),
     },
+
     formControl: {
-      margin: theme.spacing(1),
+      backgroundColor: "red",
+      display: "flex",
+      margin: theme.spacing(3),
       minWidth: 120,
     },
   },
@@ -168,240 +171,292 @@ const SignUpForm = ({ handleClose }) => {
   };
 
   return (
-    <form className={classes.root} onSubmit={handleSubmit(onSubmit)}>
-      <Controller
-        name="fullName"
-        control={control}
-        defaultValue=""
-        render={({ field: { onChange, value }, fieldState: { error } }) => (
-          <TextField
-            label="fullName"
-            variant="filled"
-            value={value}
-            onChange={onChange}
-            error={!!error}
-            helperText={error ? error.message : null}
-          />
-        )}
-        rules={{ required: "Full name required" }}
-      />
-      <Controller
-        name="email"
-        control={control}
-        defaultValue=""
-        render={({ field: { onChange, value }, fieldState: { error } }) => (
-          <TextField
-            label="Email"
-            variant="filled"
-            value={value}
-            onChange={onChange}
-            error={!!error}
-            helperText={error ? error.message : null}
-            type="email"
-          />
-        )}
-        rules={{ required: "Email required" }}
-      />
-      <Controller
-        name="password"
-        control={control}
-        defaultValue=""
-        render={({ field: { onChange, value }, fieldState: { error } }) => (
-          <TextField
-            label="Password"
-            variant="filled"
-            value={value}
-            onChange={onChange}
-            error={!!error}
-            helperText={error ? error.message : null}
-            type="password"
-          />
-        )}
-        rules={{ required: "Password required" }}
-      />
-      <Controller
-        name="phoneNumber"
-        control={control}
-        defaultValue=""
-        render={({ field: { onChange, value }, fieldState: { error } }) => (
-          <TextField
-            label="phoneNumber"
-            variant="filled"
-            value={value}
-            onChange={onChange}
-            error={!!error}
-            helperText={error ? error.message : null}
-            type="phoneNumber"
-          />
-        )}
-        rules={{ required: "phone number required" }}
-      />
-      <Controller
-        name="street"
-        control={control}
-        defaultValue=""
-        render={({ field: { onChange, value }, fieldState: { error } }) => (
-          <TextField
-            label="street"
-            variant="filled"
-            value={value}
-            onChange={onChange}
-            error={!!error}
-            helperText={error ? error.message : null}
-            type="street"
-          />
-        )}
-        rules={{ required: "street required" }}
-      />
-      <Controller
-        name="postcode"
-        control={control}
-        defaultValue=""
-        render={({ field: { onChange, value }, fieldState: { error } }) => (
-          <TextField
-            label="postcode"
-            variant="filled"
-            value={value}
-            onChange={onChange}
-            error={!!error}
-            helperText={error ? error.message : null}
-            type="postcode"
-          />
-        )}
-        rules={{ required: "postcode required" }}
-      />
-      <FormControl>
-        <InputLabel>Country</InputLabel>
-        <Select value={selectedCountryISO} onChange={handleChangeCountry}>
-          {countries.map((country) => {
-            return (
-              <MenuItem
-                name={country.name}
-                value={country.isoCode}
-                key={country.isoCode}
-              >
-                {country.name}
-              </MenuItem>
-            );
-          })}
-        </Select>
-      </FormControl>
-      {cities && (
-        <Box component="div" m={1}>
-          <FormControl style={{ minWidth: "200px" }}>
-            <InputLabel>City</InputLabel>
-            <Select value={selectedCity} onChange={handleChangeCity}>
-              {cities.map((city, index) => {
-                return (
-                  <MenuItem value={city.name} key={`${city.name}-${index}`}>
-                    {city.name}
-                  </MenuItem>
-                );
-              })}
-            </Select>
-          </FormControl>
-        </Box>
-      )}
-      <div>
-        <Button className={classes.button} onClick={handleOpen}>
-          Select the category
-        </Button>
-        <FormControl className={classes.formControl}>
-          <InputLabel id="demo-controlled-open-select-label">
-            Category
-          </InputLabel>
-          <Select
-            labelId="demo-controlled-open-select-label"
-            id="demo-controlled-open-select"
-            open={open}
-            onClose={handleClose}
-            onOpen={handleOpen}
-            onChange={handleChange}
-          >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            <MenuItem value={10}>Business</MenuItem>
-            <MenuItem value={20}>Volunteer</MenuItem>
-            <MenuItem value={30}>Charity</MenuItem>
+    <>
+      <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
+        <Controller
+          name="fullName"
+          control={control}
+          defaultValue=""
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <TextField
+              label="fullName"
+              variant="filled"
+              value={value}
+              onChange={onChange}
+              error={!!error}
+              helperText={error ? error.message : null}
+            />
+          )}
+          rules={{ required: "Full name required" }}
+        />
+        <Controller
+          name="email"
+          control={control}
+          defaultValue=""
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <TextField
+              label="Email"
+              variant="filled"
+              value={value}
+              onChange={onChange}
+              error={!!error}
+              helperText={error ? error.message : null}
+              type="email"
+            />
+          )}
+          rules={{ required: "Email required" }}
+        />
+        <Controller
+          name="password"
+          control={control}
+          defaultValue=""
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <TextField
+              label="Password"
+              variant="filled"
+              value={value}
+              onChange={onChange}
+              error={!!error}
+              helperText={error ? error.message : null}
+              type="password"
+            />
+          )}
+          rules={{ required: "Password required" }}
+        />
+        <Controller
+          name="phoneNumber"
+          control={control}
+          defaultValue=""
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <TextField
+              label="phoneNumber"
+              variant="filled"
+              value={value}
+              onChange={onChange}
+              error={!!error}
+              helperText={error ? error.message : null}
+              type="phoneNumber"
+            />
+          )}
+          rules={{ required: "phone number required" }}
+        />
+        <Controller
+          name="street"
+          control={control}
+          defaultValue=""
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <TextField
+              label="street"
+              variant="filled"
+              value={value}
+              onChange={onChange}
+              error={!!error}
+              helperText={error ? error.message : null}
+              type="street"
+            />
+          )}
+          rules={{ required: "street required" }}
+        />
+        <Controller
+          name="postcode"
+          control={control}
+          defaultValue=""
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <TextField
+              label="postcode"
+              variant="filled"
+              value={value}
+              onChange={onChange}
+              error={!!error}
+              helperText={error ? error.message : null}
+              type="postcode"
+            />
+          )}
+          rules={{ required: "postcode required" }}
+        />
+        <FormControl>
+          <InputLabel>Country</InputLabel>
+          <Select value={selectedCountryISO} onChange={handleChangeCountry}>
+            {countries.map((country) => {
+              return (
+                <MenuItem
+                  name={country.name}
+                  value={country.isoCode}
+                  key={country.isoCode}
+                >
+                  {country.name}
+                </MenuItem>
+              );
+            })}
           </Select>
         </FormControl>
-      </div>
-      <FormControlLabel
-        control={
-          <Checkbox
-            checked={animals}
-            onChange={handleChangeAnimals}
-            name="animals"
-            color="primary"
-          />
-        }
-        label="Animals"
-      />
-      <FormControlLabel
-        control={
-          <Checkbox
-            checked={environmental}
-            onChange={handleChangeEnvironmental}
-            name="environmental"
-            color="primary"
-          />
-        }
-        label="Environmental"
-      />
-      <FormControlLabel
-        control={
-          <Checkbox
-            checked={international}
-            onChange={handleChangeInternational}
-            name="international"
-            color="primary"
-          />
-        }
-        label="International"
-      />
-      <FormControlLabel
-        control={
-          <Checkbox
-            checked={health}
-            onChange={handleChangeHealth}
-            name="health"
-            color="primary"
-          />
-        }
-        label="Health"
-      />
-      <FormControlLabel
-        control={
-          <Checkbox
-            checked={education}
-            onChange={handleChangeEducation}
-            name="education"
-            color="primary"
-          />
-        }
-        label="Education"
-      />
-      <FormControlLabel
-        control={
-          <Checkbox
-            checked={artCulture}
-            onChange={handleChangeArtCulture}
-            name="artCulture"
-            color="primary"
-          />
-        }
-        label="artCulture"
-      />
-      <div>
-        <Button variant="contained" onClick={handleClose}>
-          Cancel
-        </Button>
-        <Button type="submit" variant="contained" color="primary">
-          Signup
-        </Button>
-      </div>
-    </form>
+        {cities && (
+          <Box component="div" m={1}>
+            <FormControl style={{ minWidth: "200px" }}>
+              <InputLabel>City</InputLabel>
+              <Select value={selectedCity} onChange={handleChangeCity}>
+                {cities.map((city, index) => {
+                  return (
+                    <MenuItem value={city.name} key={`${city.name}-${index}`}>
+                      {city.name}
+                    </MenuItem>
+                  );
+                })}
+              </Select>
+            </FormControl>
+          </Box>
+        )}
+        <div>
+          <Button className={classes.button} onClick={handleOpen}>
+            Select the type
+          </Button>
+          <FormControl className={classes.formControl}>
+            <InputLabel id="demo-controlled-open-select-label">Type</InputLabel>
+            <Select
+              labelId="demo-controlled-open-select-label"
+              id="demo-controlled-open-select"
+              open={open}
+              onClose={handleClose}
+              onOpen={handleOpen}
+              onChange={handleChange}
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              <MenuItem value={10}>Business</MenuItem>
+              <MenuItem value={20}>Volunteer</MenuItem>
+              <MenuItem value={30}>Charity</MenuItem>
+            </Select>
+          </FormControl>
+        </div>
+
+        <div className={classes.root}>
+          <FormControl component="fieldset" className={classes.formControl}>
+            <FormGroup>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={animals}
+                    onChange={handleChangeAnimals}
+                    name="animals"
+                    color="primary"
+                  />
+                }
+                label="Animals"
+              />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={environmental}
+                    onChange={handleChangeEnvironmental}
+                    name="environmental"
+                    color="primary"
+                  />
+                }
+                label="Environmental"
+              />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={international}
+                    onChange={handleChangeInternational}
+                    name="international"
+                    color="primary"
+                  />
+                }
+                label="International"
+              />
+            </FormGroup>
+          </FormControl>
+
+          <FormControl component="fieldset" className={classes.formControl}>
+            <FormGroup>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={health}
+                    onChange={handleChangeHealth}
+                    name="health"
+                    color="primary"
+                  />
+                }
+                label="Health"
+              />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={education}
+                    onChange={handleChangeEducation}
+                    name="education"
+                    color="primary"
+                  />
+                }
+                label="ArtCulture"
+              />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={artCulture}
+                    onChange={handleChangeArtCulture}
+                    name="artCulture"
+                    color="primary"
+                  />
+                }
+                label="artCulture"
+              />
+            </FormGroup>
+          </FormControl>
+        </div>
+
+        <div>
+          <Button variant="contained" onClick={handleClose}>
+            Cancel
+          </Button>
+          <Button type="submit" variant="contained" color="primary">
+            Signup
+          </Button>
+        </div>
+      </form>
+
+      {/* <div className={classes.root}> */}
+      {/* <FormControl component="fieldset" className={classes.formControl}>
+          <FormGroup>
+            <FormControlLabel
+              control={<Checkbox checked={false} name="gilad" />}
+              label="Gilad Gray"
+            />
+            <FormControlLabel
+              control={<Checkbox checked={false} name="jason" />}
+              label="Jason Killian"
+            />
+            <FormControlLabel
+              control={<Checkbox checked={false} name="antoine" />}
+              label="Antoine Llorca"
+            />
+          </FormGroup>
+        </FormControl>
+        <FormControl
+          required
+          component="fieldset"
+          className={classes.formControl}
+        >
+          <FormGroup>
+            <FormControlLabel
+              control={<Checkbox checked={false} name="gilad" />}
+              label="Gilad Gray"
+            />
+            <FormControlLabel
+              control={<Checkbox checked={false} name="jason" />}
+              label="Jason Killian"
+            />
+            <FormControlLabel
+              control={<Checkbox checked={false} name="antoine" />}
+              label="Antoine Llorca"
+            />
+          </FormGroup>
+        </FormControl>
+      </div> */}
+    </>
   );
 };
 
