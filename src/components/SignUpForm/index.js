@@ -12,6 +12,41 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import { Box } from "@material-ui/core";
 import { Country, City } from "country-state-city";
+import { Component } from "react";
+
+// export class SignUp extends Component {
+//   state = {
+//     step: 1,
+//     fullName: "",
+//     email: "",
+//     password: "",
+//     postcode: "",
+//     street: "",
+//     phoneNumber: "",
+//     selectCountry: "",
+//     selectedCountryISO: "",
+//     setSelectedCity: "",
+//     category: "",
+//   };
+
+//   //Proceed to the next form
+//   nextStep = () => {
+//     const { step } = this.state;
+//     this.setState({
+//       step: step + 1,
+//     });
+//   };
+
+//   //Go back to the previous form
+//   prevStep = () => {
+//     const { step } = this.state;
+//     this.setState({
+//       step: step - 1,
+//     });
+//   };
+
+//   //Handle
+// }
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -313,7 +348,7 @@ const SignUpForm = ({ handleClose }) => {
             color="primary"
           />
         }
-        label="ArtCulture"
+        label="Education"
       />
       <FormControlLabel
         control={
