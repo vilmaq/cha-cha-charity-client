@@ -270,6 +270,38 @@ const SignUpForm = ({ handleClose }) => {
         )}
         rules={{ required: "postcode required" }}
       />
+      <FormControl>
+        <InputLabel>Country</InputLabel>
+        <Select value={selectedCountryISO} onChange={handleChangeCountry}>
+          {countries.map((country) => {
+            return (
+              <MenuItem
+                name={country.name}
+                value={country.isoCode}
+                key={country.isoCode}
+              >
+                {country.name}
+              </MenuItem>
+            );
+          })}
+        </Select>
+      </FormControl>
+      {cities && (
+        <Box component="div" m={1}>
+          <FormControl style={{ minWidth: "200px" }}>
+            <InputLabel>City</InputLabel>
+            <Select value={selectedCity} onChange={handleChangeCity}>
+              {cities.map((city, index) => {
+                return (
+                  <MenuItem value={city.name} key={`${city.name}-${index}`}>
+                    {city.name}
+                  </MenuItem>
+                );
+              })}
+            </Select>
+          </FormControl>
+        </Box>
+      )}
       <div>
         <Button className={classes.button} onClick={handleOpen}>
           Select the category
@@ -361,38 +393,6 @@ const SignUpForm = ({ handleClose }) => {
         }
         label="artCulture"
       />
-      <FormControl>
-        <InputLabel>Country</InputLabel>
-        <Select value={selectedCountryISO} onChange={handleChangeCountry}>
-          {countries.map((country) => {
-            return (
-              <MenuItem
-                name={country.name}
-                value={country.isoCode}
-                key={country.isoCode}
-              >
-                {country.name}
-              </MenuItem>
-            );
-          })}
-        </Select>
-      </FormControl>
-      {cities && (
-        <Box component="div" m={1}>
-          <FormControl style={{ minWidth: "200px" }}>
-            <InputLabel>City</InputLabel>
-            <Select value={selectedCity} onChange={handleChangeCity}>
-              {cities.map((city, index) => {
-                return (
-                  <MenuItem value={city.name} key={`${city.name}-${index}`}>
-                    {city.name}
-                  </MenuItem>
-                );
-              })}
-            </Select>
-          </FormControl>
-        </Box>
-      )}
       <div>
         <Button variant="contained" onClick={handleClose}>
           Cancel
