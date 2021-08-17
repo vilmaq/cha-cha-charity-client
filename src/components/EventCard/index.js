@@ -1,7 +1,10 @@
+import { useMutation } from "@apollo/client";
+import { useUserContext } from "../../contexts/UserProvider";
 import "./eventcard.css";
+import { SIGNUPTOEVENT } from "../../graphql/mutations";
 
 const EventCard = ({
-  props,
+  id,
   name,
   description,
   day,
@@ -12,6 +15,19 @@ const EventCard = ({
   organizer,
   imageUrl,
 }) => {
+  const { state } = useUserContext();
+  console.log(state);
+  const [signUpToEvent] = useMutation(SIGNUPTOEVENT);
+  const HandleSignUpToEvent = async (e) => {
+    e.preventDefault();
+    const { data } = await signUpToEvent({
+      variables: {
+        userId: state.user.id,
+        eventId: id,
+      },
+    });
+    console.log(data);
+  };
   return (
     <article className="event-card-container">
       <div className="img-container">
@@ -34,7 +50,9 @@ const EventCard = ({
             <button type="button">I'm interested</button>
           </a>
           <a href="/signup">
-            <button type="button">Sign Up</button>
+            <button type="button" onClick={(e) => HandleSignUpToEvent(e)}>
+              Sign Up
+            </button>
           </a>
         </section>
       </div>

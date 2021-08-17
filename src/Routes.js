@@ -5,6 +5,7 @@ import SignUp from "./pages/SignUp";
 import Events from "./pages/Events";
 import Home from "./pages/Home";
 import { useUserContext } from "./contexts/UserProvider";
+import NewEvent from "./pages/NewEvent";
 
 const Routes = () => {
   const { state, dispatch } = useUserContext();
@@ -19,6 +20,9 @@ const Routes = () => {
       </Route>
       <Route exact path="/events">
         <Events />
+      </Route>
+      <Route exact path="/newEvent">
+        <NewEvent />
       </Route>
       <Route exact path="/">
         <Home />
