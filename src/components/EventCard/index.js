@@ -35,8 +35,8 @@ const EventCard = ({
           scrambled it to make a type specimen book{description}
         </section>
         <section className="when-where">
-          <h5>date:{day}</h5>
-          <h5>location:{city}</h5>
+          <h5>Date:{day}</h5>
+          <h5>Location:{city}</h5>
         </section>
 
         <section>

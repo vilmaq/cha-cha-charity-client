@@ -1,17 +1,16 @@
 import React from "react";
 
 import { makeStyles } from "@material-ui/core/styles";
-// import clsx from "clsx";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardActions from "@material-ui/core/CardActions";
 import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
-import { red } from "@material-ui/core/colors";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import ShareIcon from "@material-ui/icons/Share";
 import Button from "@material-ui/core/Button";
+// import clsx from "clsx";
 
 import animal from "../../assets/images/illustrations/whole-images/deer.png";
 import environmental from "../../assets/images/illustrations/whole-images/environment.png";
@@ -19,14 +18,6 @@ import arts from "../../assets/images/illustrations/whole-images/painter.png";
 import health from "../../assets/images/illustrations/whole-images/healthy.png";
 import education from "../../assets/images/illustrations/whole-images/reading.png";
 import mrworldwide from "../../assets/images/illustrations/whole-images/planet.png";
-
-// import CardContent from "@material-ui/core/CardContent";
-// import Typography from "@material-ui/core/Typography";
-// import Collapse from "@material-ui/core/Collapse";
-// import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-// import MoreVertIcon from "@material-ui/icons/MoreVert";
-
-// import animal from "../assets/image/animal.png";
 
 const categoryImages = {
   animals: animal,
@@ -37,7 +28,7 @@ const categoryImages = {
   international: mrworldwide,
 };
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     width: 435,
     margin: 10,
@@ -70,11 +61,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CategoryCard({ title, image }) {
   const classes = useStyles();
-  // const [expanded, setExpanded] = useState(false);
-
-  // const handleExpandClick = () => {
-  //   setExpanded(!expanded);
-  // };
 
   return (
     <div className={classes.container}>
