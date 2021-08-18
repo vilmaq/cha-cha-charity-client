@@ -1,13 +1,11 @@
 .main-content {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
   padding: 20px;
   border: 3rem;
-  /* border-color: black; */
-  width: 70%;
-  display: inline-flex;
-  flex-wrap: wrap;
-
   align-self: center;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 }
 

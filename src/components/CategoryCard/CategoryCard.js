@@ -39,28 +39,32 @@ const categoryImages = {
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    minWidth: 345,
+    width: 435,
+    margin: 10,
+    backgroundColor: "#f8cf61",
+    padding: 5,
   },
 
   media: {
-    height: 100,
+    // height: 100,
     paddingTop: "56.25%", // 16:9
+    backgroundColor: "white",
   },
 
   container: {
     margin: "auto",
     justifyContent: "center",
-    backgroundColor: "yellow",
   },
 
   expand: {
     marginLeft: "auto",
+    backgroundColor: "#f36b7f",
   },
   expandOpen: {
     transform: "rotate(180deg)",
   },
   avatar: {
-    backgroundColor: red[500],
+    backgroundColor: "#f36b7f",
   },
 }));
 
@@ -96,11 +100,7 @@ export default function CategoryCard({ title, image }) {
           <IconButton aria-label="share">
             <ShareIcon />
           </IconButton>{" "}
-          <Button
-            className={classes.expand}
-            variant="contained"
-            color="secondary"
-          >
+          <Button className={classes.expand} variant="contained">
             More
           </Button>
         </CardActions>
