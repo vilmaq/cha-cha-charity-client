@@ -13,12 +13,12 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import ShareIcon from "@material-ui/icons/Share";
 import Button from "@material-ui/core/Button";
 
-import dog from "../../assets/images/illustrations/whole-images/dog.png";
-import environmental from "../../assets/images/illustrations/whole-images/pablo-201.png";
-import arts from "../../assets/images/illustrations/whole-images/pablo-956.png";
+import animal from "../../assets/images/illustrations/whole-images/deer.png";
+import environmental from "../../assets/images/illustrations/whole-images/environment.png";
+import arts from "../../assets/images/illustrations/whole-images/painter.png";
 import health from "../../assets/images/illustrations/whole-images/healthy.png";
-import education from "../../assets/images/illustrations/whole-images/school.png";
-import mrworldwide from "../../assets/images/illustrations/whole-images/pablo-873.png";
+import education from "../../assets/images/illustrations/whole-images/reading.png";
+import mrworldwide from "../../assets/images/illustrations/whole-images/planet.png";
 
 // import CardContent from "@material-ui/core/CardContent";
 // import Typography from "@material-ui/core/Typography";
@@ -29,7 +29,7 @@ import mrworldwide from "../../assets/images/illustrations/whole-images/pablo-87
 // import animal from "../assets/image/animal.png";
 
 const categoryImages = {
-  animals: dog,
+  animals: animal,
   environmental: environmental,
   arts: arts,
   health: health,
@@ -48,8 +48,9 @@ const useStyles = makeStyles((theme) => ({
   },
 
   container: {
-    margin: 10,
-    // justifyContent: "left",
+    margin: "auto",
+    justifyContent: "center",
+    backgroundColor: "yellow",
   },
 
   expand: {
