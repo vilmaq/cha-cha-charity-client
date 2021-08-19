@@ -4,6 +4,7 @@ import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import Events from "./pages/Events";
 import Home from "./pages/Home";
+import SingleEvent from "./pages/SingleEvent";
 import { useUserContext } from "./contexts/UserProvider";
 
 const Routes = () => {
@@ -22,6 +23,9 @@ const Routes = () => {
       </Route>
       <Route exact path="/">
         <Home />
+      </Route>
+      <Route exact path="/singleevent">
+        <SingleEvent />
       </Route>
     </Switch>
   );
