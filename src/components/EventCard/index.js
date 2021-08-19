@@ -1,3 +1,6 @@
+import calendar from "./pablo-68.png";
+import location from "./pablo-51.png";
+
 import "./eventcard.css";
 
 const EventCard = ({
@@ -25,7 +28,7 @@ const EventCard = ({
       </div>
       <div className="info-container">
         <section className="name">
-          <h3>Event Name{name}</h3>
+          <h4>Event Name{name}</h4>
         </section>
 
         <section className="description">
@@ -35,8 +38,15 @@ const EventCard = ({
           scrambled it to make a type specimen book{description}
         </section>
         <section className="when-where">
-          <h5>Date:{day}</h5>
-          <h5>Location:{city}</h5>
+          <div className="details">
+            <img src={calendar} alt="calendar" height="24px" />
+            <text>12 September 2021{day}</text>
+          </div>
+
+          <div className="details">
+            <img src={location} alt="location" height="24px" />
+            <text>Birmingham{city}</text>
+          </div>
         </section>
 
         <section>

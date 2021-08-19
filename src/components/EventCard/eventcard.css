@@ -55,6 +55,11 @@
   color: #353535;
   font-family: sans-serif;
 }
+.details {
+  display: flex;
+  flex-direction: row;
+  background-color: #9fbfff;
+}
 
 .buttons {
   cursor: pointer;
