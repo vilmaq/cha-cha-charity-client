@@ -3,15 +3,17 @@ import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Button from "react-bootstrap/Button";
+import "./style.css";
 // import { UserContext } from "../../context/UserContext";
 const NavigationBar = () => {
   // const { currentUser, onLogout } = useContext(UserContext);
   return (
     <Navbar
+      className="navBar"
       collapseOnSelect
       expand="lg"
-      bg="dark"
-      variant="dark"
+      // bg="dark"
+      // variant="dark"
       style={{ zIndex: "100" }}
     >
       <Container>
