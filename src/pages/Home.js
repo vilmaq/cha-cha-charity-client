@@ -1,20 +1,38 @@
+import { Container } from "@material-ui/core";
+import CategoryCard from "../components/CategoryCard/CategoryCard";
 import MainContainer from "../components/MainContainer";
-import Header from "../components/Header";
-import CharityCard from "../components/CharityCard";
-// import { useQuery } from "@apollo/client";
-// import { title, imageUrl } from "../components/CharityCard";
+import { eventCategories } from "../data";
+import EventCard from "../components/EventCard";
+import "./home.css";
 
 const Home = () => {
-  // const charityCard = useQuery();
   return (
-    <MainContainer>
-      <Header title="All Charity Cards" />
-      {/* <div className="Card">
-        {charityCard.card.map(card => {
-          return <CharityCard title={card.title} imageUrl={card.imageUrl} />;
+    <div>
+      <div>
+        <EventCard />
+      </div>
+      <div className="main">
+        <h1 className="header">Cha-Cha-Charity!</h1>
+        <section className="intro">
+          Welcome to cha-cha-charity and Enjoy connecting and meeting other's.
+          Cha-cha-charity is a website which connects a charity to a company and
+          volunteers. Anyone could click and add a charity event or participate
+          in any event easily through our website. Anyone could save the events
+          after completing the sign up or login.
+        </section>
+      </div>
+      <MainContainer>
+        {eventCategories.map((eventCategory) => {
+          return (
+            <div>
+              <Container>
+                <CategoryCard {...eventCategory} />
+              </Container>
+            </div>
+          );
         })}
-      </div> */}
-    </MainContainer>
+      </MainContainer>
+    </div>
   );
 };
 export default Home;

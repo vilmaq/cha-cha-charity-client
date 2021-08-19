@@ -1,0 +1,17 @@
+.header {
+  text-align: center;
+  padding: 20px;
+  margin: 20px;
+}
+.intro {
+  width: 60%;
+  text-align: center;
+  padding: 20px;
+  margin: 20px;
+}
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
