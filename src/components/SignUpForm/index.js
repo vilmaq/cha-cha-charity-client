@@ -11,8 +11,12 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormGroup from "@material-ui/core/FormGroup";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
-import { Box } from "@material-ui/core";
+import Box from "@material-ui/core/Box";
+import Input from "@material-ui/core/Input";
 import { Country, City } from "country-state-city";
+import classNames from "classnames";
+
+import "./SignUpForm.css";
 
 // export class SignUp extends Component {
 //   state = {
@@ -93,7 +97,7 @@ const useStyles = makeStyles((theme) => ({
 
 const SignUpForm = ({ handleClose }) => {
   const classes = useStyles();
-  ///const { handleSubmit, control } = useForm();
+  const { handleSubmit, control } = useForm();
 
   const [FullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -114,10 +118,6 @@ const SignUpForm = ({ handleClose }) => {
   const [selectedCity, setSelectedCity] = useState("");
   const [category, setCategory] = React.useState("None");
   const [open, setOpen] = React.useState(false);
-
-  const onSubmit = (event) => {
-    event.preventDefault();
-  };
 
   const onChangeFullName = (event) => {
     setFullName(event.target.value);
@@ -191,185 +191,222 @@ const SignUpForm = ({ handleClose }) => {
     setOpen(false);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    //onClick form an to be send to the back
-
-    const userData = {
-      type: "Volunteer",
-      fullName: "Sarah James",
-      password: "password222",
-      email: "sarah.james@gmail.com",
-      phoneNumber: "07796342221",
-      street: "New Street",
-      postcode: "B18 NN",
-      // city: "Birmingham",
-      // country: "UK",
-      // animals: false,
-      // environmental: false,
-      // international: false,
-      // health: false,
-      // education: false,
-      // art_culture: false,
-    };
+  const onSubmit = (formData) => {
+    console.log(formData);
+    // const userData = {
+    //   type: "Volunteer",
+    //   fullName: "Sarah James",
+    //   password: "password222",
+    //   email: "sarah.james@gmail.com",
+    //   phoneNumber: "07796342221",
+    //   street: "New Street",
+    //   postcode: "B18 NN",
+    //   // city: "Birmingham",
+    //   // country: "UK",
+    //   // animals: false,
+    //   // environmental: false,
+    //   // international: false,
+    //   // health: false,
+    //   // education: false,
+    //   // art_culture: false,
+    // };
   };
 
   return (
-    <>
-      <form>
-        <TextField label="Full Name" fullWidth autocomplete="none" />
-        <TextField label="Email" fullWidth autocomplete="none" />
-        <TextField label="PhoneNumber" fullWidth autocomplete="none" />
-        <TextField label="Postcode" fullWidth autocomplete="none" />
-        <TextField label="Street" fullWidth autocomplete="none" />
-        <TextField
-          label="Message"
-          fullWidth
-          multiline
-          rows={5}
-          autocomplete="none"
-        />
-        <FormControl>
-          <InputLabel>Country</InputLabel>
-          <Select value={selectedCountryISO} onChange={handleChangeCountry}>
-            {countries.map((country) => {
-              return (
-                <MenuItem
-                  name={country.name}
-                  value={country.isoCode}
-                  key={country.isoCode}
-                >
-                  {country.name}
-                </MenuItem>
-              );
-            })}
-          </Select>
-        </FormControl>
-        {cities && (
-          <Box component="div" m={1}>
-            <FormControl style={{ minWidth: "200px" }}>
-              <InputLabel>City</InputLabel>
-              <Select value={selectedCity} onChange={handleChangeCity}>
-                {cities.map((city, index) => {
-                  return (
-                    <MenuItem value={city.name} key={`${city.name}-${index}`}>
-                      {city.name}
-                    </MenuItem>
-                  );
-                })}
-              </Select>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <Box component="div" m={1}>
+        <Controller
+          name="fullName"
+          control={control}
+          defaultValue=""
+          rules={{ required: "Full name is required" }}
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <FormControl>
+              <InputLabel className={classNames({ "form-error": error })}>
+                Username
+              </InputLabel>
+              <Input value={value} onChange={onChange} error={!!error} />
             </FormControl>
-          </Box>
-        )}
-        <div>
-          <Button className={classes.button} onClick={handleOpen}>
-            Select the type
-          </Button>
-          <FormControl className={classes.formControl}>
-            <InputLabel id="demo-controlled-open-select-label">Type</InputLabel>
-            <Select
-              labelId="demo-controlled-open-select-label"
-              id="demo-controlled-open-select"
-              open={open}
-              onClose={handleSelectClose}
-              onOpen={handleOpen}
-              value={category}
-              onChange={handleChange}
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={"Business"}>Business</MenuItem>
-              <MenuItem value={"Volunteer"}>Volunteer</MenuItem>
-              <MenuItem value={"Charity"}>Charity</MenuItem>
-            </Select>
-          </FormControl>
-        </div>
-        <div className={classes.secondRoot}>
-          <FormControl component="fieldset" className={classes.formControl}>
-            <FormGroup>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={animals}
-                    onChange={handleChangeAnimals}
-                    name="animals"
-                    color="primary"
-                  />
-                }
-                label="Animals"
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={environmental}
-                    onChange={handleChangeEnvironmental}
-                    name="environmental"
-                    color="primary"
-                  />
-                }
-                label="Environmental"
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={international}
-                    onChange={handleChangeInternational}
-                    name="international"
-                    color="primary"
-                  />
-                }
-                label="International"
-              />
-            </FormGroup>
-          </FormControl>
-          <FormControl component="fieldset" className={classes.formControl}>
-            <FormGroup>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={health}
-                    onChange={handleChangeHealth}
-                    name="health"
-                    color="primary"
-                  />
-                }
-                label="Health"
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={education}
-                    onChange={handleChangeEducation}
-                    name="education"
-                    color="primary"
-                  />
-                }
-                label="ArtCulture"
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={artCulture}
-                    onChange={handleChangeArtCulture}
-                    name="artCulture"
-                    color="primary"
-                  />
-                }
-                label="artCulture"
-              />
-            </FormGroup>
-          </FormControl>
-        </div>
-        <div>
-          <Button type="submit" variant="contained" color="primary">
-            Signup
-          </Button>
-        </div>
-        <Button type="submit">Submit</Button>
-      </form>
-    </>
+          )}
+        />
+      </Box>
+      <div>
+        <Button type="submit" variant="contained" color="primary">
+          Signup
+        </Button>
+      </div>
+    </form>
   );
+
+  // return (
+  //   <>
+  //     <form onSubmit={handleSubmit(onSubmit)}>
+  //       <Box component="div" m={1}>
+  //         <Controller
+  //           name="fullName"
+  //           control={control}
+  //           defaultValue=""
+  //           rules={{ required: "Full name is required" }}
+  //           render={({ field: { onChange, value } }) => (
+  //             <FormControl>
+  //               <InputLabel>Username</InputLabel>
+  //               <Input value={value} onChange={onChange} />
+  //             </FormControl>
+  //           )}
+  //         />
+  //       </Box>
+  //       <TextField label="Full Name" fullWidth autocomplete="none" />
+  //       <TextField label="Email" fullWidth autocomplete="none" />
+  //       <TextField label="PhoneNumber" fullWidth autocomplete="none" />
+  //       <TextField label="Postcode" fullWidth autocomplete="none" />
+  //       <TextField label="Street" fullWidth autocomplete="none" />
+  //       <TextField
+  //         label="Message"
+  //         fullWidth
+  //         multiline
+  //         rows={5}
+  //         autocomplete="none"
+  //       />
+  //       <FormControl>
+  //         <InputLabel>Country</InputLabel>
+  //         <Select value={selectedCountryISO} onChange={handleChangeCountry}>
+  //           {countries.map((country) => {
+  //             return (
+  //               <MenuItem
+  //                 name={country.name}
+  //                 value={country.isoCode}
+  //                 key={country.isoCode}
+  //               >
+  //                 {country.name}
+  //               </MenuItem>
+  //             );
+  //           })}
+  //         </Select>
+  //       </FormControl>
+  //       {cities && (
+  //         <Box component="div" m={1}>
+  //           <FormControl style={{ minWidth: "200px" }}>
+  //             <InputLabel>City</InputLabel>
+  //             <Select value={selectedCity} onChange={handleChangeCity}>
+  //               {cities.map((city, index) => {
+  //                 return (
+  //                   <MenuItem value={city.name} key={`${city.name}-${index}`}>
+  //                     {city.name}
+  //                   </MenuItem>
+  //                 );
+  //               })}
+  //             </Select>
+  //           </FormControl>
+  //         </Box>
+  //       )}
+  //       <div>
+  //         <Button className={classes.button} onClick={handleOpen}>
+  //           Select the type
+  //         </Button>
+  //         <FormControl className={classes.formControl}>
+  //           <InputLabel id="demo-controlled-open-select-label">Type</InputLabel>
+  //           <Select
+  //             labelId="demo-controlled-open-select-label"
+  //             id="demo-controlled-open-select"
+  //             open={open}
+  //             onClose={handleSelectClose}
+  //             onOpen={handleOpen}
+  //             value={category}
+  //             onChange={handleChange}
+  //           >
+  //             <MenuItem value="">
+  //               <em>None</em>
+  //             </MenuItem>
+  //             <MenuItem value={"Business"}>Business</MenuItem>
+  //             <MenuItem value={"Volunteer"}>Volunteer</MenuItem>
+  //             <MenuItem value={"Charity"}>Charity</MenuItem>
+  //           </Select>
+  //         </FormControl>
+  //       </div>
+  //       <div className={classes.secondRoot}>
+  //         <FormControl component="fieldset" className={classes.formControl}>
+  //           <FormGroup>
+  //             <FormControlLabel
+  //               control={
+  //                 <Checkbox
+  //                   checked={animals}
+  //                   onChange={handleChangeAnimals}
+  //                   name="animals"
+  //                   color="primary"
+  //                 />
+  //               }
+  //               label="Animals"
+  //             />
+  //             <FormControlLabel
+  //               control={
+  //                 <Checkbox
+  //                   checked={environmental}
+  //                   onChange={handleChangeEnvironmental}
+  //                   name="environmental"
+  //                   color="primary"
+  //                 />
+  //               }
+  //               label="Environmental"
+  //             />
+  //             <FormControlLabel
+  //               control={
+  //                 <Checkbox
+  //                   checked={international}
+  //                   onChange={handleChangeInternational}
+  //                   name="international"
+  //                   color="primary"
+  //                 />
+  //               }
+  //               label="International"
+  //             />
+  //           </FormGroup>
+  //         </FormControl>
+  //         <FormControl component="fieldset" className={classes.formControl}>
+  //           <FormGroup>
+  //             <FormControlLabel
+  //               control={
+  //                 <Checkbox
+  //                   checked={health}
+  //                   onChange={handleChangeHealth}
+  //                   name="health"
+  //                   color="primary"
+  //                 />
+  //               }
+  //               label="Health"
+  //             />
+  //             <FormControlLabel
+  //               control={
+  //                 <Checkbox
+  //                   checked={education}
+  //                   onChange={handleChangeEducation}
+  //                   name="education"
+  //                   color="primary"
+  //                 />
+  //               }
+  //               label="ArtCulture"
+  //             />
+  //             <FormControlLabel
+  //               control={
+  //                 <Checkbox
+  //                   checked={artCulture}
+  //                   onChange={handleChangeArtCulture}
+  //                   name="artCulture"
+  //                   color="primary"
+  //                 />
+  //               }
+  //               label="artCulture"
+  //             />
+  //           </FormGroup>
+  //         </FormControl>
+  //       </div>
+  //       <div>
+  //         <Button type="submit" variant="contained" color="primary">
+  //           Signup
+  //         </Button>
+  //       </div>
+  //     </form>
+  //   </>
+  // );
 };
 
 export default SignUpForm;
