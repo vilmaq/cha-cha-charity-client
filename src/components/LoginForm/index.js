@@ -8,8 +8,25 @@ import Box from "@material-ui/core/Box";
 import Input from "@material-ui/core/Input";
 import classNames from "classnames";
 
+import "./LoginForm.css";
+
 const LoginForm = () => {
   const { handleSubmit, control } = useForm();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const onChangeEmail = (event) => {
+    setEmail(event.target.value);
+  };
+
+  const onChangePassword = (event) => {
+    setPassword(event.target.value);
+  };
+
+  const onSubmit = (formData) => {};
+
+  // to declare the data that is passed through the mutation
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
