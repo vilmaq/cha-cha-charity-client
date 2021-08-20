@@ -1,95 +1,53 @@
 import React from "react";
 import { useState } from "react";
-import { makeStyles } from "@material-ui/core";
-import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { useForm, Controller } from "react-hook-form";
+import FormControl from "@material-ui/core/FormControl";
+import InputLabel from "@material-ui/core/InputLabel";
+import Box from "@material-ui/core/Box";
+import Input from "@material-ui/core/Input";
+import classNames from "classnames";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    padding: theme.spacing(2),
-
-    "& .MuiTextField-root": {
-      margin: theme.spacing(1),
-      width: "300px",
-    },
-    "& .MuiButtonBase-root": {
-      margin: theme.spacing(2),
-    },
-  },
-}));
-
-const LoginForm = ({ handleClose }) => {
-  const classes = useStyles();
+const LoginForm = () => {
   const { handleSubmit, control } = useForm();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [open, setOpen] = React.useState(false);
-
-  const onSubmit = (event) => {
-    event.preventDefault();
-  };
-
-  const onChangeEmail = (event) => {
-    setEmail(event.target.value);
-  };
-
-  const onChangePassword = (event) => {
-    setPassword(event.target.value);
-  };
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
   return (
-    <form className={classes.root} onSubmit={handleSubmit(onSubmit)}>
-      <Controller
-        name="email"
-        control={control}
-        defaultValue=""
-        render={({ field: { onChange, value }, fieldState: { error } }) => (
-          <TextField
-            label="Email"
-            variant="filled"
-            value={value}
-            onChange={onChange}
-            error={!!error}
-            helperText={error ? error.message : null}
-            type="email"
-          />
-        )}
-        rules={{ required: "Email required" }}
-      />
-      <Controller
-        name="password"
-        control={control}
-        defaultValue=""
-        render={({ field: { onChange, value }, fieldState: { error } }) => (
-          <TextField
-            label="Password"
-            variant="filled"
-            value={value}
-            onChange={onChange}
-            error={!!error}
-            helperText={error ? error.message : null}
-            type="password"
-          />
-        )}
-        rules={{ required: "Password required" }}
-      />
-
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <Box component="div" m={1}>
+        <Controller
+          name="email"
+          control={control}
+          defaultValue=""
+          rules={{ required: "email is required" }}
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <FormControl>
+              <InputLabel className={classNames({ "form-error": error })}>
+                email
+              </InputLabel>
+              <Input value={value} onChange={onChange} error={!!error} />
+            </FormControl>
+          )}
+        />
+      </Box>
+      <Box component="div" m={1}>
+        <Controller
+          name="Password"
+          control={control}
+          defaultValue=""
+          rules={{ required: "Password is required" }}
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <FormControl>
+              <InputLabel className={classNames({ "form-error": error })}>
+                password
+              </InputLabel>
+              <Input value={value} onChange={onChange} error={!!error} />
+            </FormControl>
+          )}
+        />
+      </Box>
       <div>
-        <Button variant="contained" onClick={handleClose}>
-          Cancel
-        </Button>
         <Button type="submit" variant="contained" color="primary">
-          Signup
+          Login
         </Button>
       </div>
     </form>
