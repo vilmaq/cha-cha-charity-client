@@ -49,6 +49,21 @@ import { Country, City } from "country-state-city";
 // }
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: theme.spacing(2),
+
+    "& .MuiTextField-root": {
+      margin: theme.spacing(1),
+      width: "300px",
+    },
+    "& .MuiButtonBase-root": {
+      margin: theme.spacing(2),
+    },
+  },
   form: {
     display: "flex",
     flexDirection: "column",
@@ -63,24 +78,22 @@ const useStyles = makeStyles((theme) => ({
     "& .MuiButtonBase-form": {
       margin: theme.spacing(2),
     },
+  },
+  button: {
+    display: "block",
+    marginTop: theme.spacing(2),
+  },
 
-    button: {
-      display: "block",
-      marginTop: theme.spacing(2),
-    },
-
-    formControl: {
-      backgroundColor: "red",
-      display: "flex",
-      margin: theme.spacing(3),
-      minWidth: 120,
-    },
+  formControl: {
+    display: "flex",
+    margin: theme.spacing(3),
+    minWidth: 120,
   },
 }));
 
 const SignUpForm = ({ handleClose }) => {
   const classes = useStyles();
-  const { handleSubmit, control } = useForm();
+  ///const { handleSubmit, control } = useForm();
 
   const [FullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -99,7 +112,7 @@ const SignUpForm = ({ handleClose }) => {
   const [selectedCountryISO, setSelectedCountryISO] = useState("");
   const [selectCountry, setSelectedCountry] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
-  const [category, setCategory] = React.useState("");
+  const [category, setCategory] = React.useState("None");
   const [open, setOpen] = React.useState(false);
 
   const onSubmit = (event) => {
@@ -153,12 +166,16 @@ const SignUpForm = ({ handleClose }) => {
     setArtCulture(event.target.checked);
   };
   const handleChangeCountry = (event) => {
-    setSelectedCountryISO(event.target.value);
-    setSelectedCountry(event.currentTarget.getAttribute("name"));
-    setCities(City.getCitiesOfCountry(event.target.value));
+    const city = City.getCitiesOfCountry(event.target.value);
+    const country = event.target.value;
+    const countryName = event.currentTarget.getAttribute("name");
+    setSelectedCountryISO(country);
+    setSelectedCountry(countryName);
+    setCities(city);
   };
 
   const handleChangeCity = (event) => {
+    console.log(event.target.value);
     setSelectedCity(event.target.value);
   };
 
@@ -170,109 +187,47 @@ const SignUpForm = ({ handleClose }) => {
     setOpen(true);
   };
 
+  const handleSelectClose = () => {
+    setOpen(false);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    //onClick form an to be send to the back
+
+    const userData = {
+      type: "Volunteer",
+      fullName: "Sarah James",
+      password: "password222",
+      email: "sarah.james@gmail.com",
+      phoneNumber: "07796342221",
+      street: "New Street",
+      postcode: "B18 NN",
+      // city: "Birmingham",
+      // country: "UK",
+      // animals: false,
+      // environmental: false,
+      // international: false,
+      // health: false,
+      // education: false,
+      // art_culture: false,
+    };
+  };
+
   return (
     <>
-      <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
-        <Controller
-          name="fullName"
-          control={control}
-          defaultValue=""
-          render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <TextField
-              label="fullName"
-              variant="filled"
-              value={value}
-              onChange={onChange}
-              error={!!error}
-              helperText={error ? error.message : null}
-            />
-          )}
-          rules={{ required: "Full name required" }}
-        />
-        <Controller
-          name="email"
-          control={control}
-          defaultValue=""
-          render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <TextField
-              label="Email"
-              variant="filled"
-              value={value}
-              onChange={onChange}
-              error={!!error}
-              helperText={error ? error.message : null}
-              type="email"
-            />
-          )}
-          rules={{ required: "Email required" }}
-        />
-        <Controller
-          name="password"
-          control={control}
-          defaultValue=""
-          render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <TextField
-              label="Password"
-              variant="filled"
-              value={value}
-              onChange={onChange}
-              error={!!error}
-              helperText={error ? error.message : null}
-              type="password"
-            />
-          )}
-          rules={{ required: "Password required" }}
-        />
-        <Controller
-          name="phoneNumber"
-          control={control}
-          defaultValue=""
-          render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <TextField
-              label="phoneNumber"
-              variant="filled"
-              value={value}
-              onChange={onChange}
-              error={!!error}
-              helperText={error ? error.message : null}
-              type="phoneNumber"
-            />
-          )}
-          rules={{ required: "phone number required" }}
-        />
-        <Controller
-          name="street"
-          control={control}
-          defaultValue=""
-          render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <TextField
-              label="street"
-              variant="filled"
-              value={value}
-              onChange={onChange}
-              error={!!error}
-              helperText={error ? error.message : null}
-              type="street"
-            />
-          )}
-          rules={{ required: "street required" }}
-        />
-        <Controller
-          name="postcode"
-          control={control}
-          defaultValue=""
-          render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <TextField
-              label="postcode"
-              variant="filled"
-              value={value}
-              onChange={onChange}
-              error={!!error}
-              helperText={error ? error.message : null}
-              type="postcode"
-            />
-          )}
-          rules={{ required: "postcode required" }}
+      <form>
+        <TextField label="Full Name" fullWidth autocomplete="none" />
+        <TextField label="Email" fullWidth autocomplete="none" />
+        <TextField label="PhoneNumber" fullWidth autocomplete="none" />
+        <TextField label="Postcode" fullWidth autocomplete="none" />
+        <TextField label="Street" fullWidth autocomplete="none" />
+        <TextField
+          label="Message"
+          fullWidth
+          multiline
+          rows={5}
+          autocomplete="none"
         />
         <FormControl>
           <InputLabel>Country</InputLabel>
@@ -316,21 +271,21 @@ const SignUpForm = ({ handleClose }) => {
               labelId="demo-controlled-open-select-label"
               id="demo-controlled-open-select"
               open={open}
-              onClose={handleClose}
+              onClose={handleSelectClose}
               onOpen={handleOpen}
+              value={category}
               onChange={handleChange}
             >
               <MenuItem value="">
                 <em>None</em>
               </MenuItem>
-              <MenuItem value={10}>Business</MenuItem>
-              <MenuItem value={20}>Volunteer</MenuItem>
-              <MenuItem value={30}>Charity</MenuItem>
+              <MenuItem value={"Business"}>Business</MenuItem>
+              <MenuItem value={"Volunteer"}>Volunteer</MenuItem>
+              <MenuItem value={"Charity"}>Charity</MenuItem>
             </Select>
           </FormControl>
         </div>
-
-        <div className={classes.root}>
+        <div className={classes.secondRoot}>
           <FormControl component="fieldset" className={classes.formControl}>
             <FormGroup>
               <FormControlLabel
@@ -368,7 +323,6 @@ const SignUpForm = ({ handleClose }) => {
               />
             </FormGroup>
           </FormControl>
-
           <FormControl component="fieldset" className={classes.formControl}>
             <FormGroup>
               <FormControlLabel
@@ -407,15 +361,12 @@ const SignUpForm = ({ handleClose }) => {
             </FormGroup>
           </FormControl>
         </div>
-
         <div>
-          <Button variant="contained" onClick={handleClose}>
-            Cancel
-          </Button>
           <Button type="submit" variant="contained" color="primary">
             Signup
           </Button>
         </div>
+        <Button type="submit">Submit</Button>
       </form>
     </>
   );
