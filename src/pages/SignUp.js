@@ -4,7 +4,7 @@ const SignUp = () => {
   return (
     <MainContainer>
       <div>
-        <h2 className="my-4 text-center">SignUp</h2>
+        <h2 className="my-4 text-center">Sign Up</h2>
         <hr />
       </div>
       <SignUpForm />

@@ -4,7 +4,10 @@ import LoginForm from "../../src/components/LoginForm";
 const LoginPage = () => {
   return (
     <MainContainer>
-      <h1>Login Form</h1>
+      <div>
+        <h2 className="my-4 text-center">Login</h2>
+        <hr />
+      </div>
 
       <LoginForm />
     </MainContainer>
