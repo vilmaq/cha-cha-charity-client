@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function EventForm() {
+export default function EventForm({ stepOneActions }) {
   const [selectedDate, setSelectedDate] = React.useState(new Date());
 
   const classes = useStyles();
@@ -47,6 +47,9 @@ export default function EventForm() {
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6}>
           <TextField
+            onChange={(event) =>
+              stepOneActions.setEventName(event.target.value)
+            }
             required
             id="name"
             name="name"
@@ -63,7 +66,7 @@ export default function EventForm() {
                 variant="inline"
                 format="MM/dd/yyyy"
                 margin="normal"
-                id="date-picker-inline"
+                id="date-picker"
                 label="Date picker"
                 value={selectedDate}
                 onChange={handleDateChange}
@@ -99,12 +102,12 @@ export default function EventForm() {
               <MenuItem value="">
                 <em></em>
               </MenuItem>
-              <MenuItem value={10}>Animals</MenuItem>
-              <MenuItem value={20}>Health</MenuItem>
-              <MenuItem value={30}>Education</MenuItem>
-              <MenuItem value={10}>Art/Culture</MenuItem>
-              <MenuItem value={20}>Environmental</MenuItem>
-              <MenuItem value={30}>International</MenuItem>
+              <MenuItem value="Animals">Animals</MenuItem>
+              <MenuItem value="Health">Health</MenuItem>
+              <MenuItem value="Education">Education</MenuItem>
+              <MenuItem value="Art/Culture">Art/Culture</MenuItem>
+              <MenuItem value="Environmental">Environmental</MenuItem>
+              <MenuItem value="International">International</MenuItem>
             </Select>
           </FormControl>
         </Grid>

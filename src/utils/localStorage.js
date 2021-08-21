@@ -1,35 +1,29 @@
 export const getEventDetails = () => {
-  const eventName = localStorage.getItem("name")
-    ? JSON.parse(localStorage.getItem("name"))
-    : [];
-  const eventName = localStorage.getItem("name")
-    ? JSON.parse(localStorage.getItem("name"))
-    : [];
+  const eventName = JSON.stringify.localStorage.getItem("name");
+  const eventType = JSON.stringify.localStorage.getItem("type");
+  const eventDate = JSON.stringify.localStorage.getItem("date-picker");
+  const eventTime = JSON.stringify.localStorage.getItem("date-time");
+  const eventDescription = JSON.stringify.localStorage.getItem("description");
+  const eventStreet = JSON.stringify.localStorage.getItem("street");
+  const eventCity = JSON.stringify.localStorage.getItem("city");
+  const eventState = JSON.stringify.localStorage.getItem("state");
+  const eventPostcode = JSON.stringify.localStorage.getItem("postcode");
+  const eventCountry = JSON.stringify.localStorage.getItem("country");
+  const eventOrganizer = JSON.stringify.localStorage.getItem("organizer");
 
-  return eventName;
-};
-
-export const saveBookIds = (bookIdArr) => {
-  if (bookIdArr.length) {
-    localStorage.setItem("saved_books", JSON.stringify(bookIdArr));
-  } else {
-    localStorage.removeItem("saved_books");
-  }
-};
-
-export const removeBookId = (bookId) => {
-  const savedBookIds = localStorage.getItem("saved_books")
-    ? JSON.parse(localStorage.getItem("saved_books"))
-    : null;
-
-  if (!savedBookIds) {
-    return false;
-  }
-
-  const updatedSavedBookIds = savedBookIds?.filter(
-    (savedBookId) => savedBookId !== bookId
+  console.log(
+    eventName,
+    eventType,
+    eventDate,
+    eventTime,
+    eventDescription,
+    eventStreet,
+    eventCity,
+    eventState,
+    eventPostcode,
+    eventCountry,
+    eventOrganizer
   );
-  localStorage.setItem("saved_books", JSON.stringify(updatedSavedBookIds));
 
-  return true;
+  // return eventName
 };
