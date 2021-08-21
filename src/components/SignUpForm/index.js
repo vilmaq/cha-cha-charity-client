@@ -16,40 +16,7 @@ import { Country, City } from "country-state-city";
 import classNames from "classnames";
 
 import "./SignUpForm.css";
-
-// export class SignUp extends Component {
-//   state = {
-//     step: 1,
-//     fullName: "",
-//     email: "",
-//     password: "",
-//     postcode: "",
-//     street: "",
-//     phoneNumber: "",
-//     selectCountry: "",
-//     selectedCountryISO: "",
-//     setSelectedCity: "",
-//     category: "",
-//   };
-
-//   //Proceed to the next form
-//   nextStep = () => {
-//     const { step } = this.state;
-//     this.setState({
-//       step: step + 1,
-//     });
-//   };
-
-//   //Go back to the previous form
-//   prevStep = () => {
-//     const { step } = this.state;
-//     this.setState({
-//       step: step - 1,
-//     });
-//   };
-
-//   //Handle
-// }
+import ReactHookFormSelect from "./ReactHookFormSelect";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -164,13 +131,14 @@ const SignUpForm = ({ handleClose }) => {
   const handleChangeArtCulture = (event) => {
     setArtCulture(event.target.checked);
   };
+
   const handleChangeCountry = (event) => {
-    const city = City.getCitiesOfCountry(event.target.value);
-    const country = event.target.value;
-    const countryName = event.currentTarget.getAttribute("name");
-    setSelectedCountryISO(country);
+    const isoCode = event.currentTarget.getAttribute("name");
+    const cities = City.getCitiesOfCountry(isoCode);
+    const countryName = event.target.value;
+    setSelectedCountryISO(isoCode);
     setSelectedCountry(countryName);
-    setCities(city);
+    setCities(cities);
   };
 
   const handleChangeCity = (event) => {
@@ -196,7 +164,7 @@ const SignUpForm = ({ handleClose }) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Box component="div" m={1}>
+      {/* <Box component="div" m={1}>
         <Controller
           name="fullName"
           control={control}
@@ -295,35 +263,30 @@ const SignUpForm = ({ handleClose }) => {
               <Input value={value} onChange={onChange} error={!!error} />
             </FormControl>
           )}
-        />
-      </Box>
+        /> 
+      </Box> */}
       <Box component="div" m={1}>
-        <Controller
+        <ReactHookFormSelect
+          id="country"
           name="country"
+          label="Country"
           control={control}
-          defaultValue=""
-          rules={{ required: "country is required" }}
-          render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <FormControl>
-              <InputLabel>Country</InputLabel>
-              <Select value={selectedCountryISO} onChange={handleChangeCountry}>
-                {countries.map((country) => {
-                  return (
-                    <MenuItem
-                      name={country.name}
-                      value={country.isoCode}
-                      key={country.isoCode}
-                    >
-                      {country.name}
-                    </MenuItem>
-                  );
-                })}
-              </Select>
-            </FormControl>
-          )}
-        />
+          handleChange={handleChangeCountry}
+        >
+          {countries.map((country) => {
+            return (
+              <MenuItem
+                name={country.isoCode}
+                value={country.name}
+                key={country.isoCode}
+              >
+                {country.name}
+              </MenuItem>
+            );
+          })}
+        </ReactHookFormSelect>
       </Box>
-      <FormControl>
+      {/* <FormControl>
         <InputLabel>Country</InputLabel>
         <Select value={selectedCountryISO} onChange={handleChangeCountry}>
           {countries.map((country) => {
@@ -338,7 +301,7 @@ const SignUpForm = ({ handleClose }) => {
             );
           })}
         </Select>
-      </FormControl>
+      </FormControl> */}
       {cities && (
         <Box component="div" m={1}>
           <FormControl style={{ minWidth: "200px" }}>
