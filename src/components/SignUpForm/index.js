@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { makeStyles } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
-import { useForm, Controller } from "react-hook-form";
+import TextField from "@material-ui/core/TextField";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Checkbox from "@material-ui/core/Checkbox";
@@ -13,42 +13,10 @@ import Select from "@material-ui/core/Select";
 import Box from "@material-ui/core/Box";
 import Input from "@material-ui/core/Input";
 import { Country, City } from "country-state-city";
-import classNames from "classnames";
 
 import "./SignUpForm.css";
-import ReactHookFormSelect from "./ReactHookFormSelect";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    padding: theme.spacing(2),
-
-    "& .MuiTextField-root": {
-      margin: theme.spacing(1),
-      width: "300px",
-    },
-    "& .MuiButtonBase-root": {
-      margin: theme.spacing(2),
-    },
-  },
-  form: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    padding: theme.spacing(2),
-
-    "& .MuiTextField-form": {
-      margin: theme.spacing(1),
-      width: "300px",
-    },
-    "& .MuiButtonBase-form": {
-      margin: theme.spacing(2),
-    },
-  },
   button: {
     display: "block",
     marginTop: theme.spacing(2),
@@ -63,91 +31,51 @@ const useStyles = makeStyles((theme) => ({
 
 const SignUpForm = ({ handleClose }) => {
   const classes = useStyles();
-  const { handleSubmit, control } = useForm();
 
-  const [fullName, setFullName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [postcode, setPostcode] = useState("");
-  const [street, setStreet] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [animals, setAnimals] = useState(false);
-  const [environmental, setEnvironmental] = useState(false);
-  const [international, setInternational] = useState(false);
-  const [health, setHealth] = useState(false);
-  const [education, setEducation] = useState(false);
-  const [artCulture, setArtCulture] = useState(false);
-  const [countries] = useState(Country.getAllCountries());
+  const [formValues, setFormValues] = useState({
+    fullName: "",
+    email: "",
+    password: "",
+    phoneNumber: "",
+    street: "",
+    animals: false,
+    educational: false,
+    health: false,
+    artCulture: false,
+    environmental: false,
+    international: false,
+  });
+
+  const countries = Country.getAllCountries();
   const [cities, setCities] = useState();
-  const [selectedCountryISO, setSelectedCountryISO] = useState("");
-  const [selectCountry, setSelectedCountry] = useState("");
+  const [selectedCountry, setSelectedCountry] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
-  const [category, setCategory] = React.useState("None");
+  const [selectedType, setSelectedType] = useState("");
+  const [preferences, setPreferences] = useState({
+    animals: false,
+    environmental: false,
+    health: false,
+    education: false,
+    international: false,
+    artCulture: false,
+  });
+
   const [open, setOpen] = React.useState(false);
-
-  const onChangeFullName = (event) => {
-    setFullName(event.target.value);
-  };
-
-  const onChangeEmail = (event) => {
-    setEmail(event.target.value);
-  };
-
-  const onChangePassword = (event) => {
-    setPassword(event.target.value);
-  };
-
-  const onChangePostcode = (event) => {
-    setPostcode(event.target.value);
-  };
-
-  const onChangeStreet = (event) => {
-    setStreet(event.target.value);
-  };
-
-  const onChangePhoneNumber = (event) => {
-    setPhoneNumber(event.target.value);
-  };
-
-  const handleChangeAnimals = (event) => {
-    setAnimals(event.target.checked);
-  };
-
-  const handleChangeEnvironmental = (event) => {
-    setEnvironmental(event.target.checked);
-  };
-
-  const handleChangeInternational = (event) => {
-    setInternational(event.target.checked);
-  };
-  const handleChangeHealth = (event) => {
-    setHealth(event.target.checked);
-  };
-
-  const handleChangeEducation = (event) => {
-    setEducation(event.target.checked);
-  };
-
-  const handleChangeArtCulture = (event) => {
-    setArtCulture(event.target.checked);
-  };
 
   const handleChangeCountry = (event) => {
     const isoCode = event.currentTarget.getAttribute("name");
     const cities = City.getCitiesOfCountry(isoCode);
     const countryName = event.target.value;
-    setSelectedCountryISO(isoCode);
     setSelectedCountry(countryName);
     setCities(cities);
   };
 
   const handleChangeCity = (event) => {
-    console.log(event.target.value);
     setSelectedCity(event.target.value);
   };
 
-  const handleChange = (event) => {
-    setCategory(event.target.value);
+  const handleChangeType = (event) => {
+    setSelectedType(event.target.value);
   };
 
   const handleOpen = () => {
@@ -158,120 +86,82 @@ const SignUpForm = ({ handleClose }) => {
     setOpen(false);
   };
 
-  const onSubmit = (formData) => {
-    console.log(formData);
+  const onChange = (event) => {
+    const { name, value } = event.target;
+    console.log(value);
+    setFormValues({
+      ...formValues,
+      [name]: value,
+    });
+  };
+
+  const onCheck = (event) => {
+    const { name, checked } = event.target;
+    setPreferences({
+      ...preferences,
+      [name]: checked,
+    });
+  };
+
+  const handleSubmit = () => {
+    console.log(formValues);
+    console.log(selectedCountry, selectedCity);
+    console.log(selectedType);
+    console.log(preferences);
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      {/* <Box component="div" m={1}>
-        <Controller
-          name="fullName"
-          control={control}
-          defaultValue=""
-          rules={{ required: "Full name is required" }}
-          render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <FormControl>
-              <InputLabel className={classNames({ "form-error": error })}>
-                Username
-              </InputLabel>
-              <Input value={value} onChange={onChange} error={!!error} />
-            </FormControl>
-          )}
-        />
-      </Box>
-      <Box component="div" m={1}>
-        <Controller
-          name="email"
-          control={control}
-          defaultValue=""
-          rules={{ required: "Email is required" }}
-          render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <FormControl>
-              <InputLabel className={classNames({ "form-error": error })}>
-                Email address
-              </InputLabel>
-              <Input value={value} onChange={onChange} error={!!error} />
-            </FormControl>
-          )}
-        />
-      </Box>
-      <Box component="div" m={1}>
-        <Controller
-          name="password"
-          control={control}
-          defaultValue=""
-          rules={{ required: "Password is required" }}
-          render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <FormControl>
-              <InputLabel className={classNames({ "form-error": error })}>
-                password
-              </InputLabel>
-              <Input
-                type="password"
-                value={value}
-                onChange={onChange}
-                error={!!error}
-              />
-            </FormControl>
-          )}
-        />
-      </Box>
-      <Box component="div" m={1}>
-        <Controller
-          name="phoneNumber"
-          control={control}
-          defaultValue=""
-          rules={{ required: "phoneNumber is required" }}
-          render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <FormControl>
-              <InputLabel className={classNames({ "form-error": error })}>
-                Phone Number
-              </InputLabel>
-              <Input value={value} onChange={onChange} error={!!error} />
-            </FormControl>
-          )}
-        />
-      </Box>
-      <Box component="div" m={1}>
-        <Controller
-          name="street"
-          control={control}
-          defaultValue=""
-          rules={{ required: "street is required" }}
-          render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <FormControl>
-              <InputLabel className={classNames({ "form-error": error })}>
-                Street
-              </InputLabel>
-              <Input value={value} onChange={onChange} error={!!error} />
-            </FormControl>
-          )}
-        />
-      </Box>
-      <Box component="div" m={1}>
-        <Controller
-          name="postcode"
-          control={control}
-          defaultValue=""
-          rules={{ required: "postcode is required" }}
-          render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <FormControl>
-              <InputLabel className={classNames({ "form-error": error })}>
-                Postcode
-              </InputLabel>
-              <Input value={value} onChange={onChange} error={!!error} />
-            </FormControl>
-          )}
-        /> 
-      </Box> */}
-      <Box component="div" m={1}>
-        <ReactHookFormSelect
-          id="country"
+    <form onSubmit={handleSubmit}>
+      <TextField
+        label="fullName"
+        name="fullName"
+        onChange={(event) => onChange(event)}
+        fullWidth
+        autocomplete="none"
+      />
+      <TextField
+        label="email"
+        name="email"
+        onChange={(event) => onChange(event)}
+        fullWidth
+        autocomplete="none"
+      />
+      <TextField
+        label="password"
+        name="password"
+        onChange={(event) => onChange(event)}
+        fullWidth
+        autocomplete="none"
+      />
+      <TextField
+        label="phoneNumber"
+        name="phoneNumber"
+        onChange={(event) => onChange(event)}
+        fullWidth
+        autocomplete="none"
+      />
+      <TextField
+        label="street"
+        name="street"
+        onChange={(event) => onChange(event)}
+        fullWidth
+        autocomplete="none"
+      />
+      <TextField
+        label="Message"
+        fullWidth
+        multiline
+        rows={5}
+        autocomplete="none"
+      />
+      <FormControl>
+        <InputLabel>Country</InputLabel>
+        <Select
+          value={selectedCountry}
           name="country"
-          label="Country"
-          control={control}
-          handleChange={handleChangeCountry}
+          onChange={(event) => {
+            handleChangeCountry(event);
+          }}
         >
           {countries.map((country) => {
             return (
@@ -284,39 +174,27 @@ const SignUpForm = ({ handleClose }) => {
               </MenuItem>
             );
           })}
-        </ReactHookFormSelect>
-      </Box>
-      {/* <FormControl>
-        <InputLabel>Country</InputLabel>
-        <Select value={selectedCountryISO} onChange={handleChangeCountry}>
-          {countries.map((country) => {
-            return (
-              <MenuItem
-                name={country.name}
-                value={country.isoCode}
-                key={country.isoCode}
-              >
-                {country.name}
-              </MenuItem>
-            );
-          })}
         </Select>
-      </FormControl> */}
+      </FormControl>
       {cities && (
-        <Box component="div" m={1}>
-          <FormControl style={{ minWidth: "200px" }}>
-            <InputLabel>City</InputLabel>
-            <Select value={selectedCity} onChange={handleChangeCity}>
-              {cities.map((city, index) => {
-                return (
-                  <MenuItem value={city.name} key={`${city.name}-${index}`}>
-                    {city.name}
-                  </MenuItem>
-                );
-              })}
-            </Select>
-          </FormControl>
-        </Box>
+        <FormControl style={{ minWidth: "200px" }}>
+          <InputLabel>City</InputLabel>
+          <Select
+            value={selectedCity}
+            name="city"
+            onChange={(event) => {
+              handleChangeCity(event);
+            }}
+          >
+            {cities.map((city, index) => {
+              return (
+                <MenuItem value={city.name} key={`${city.name}-${index}`}>
+                  {city.name}
+                </MenuItem>
+              );
+            })}
+          </Select>
+        </FormControl>
       )}
       <div>
         <Button className={classes.button} onClick={handleOpen}>
@@ -330,8 +208,11 @@ const SignUpForm = ({ handleClose }) => {
             open={open}
             onClose={handleSelectClose}
             onOpen={handleOpen}
-            value={category}
-            onChange={handleChange}
+            value={selectedType.type}
+            name="type"
+            onChange={(event) => {
+              handleChangeType(event);
+            }}
           >
             <MenuItem value="">
               <em>None</em>
@@ -342,82 +223,75 @@ const SignUpForm = ({ handleClose }) => {
           </Select>
         </FormControl>
       </div>
-      <div className={classes.secondRoot}>
-        <FormControl component="fieldset" className={classes.formControl}>
-          <FormGroup>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={animals}
-                  onChange={handleChangeAnimals}
-                  name="animals"
-                  color="primary"
-                />
-              }
-              label="Animals"
+      <FormGroup row>
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={preferences.animals}
+              onChange={(event) => onCheck(event)}
+              name="animals"
+              color="primary"
             />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={environmental}
-                  onChange={handleChangeEnvironmental}
-                  name="environmental"
-                  color="primary"
-                />
-              }
-              label="Environmental"
+          }
+          label="Animals"
+        />
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={preferences.environmental}
+              onChange={(event) => onCheck(event)}
+              name="environmental"
+              color="primary"
             />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={international}
-                  onChange={handleChangeInternational}
-                  name="international"
-                  color="primary"
-                />
-              }
-              label="International"
+          }
+          label="International"
+        />
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={preferences.international}
+              onChange={(event) => onCheck(event)}
+              name="international"
+              color="primary"
             />
-          </FormGroup>
-        </FormControl>
-        <FormControl component="fieldset" className={classes.formControl}>
-          <FormGroup>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={health}
-                  onChange={handleChangeHealth}
-                  name="health"
-                  color="primary"
-                />
-              }
-              label="Health"
+          }
+          label="International"
+        />
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={preferences.health}
+              onChange={(event) => onCheck(event)}
+              name="health"
+              color="primary"
             />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={education}
-                  onChange={handleChangeEducation}
-                  name="education"
-                  color="primary"
-                />
-              }
-              label="ArtCulture"
+          }
+          label="Health"
+        />
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={preferences.education}
+              onChange={(event) => onCheck(event)}
+              name="education"
+              color="primary"
             />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={artCulture}
-                  onChange={handleChangeArtCulture}
-                  name="artCulture"
-                  color="primary"
-                />
-              }
-              label="artCulture"
+          }
+          label="Education"
+        />
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={preferences.artCulture}
+              onChange={(event) => onCheck(event)}
+              name="artCulture"
+              color="primary"
             />
-          </FormGroup>
-        </FormControl>
-      </div>
+          }
+          label="Art Culture"
+        />
+      </FormGroup>
+
       <div>
         <Button type="submit" variant="contained" color="primary">
           Signup
