@@ -10,11 +10,12 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormGroup from "@material-ui/core/FormGroup";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
-import Box from "@material-ui/core/Box";
-import Input from "@material-ui/core/Input";
 import { Country, City } from "country-state-city";
+//import { useUserContext } from "../contexts/UserProvider";
 
 import "./SignUpForm.css";
+import { SIGNUP } from "../../graphql/mutations";
+import { useMutation } from "@apollo/client";
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -29,8 +30,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SignUpForm = ({ handleClose }) => {
+const SignUpForm = () => {
+  // let history = useHistory();
+
+  // const { dispatch } = useUserContext();
+
   const classes = useStyles();
+  // const { dispatch } = useUserContext();
+
+  /*   const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true); */
 
   const [formValues, setFormValues] = useState({
     fullName: "",
@@ -103,11 +114,52 @@ const SignUpForm = ({ handleClose }) => {
     });
   };
 
-  const handleSubmit = () => {
+  const [signup] = useMutation(SIGNUP, {
+    // onCompleted: (data) => {
+    //   const payload = {
+    //     token: data.login.token,
+    //     email: data.login.user.email,
+    //     firstName: data.login.user.firstName,
+    //     lastName: data.login.user.lastName,
+    //     id: data.login.user.id,
+    //   };
+    //   // localStorage.setItem("user", JSON.ify(payload));
+    //   // dispatch({
+    //   //   type: "SIGNUP",
+    //   //   payload,
+    //   // });
+    //   // history.push("/");
+    // },
+  });
+
+  const handleSubmit = async (formData) => {
     console.log(formValues);
     console.log(selectedCountry, selectedCity);
     console.log(selectedType);
     console.log(preferences);
+    const userData = {
+      // id: ID,
+      type: formData.type,
+      fullName: formData.fullName,
+      password: formData.password,
+      email: formData.email,
+      phoneNumber: formData.phoneNumber,
+      street: formData.street,
+      postcode: formData.postcode,
+      city: formData.city,
+      country: formData.country,
+      animals: formData.animals,
+      environmental: formData.environmental,
+      international: formData.international,
+      health: formData.health,
+      education: formData.education,
+      artCulture: formData.artCulture,
+    };
+    await signup({
+      variables: {
+        signUpInput: userData,
+      },
+    });
   };
 
   return (
