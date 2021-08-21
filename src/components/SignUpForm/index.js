@@ -11,7 +11,7 @@ import FormGroup from "@material-ui/core/FormGroup";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import { Country, City } from "country-state-city";
-//import { useUserContext } from "../contexts/UserProvider";
+import { useUserContext } from "../../contexts/UserProvider";
 
 import "./SignUpForm.css";
 import { SIGNUP } from "../../graphql/mutations";
