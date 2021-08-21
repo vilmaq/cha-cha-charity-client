@@ -22,7 +22,7 @@ const Home = () => {
         </section>
       </div>
       <MainContainer>
-        {eventCategories.map(eventCategory => {
+        {eventCategories.map((eventCategory) => {
           return (
             <div>
               <Container>
@@ -35,5 +35,4 @@ const Home = () => {
     </div>
   );
 };
-
 export default Home;

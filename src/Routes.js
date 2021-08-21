@@ -8,7 +8,7 @@ import SingleEvent from "./pages/SingleEvent";
 import { useUserContext } from "./contexts/UserProvider";
 
 const Routes = () => {
-  const { state, dispatch } = useUserContext();
+  // const { state, dispatch } = useUserContext();
 
   return (
     <Switch>

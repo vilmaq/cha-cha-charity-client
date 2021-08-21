@@ -1,13 +1,17 @@
 :root {
   --jet: #353535;
-  --blue: #878dc5;
+  --green: #82b5a5;
+  --blue: #9fbfff;
+  --white: #ffffff;
+  --pink: #f9d9eb;
+  --orange-yellow: #f8cf61;
+  --red: #f36b7f;
 }
 
 .event-card-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  /* border: 6px solid #15172b; */
   max-width: 650px;
   max-height: 450px;
   margin: 50px;
@@ -16,7 +20,7 @@
 }
 .name {
   text-align: center;
-  color: black;
+  color: #353535;
   font-family: sans-serif;
 }
 .img-container {
@@ -36,7 +40,6 @@
   display: flex;
   flex-direction: column;
   padding: 1rem;
-  /* background-color: #15172b; */
 }
 .description {
   text-align: justify;
@@ -44,13 +47,18 @@
   margin-bottom: 10px;
   margin-top: 10px;
   margin-right: 10px;
-  color: black;
+  color: #353535;
   font-family: sans-serif;
 }
 
 .when-where {
-  color: black;
+  color: #353535;
   font-family: sans-serif;
+}
+.details {
+  display: flex;
+  flex-direction: row;
+  background-color: #9fbfff;
 }
 
 .buttons {
@@ -61,13 +69,13 @@
   border: 0;
   outline: 0;
   width: 60%;
-  color: black;
+  color: #353535;
   margin-top: 8px;
   height: 25px;
   font-weight: bolder;
   font-family: sans-serif;
 }
 
-.buttons:active {
-  background-color: #06b;
+.buttons:hover {
+  background-color: #f9d9eb;
 }
