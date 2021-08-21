@@ -28,21 +28,12 @@ const LoginForm = () => {
 
   const { dispatch } = useUserContext();
 
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
   const [formValues, setFormValues] = useState({
     email: "",
     password: "",
   });
 
   const [open, setOpen] = React.useState(false);
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
 
   const onChange = (event) => {
     const { name, value } = event.target;
