@@ -192,23 +192,6 @@ const SignUpForm = ({ handleClose }) => {
 
   const onSubmit = (formData) => {
     console.log(formData);
-    // const userData = {
-    //   type: "Volunteer",
-    //   fullName: "Sarah James",
-    //   password: "password222",
-    //   email: "sarah.james@gmail.com",
-    //   phoneNumber: "07796342221",
-    //   street: "New Street",
-    //   postcode: "B18 NN",
-    //   // city: "Birmingham",
-    //   // country: "UK",
-    //   // animals: false,
-    //   // environmental: false,
-    //   // international: false,
-    //   // health: false,
-    //   // education: false,
-    //   // art_culture: false,
-    // };
   };
 
   return (
@@ -231,14 +214,14 @@ const SignUpForm = ({ handleClose }) => {
       </Box>
       <Box component="div" m={1}>
         <Controller
-          name="Email"
+          name="email"
           control={control}
           defaultValue=""
           rules={{ required: "Email is required" }}
           render={({ field: { onChange, value }, fieldState: { error } }) => (
             <FormControl>
               <InputLabel className={classNames({ "form-error": error })}>
-                email address
+                Email address
               </InputLabel>
               <Input value={value} onChange={onChange} error={!!error} />
             </FormControl>
@@ -247,7 +230,7 @@ const SignUpForm = ({ handleClose }) => {
       </Box>
       <Box component="div" m={1}>
         <Controller
-          name="Password"
+          name="password"
           control={control}
           defaultValue=""
           rules={{ required: "Password is required" }}
@@ -256,7 +239,12 @@ const SignUpForm = ({ handleClose }) => {
               <InputLabel className={classNames({ "form-error": error })}>
                 password
               </InputLabel>
-              <Input value={value} onChange={onChange} error={!!error} />
+              <Input
+                type="password"
+                value={value}
+                onChange={onChange}
+                error={!!error}
+              />
             </FormControl>
           )}
         />
@@ -270,7 +258,7 @@ const SignUpForm = ({ handleClose }) => {
           render={({ field: { onChange, value }, fieldState: { error } }) => (
             <FormControl>
               <InputLabel className={classNames({ "form-error": error })}>
-                phoneNumber
+                Phone Number
               </InputLabel>
               <Input value={value} onChange={onChange} error={!!error} />
             </FormControl>
@@ -286,7 +274,7 @@ const SignUpForm = ({ handleClose }) => {
           render={({ field: { onChange, value }, fieldState: { error } }) => (
             <FormControl>
               <InputLabel className={classNames({ "form-error": error })}>
-                street
+                Street
               </InputLabel>
               <Input value={value} onChange={onChange} error={!!error} />
             </FormControl>
@@ -302,9 +290,35 @@ const SignUpForm = ({ handleClose }) => {
           render={({ field: { onChange, value }, fieldState: { error } }) => (
             <FormControl>
               <InputLabel className={classNames({ "form-error": error })}>
-                postcode
+                Postcode
               </InputLabel>
               <Input value={value} onChange={onChange} error={!!error} />
+            </FormControl>
+          )}
+        />
+      </Box>
+      <Box component="div" m={1}>
+        <Controller
+          name="country"
+          control={control}
+          defaultValue=""
+          rules={{ required: "country is required" }}
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <FormControl>
+              <InputLabel>Country</InputLabel>
+              <Select value={selectedCountryISO} onChange={handleChangeCountry}>
+                {countries.map((country) => {
+                  return (
+                    <MenuItem
+                      name={country.name}
+                      value={country.isoCode}
+                      key={country.isoCode}
+                    >
+                      {country.name}
+                    </MenuItem>
+                  );
+                })}
+              </Select>
             </FormControl>
           )}
         />
