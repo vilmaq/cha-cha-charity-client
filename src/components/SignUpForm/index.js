@@ -181,6 +181,7 @@ const SignUpForm = () => {
       <TextField
         label="password"
         name="password"
+        type="password"
         onChange={(event) => onChange(event)}
         fullWidth
         autocomplete="none"
