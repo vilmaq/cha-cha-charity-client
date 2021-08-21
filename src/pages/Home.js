@@ -2,15 +2,12 @@ import { Container } from "@material-ui/core";
 import CategoryCard from "../components/CategoryCard/CategoryCard";
 import MainContainer from "../components/MainContainer";
 import { eventCategories } from "../data";
-import EventCard from "../components/EventCard";
+
 import "./home.css";
 
 const Home = () => {
   return (
     <div>
-      <div>
-        <EventCard />
-      </div>
       <div className="main">
         <h1 className="header">Cha-Cha-Charity!</h1>
         <section className="intro">
@@ -22,7 +19,7 @@ const Home = () => {
         </section>
       </div>
       <MainContainer>
-        {eventCategories.map(eventCategory => {
+        {eventCategories.map((eventCategory) => {
           return (
             <div>
               <Container>
