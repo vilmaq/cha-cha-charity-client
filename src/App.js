@@ -1,4 +1,5 @@
 import { BrowserRouter as Router } from "react-router-dom";
+
 import {
   ApolloClient,
   ApolloProvider,
@@ -9,6 +10,7 @@ import { setContext } from "@apollo/client/link/context";
 
 import Routes from "./Routes";
 import Navigation from "./components/NavigationBar";
+import ImageSlider from "./components/ImageSlider/ImageSlider";
 import UserProvider from "./contexts/UserProvider";
 
 import "./App.css";
@@ -39,6 +41,7 @@ const App = () => {
       <UserProvider>
         <Router>
           <Navigation />
+          <ImageSlider />
           <Routes />
         </Router>
       </UserProvider>

@@ -91,6 +91,9 @@ export default function CategoryCard({ title, image }) {
           </Button>
         </CardActions>
       </Card>
+      <div>
+        <h1>Carousel</h1>
+      </div>
     </div>
   );
 }
