@@ -48,6 +48,7 @@ export default class UploadImages extends Component {
       this.setState({
         imageInfos: response.data,
       });
+      console.log(response.data);
     });
   }
 
@@ -58,6 +59,7 @@ export default class UploadImages extends Component {
       progress: 0,
       message: "",
     });
+    console.log("event.target.files", event.target.files);
   }
 
   upload() {

@@ -5,15 +5,36 @@ import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import DateFnsUtils from "@date-io/date-fns";
-
+import InputLabel from "@material-ui/core/InputLabel";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
+import { makeStyles } from "@material-ui/core/styles";
+import FormControl from "@material-ui/core/FormControl";
 import {
   MuiPickersUtilsProvider,
   KeyboardTimePicker,
   KeyboardDatePicker,
 } from "@material-ui/pickers";
 
+const useStyles = makeStyles((theme) => ({
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+}));
+
 export default function EventForm() {
   const [selectedDate, setSelectedDate] = React.useState(new Date());
+
+  const classes = useStyles();
+  const [type, setType] = React.useState("");
+
+  const handleChange = (event) => {
+    setType(event.target.value);
+  };
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
@@ -63,6 +84,30 @@ export default function EventForm() {
             </Grid>
           </MuiPickersUtilsProvider>
         </Grid>
+        <Grid item xs={12} sm={6} container justifyContent="space-between">
+          <FormControl required className={classes.formControl}>
+            <InputLabel id="demo-simple-select-autowidth-label">
+              Type
+            </InputLabel>
+            <Select
+              labelId="demo-simple-select-autowidth-label"
+              id="demo-simple-select-autowidth"
+              value={type}
+              onChange={handleChange}
+              autoWidth
+            >
+              <MenuItem value="">
+                <em></em>
+              </MenuItem>
+              <MenuItem value={10}>Animals</MenuItem>
+              <MenuItem value={20}>Health</MenuItem>
+              <MenuItem value={30}>Education</MenuItem>
+              <MenuItem value={10}>Art/Culture</MenuItem>
+              <MenuItem value={20}>Environmental</MenuItem>
+              <MenuItem value={30}>International</MenuItem>
+            </Select>
+          </FormControl>
+        </Grid>
         <Grid item xs={12}>
           <TextField
             required
@@ -73,7 +118,7 @@ export default function EventForm() {
             autoComplete="Event Description"
           />
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} sm={6}>
           <TextField
             id="street"
             name="street"
