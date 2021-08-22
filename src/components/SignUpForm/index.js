@@ -19,8 +19,10 @@ import Paper from "@material-ui/core/Paper";
 import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
 
-import ReactHookFormSelect from "./ReactHookFormSelect";
 import { SIGNUP } from "../../graphql/mutations";
+
+import ReactHookFormSelect from "../ReactHookFormSelect";
+import ImageUpload from "../ImageUpload";
 
 import "./SignUpForm.css";
 
@@ -63,6 +65,8 @@ const SignUpForm = () => {
 
   const [countries] = useState(Country.getAllCountries());
   const [cities, setCities] = useState([]);
+  const [images, setImages] = useState([]);
+  const [imageUrl, setImageUrl] = useState();
 
   const [signUp] = useMutation(SIGNUP, {
     onCompleted: (data) => {
@@ -85,7 +89,7 @@ const SignUpForm = () => {
   const onSubmit = async (formData) => {
     await signUp({
       variables: {
-        signUpInput: formData,
+        signUpInput: { ...formData, imageUrl },
       },
     });
   };
@@ -100,7 +104,7 @@ const SignUpForm = () => {
           name="type"
           label="Select an account type"
           control={control}
-          defaultValue={ACCOUNT_TYPES[0]}
+          rules={{ required: true }}
         >
           {ACCOUNT_TYPES.map((accountType) => {
             return (
@@ -150,6 +154,7 @@ const SignUpForm = () => {
           name="fullName"
           control={control}
           rules={{ required: true }}
+          defaultValue=""
           render={({ field: { onChange, value }, fieldState: { error } }) => (
             <FormControl className={classes.formControl}>
               <InputLabel
@@ -169,6 +174,7 @@ const SignUpForm = () => {
           name="phoneNumber"
           control={control}
           rules={{ required: true }}
+          defaultValue=""
           render={({ field: { onChange, value }, fieldState: { error } }) => (
             <FormControl className={classes.formControl}>
               <InputLabel
@@ -188,6 +194,7 @@ const SignUpForm = () => {
           name="street"
           control={control}
           rules={{ required: true }}
+          defaultValue=""
           render={({ field: { onChange, value }, fieldState: { error } }) => (
             <FormControl className={classes.formControl}>
               <InputLabel
@@ -207,6 +214,7 @@ const SignUpForm = () => {
           name="postcode"
           control={control}
           rules={{ required: true }}
+          defaultValue=""
           render={({ field: { onChange, value }, fieldState: { error } }) => (
             <FormControl className={classes.formControl}>
               <InputLabel
@@ -277,6 +285,7 @@ const SignUpForm = () => {
           name="email"
           control={control}
           rules={{ required: true }}
+          defaultValue=""
           render={({ field: { onChange, value }, fieldState: { error } }) => (
             <FormControl className={classes.formControl}>
               <InputLabel
@@ -296,6 +305,7 @@ const SignUpForm = () => {
           name="password"
           control={control}
           rules={{ required: true }}
+          defaultValue=""
           render={({ field: { onChange, value }, fieldState: { error } }) => (
             <FormControl className={classes.formControl}>
               <InputLabel
@@ -330,6 +340,17 @@ const SignUpForm = () => {
         {renderPersonalDetails()}
         <Divider />
         {renderAccountPreferences()}
+        <Divider />
+        <Box component="div" m={1} className={classes.formTitle}>
+          <ImageUpload
+            images={images}
+            imageUrl={imageUrl}
+            setImages={setImages}
+            setImageUrl={setImageUrl}
+            filePrefix=""
+          />
+        </Box>
+        <Divider />
         <Box component="div" m={1} className={classes.formTitle}>
           <Button
             type="submit"
