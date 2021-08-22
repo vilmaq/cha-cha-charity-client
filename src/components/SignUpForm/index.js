@@ -1,220 +1,202 @@
-import React from "react";
+import classNames from "classnames";
 import { useState } from "react";
+import { useForm, Controller } from "react-hook-form";
+import { useHistory } from "react-router-dom";
+import { useMutation } from "@apollo/client";
+import { Country, City } from "country-state-city";
+
 import { makeStyles } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormGroup from "@material-ui/core/FormGroup";
 import MenuItem from "@material-ui/core/MenuItem";
-import Select from "@material-ui/core/Select";
-import { Country, City } from "country-state-city";
-import { useUserContext } from "../../contexts/UserProvider";
+import Box from "@material-ui/core/Box";
+import Input from "@material-ui/core/Input";
+
+import ReactHookFormSelect from "./ReactHookFormSelect";
+import { SIGNUP } from "../../graphql/mutations";
 
 import "./SignUpForm.css";
-import { SIGNUP } from "../../graphql/mutations";
-import { useMutation } from "@apollo/client";
 
 const useStyles = makeStyles((theme) => ({
-  button: {
-    display: "block",
-    marginTop: theme.spacing(2),
-  },
-
   formControl: {
     display: "flex",
     margin: theme.spacing(3),
-    minWidth: 120,
+    minWidth: "100%",
   },
 }));
 
+const ACCOUNT_TYPES = ["Business", "Volunteer", "Charity"];
+const PREFERENCES = {
+  animals: "Animals",
+  environmental: "Environmental",
+  international: "International",
+  education: "Education",
+  health: "Health",
+  artCulture: "Art Culture",
+};
+
 const SignUpForm = () => {
-  // let history = useHistory();
-
-  // const { dispatch } = useUserContext();
-
   const classes = useStyles();
-  // const { dispatch } = useUserContext();
+  let history = useHistory();
 
-  /*   const [show, setShow] = useState(false);
+  const { handleSubmit, control } = useForm();
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true); */
-
-  const [formValues, setFormValues] = useState({
-    fullName: "",
-    email: "",
-    password: "",
-    phoneNumber: "",
-    street: "",
-    animals: false,
-    educational: false,
-    health: false,
-    artCulture: false,
-    environmental: false,
-    international: false,
-  });
-
-  const countries = Country.getAllCountries();
+  const [countries] = useState(Country.getAllCountries());
   const [cities, setCities] = useState();
-  const [selectedCountry, setSelectedCountry] = useState("");
-  const [selectedCity, setSelectedCity] = useState("");
-  const [selectedType, setSelectedType] = useState("");
-  const [preferences, setPreferences] = useState({
-    animals: false,
-    environmental: false,
-    health: false,
-    education: false,
-    international: false,
-    artCulture: false,
-  });
 
-  const [open, setOpen] = React.useState(false);
+  const [signUp] = useMutation(SIGNUP, {
+    onCompleted: (data) => {
+      console.log(data);
+      history.push("/login");
+    },
+    onError: (error) => {
+      console.log(error);
+    },
+  });
 
   const handleChangeCountry = (event) => {
-    const isoCode = event.currentTarget.getAttribute("name");
-    const cities = City.getCitiesOfCountry(isoCode);
-    const countryName = event.target.value;
-    setSelectedCountry(countryName);
+    const cities = City.getCitiesOfCountry(
+      event.currentTarget.getAttribute("name")
+    );
+
     setCities(cities);
   };
 
-  const handleChangeCity = (event) => {
-    setSelectedCity(event.target.value);
-  };
-
-  const handleChangeType = (event) => {
-    setSelectedType(event.target.value);
-  };
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleSelectClose = () => {
-    setOpen(false);
-  };
-
-  const onChange = (event) => {
-    const { name, value } = event.target;
-    console.log(value);
-    setFormValues({
-      ...formValues,
-      [name]: value,
-    });
-  };
-
-  const onCheck = (event) => {
-    const { name, checked } = event.target;
-    setPreferences({
-      ...preferences,
-      [name]: checked,
-    });
-  };
-
-  const [signup] = useMutation(SIGNUP, {
-    // onCompleted: (data) => {
-    //   const payload = {
-    //     token: data.login.token,
-    //     email: data.login.user.email,
-    //     firstName: data.login.user.firstName,
-    //     lastName: data.login.user.lastName,
-    //     id: data.login.user.id,
-    //   };
-    //   // localStorage.setItem("user", JSON.ify(payload));
-    //   // dispatch({
-    //   //   type: "SIGNUP",
-    //   //   payload,
-    //   // });
-    //   // history.push("/");
-    // },
-  });
-
-  const handleSubmit = async (formData) => {
-    console.log(formValues);
-    console.log(selectedCountry, selectedCity);
-    console.log(selectedType);
-    console.log(preferences);
-    const userData = {
-      // id: ID,
-      type: formData.type,
-      fullName: formData.fullName,
-      password: formData.password,
-      email: formData.email,
-      phoneNumber: formData.phoneNumber,
-      street: formData.street,
-      postcode: formData.postcode,
-      city: formData.city,
-      country: formData.country,
-      animals: formData.animals,
-      environmental: formData.environmental,
-      international: formData.international,
-      health: formData.health,
-      education: formData.education,
-      artCulture: formData.artCulture,
-    };
-    await signup({
+  const onSubmit = async (formData) => {
+    await signUp({
       variables: {
-        signUpInput: userData,
+        signUpInput: formData,
       },
     });
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <TextField
-        label="fullName"
-        name="fullName"
-        onChange={(event) => onChange(event)}
-        fullWidth
-        autocomplete="none"
-      />
-      <TextField
-        label="email"
-        name="email"
-        onChange={(event) => onChange(event)}
-        fullWidth
-        autocomplete="none"
-      />
-      <TextField
-        label="password"
-        name="password"
-        type="password"
-        onChange={(event) => onChange(event)}
-        fullWidth
-        autocomplete="none"
-      />
-      <TextField
-        label="phoneNumber"
-        name="phoneNumber"
-        onChange={(event) => onChange(event)}
-        fullWidth
-        autocomplete="none"
-      />
-      <TextField
-        label="street"
-        name="street"
-        onChange={(event) => onChange(event)}
-        fullWidth
-        autocomplete="none"
-      />
-      <TextField
-        label="Message"
-        fullWidth
-        multiline
-        rows={5}
-        autocomplete="none"
-      />
-      <FormControl>
-        <InputLabel>Country</InputLabel>
-        <Select
-          value={selectedCountry}
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <Box component="div" m={1}>
+        <Controller
+          name="fullName"
+          control={control}
+          rules={{ required: "Full name is required" }}
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <FormControl className={classes.formControl}>
+              <InputLabel className={classNames({ "form-error": error })}>
+                Full Name
+              </InputLabel>
+              <Input value={value} onChange={onChange} error={!!error} />
+            </FormControl>
+          )}
+        />
+      </Box>
+      <Box component="div" m={1}>
+        <Controller
+          name="email"
+          control={control}
+          rules={{ required: "Email is required" }}
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <FormControl className={classes.formControl}>
+              <InputLabel className={classNames({ "form-error": error })}>
+                Email Address
+              </InputLabel>
+              <Input value={value} onChange={onChange} error={!!error} />
+            </FormControl>
+          )}
+        />
+      </Box>
+      <Box component="div" m={1}>
+        <Controller
+          name="password"
+          control={control}
+          rules={{ required: "Password is required" }}
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <FormControl className={classes.formControl}>
+              <InputLabel className={classNames({ "form-error": error })}>
+                Password
+              </InputLabel>
+              <Input
+                type="password"
+                value={value}
+                onChange={onChange}
+                error={!!error}
+              />
+            </FormControl>
+          )}
+        />
+      </Box>
+      <Box component="div" m={1}>
+        <Controller
+          name="phoneNumber"
+          control={control}
+          rules={{ required: "Phone number is required" }}
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <FormControl className={classes.formControl}>
+              <InputLabel className={classNames({ "form-error": error })}>
+                Phone Number
+              </InputLabel>
+              <Input value={value} onChange={onChange} error={!!error} />
+            </FormControl>
+          )}
+        />
+      </Box>
+      <Box component="div" m={1}>
+        <Controller
+          name="street"
+          control={control}
+          rules={{ required: "Address is required" }}
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <FormControl className={classes.formControl}>
+              <InputLabel className={classNames({ "form-error": error })}>
+                Address
+              </InputLabel>
+              <Input value={value} onChange={onChange} error={!!error} />
+            </FormControl>
+          )}
+        />
+      </Box>
+      <Box component="div" m={1}>
+        <Controller
+          name="postcode"
+          control={control}
+          rules={{ required: "Postcode is required" }}
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <FormControl className={classes.formControl}>
+              <InputLabel className={classNames({ "form-error": error })}>
+                Postcode
+              </InputLabel>
+              <Input value={value} onChange={onChange} error={!!error} />
+            </FormControl>
+          )}
+        />
+      </Box>
+      <Box component="div" m={1}>
+        <ReactHookFormSelect
+          name="type"
+          label="Select an account type"
+          control={control}
+          defaultValue={ACCOUNT_TYPES[0]}
+        >
+          {ACCOUNT_TYPES.map((accountType) => {
+            return (
+              <MenuItem
+                name={accountType}
+                value={accountType}
+                key={accountType}
+              >
+                {accountType}
+              </MenuItem>
+            );
+          })}
+        </ReactHookFormSelect>
+      </Box>
+      <Box component="div" m={1}>
+        <ReactHookFormSelect
           name="country"
-          onChange={(event) => {
-            handleChangeCountry(event);
-          }}
+          label="Select a country"
+          control={control}
+          handleChange={handleChangeCountry}
         >
           {countries.map((country) => {
             return (
@@ -227,129 +209,56 @@ const SignUpForm = () => {
               </MenuItem>
             );
           })}
-        </Select>
-      </FormControl>
+        </ReactHookFormSelect>
+      </Box>
       {cities && (
-        <FormControl style={{ minWidth: "200px" }}>
-          <InputLabel>City</InputLabel>
-          <Select
-            value={selectedCity}
+        <Box component="div" m={1}>
+          <ReactHookFormSelect
             name="city"
-            onChange={(event) => {
-              handleChangeCity(event);
-            }}
+            label="Select a city"
+            control={control}
           >
             {cities.map((city, index) => {
               return (
-                <MenuItem value={city.name} key={`${city.name}-${index}`}>
+                <MenuItem
+                  name={city.name}
+                  value={city.name}
+                  key={`${city.name}-${index}`}
+                >
                   {city.name}
                 </MenuItem>
               );
             })}
-          </Select>
-        </FormControl>
+          </ReactHookFormSelect>
+        </Box>
       )}
-      <div>
-        <Button className={classes.button} onClick={handleOpen}>
-          Select the type
-        </Button>
-        <FormControl className={classes.formControl}>
-          <InputLabel id="demo-controlled-open-select-label">Type</InputLabel>
-          <Select
-            labelId="demo-controlled-open-select-label"
-            id="demo-controlled-open-select"
-            open={open}
-            onClose={handleSelectClose}
-            onOpen={handleOpen}
-            value={selectedType.type}
-            name="type"
-            onChange={(event) => {
-              handleChangeType(event);
-            }}
-          >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            <MenuItem value={"Business"}>Business</MenuItem>
-            <MenuItem value={"Volunteer"}>Volunteer</MenuItem>
-            <MenuItem value={"Charity"}>Charity</MenuItem>
-          </Select>
+      <Box component="div" m={1}>
+        <FormControl component="fieldset" className={classes.formControl}>
+          <FormGroup>
+            {Object.entries(PREFERENCES).map(([name, label]) => (
+              <FormControlLabel
+                control={
+                  <Controller
+                    name={name}
+                    control={control}
+                    defaultValue={false}
+                    render={({ field: { onChange, value } }) => (
+                      <Checkbox checked={value} onChange={onChange} />
+                    )}
+                  />
+                }
+                label={label}
+                key={name}
+              />
+            ))}
+          </FormGroup>
         </FormControl>
-      </div>
-      <FormGroup row>
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={preferences.animals}
-              onChange={(event) => onCheck(event)}
-              name="animals"
-              color="primary"
-            />
-          }
-          label="Animals"
-        />
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={preferences.environmental}
-              onChange={(event) => onCheck(event)}
-              name="environmental"
-              color="primary"
-            />
-          }
-          label="International"
-        />
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={preferences.international}
-              onChange={(event) => onCheck(event)}
-              name="international"
-              color="primary"
-            />
-          }
-          label="International"
-        />
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={preferences.health}
-              onChange={(event) => onCheck(event)}
-              name="health"
-              color="primary"
-            />
-          }
-          label="Health"
-        />
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={preferences.education}
-              onChange={(event) => onCheck(event)}
-              name="education"
-              color="primary"
-            />
-          }
-          label="Education"
-        />
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={preferences.artCulture}
-              onChange={(event) => onCheck(event)}
-              name="artCulture"
-              color="primary"
-            />
-          }
-          label="Art Culture"
-        />
-      </FormGroup>
-
-      <div>
+      </Box>
+      <Box component="div" m={1}>
         <Button type="submit" variant="contained" color="primary">
           Signup
         </Button>
-      </div>
+      </Box>
     </form>
   );
 };
