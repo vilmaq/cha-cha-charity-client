@@ -75,36 +75,9 @@ export const SIGNUPTOEVENT = gql`
   }
 `;
 
-export const SIGNUP = gql`
-  mutation Mutation($signUpInput: SignUpInput!) {
-    signUp(input: $signUpInput) {
-      token
-      user {
-        type
-        fullName
-        password
-        email
-        phoneNumber
-        street
-        postcode
-        city
-        country
-        imageUrl
-        bio
-        animals
-        environmental
-        international
-        health
-        education
-        artCulture
-      }
-    }
-  }
-`;
-
 export const CREATEEVENT = gql`
-  mutation Mutation($userId: ID!, $eventId: ID!) {
-    signUpToEvent(userId: $userId, eventId: $eventId) {
+  mutation Mutation($eventId: ID!, $userId: ID!) {
+    createEvent(userId: $userId, eventId: $eventId) {
       events {
         id
         type
@@ -124,14 +97,18 @@ export const CREATEEVENT = gql`
           email
         }
         imageUrl
-        participants {
-          id
-          type
-          fullName
-          password
-          email
-        }
       }
     }
   }
+`;
+
+export const UPLOADIMAGE = gql`
+  mutation Mutation($imageUploadInput: Image) {
+    imageUpload(input: $imageUploadInput)
+  }
+  # mutation Mutation($input: Image) {
+  #   uploadImage(imageUploadInput: $input) {
+  #     name
+  #   }
+  # }
 `;

@@ -5,7 +5,7 @@ import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 
-export default function TCForm() {
+export default function TCForm(stepThreeActions) {
   const line1 = "Your Agreement!";
   const line2 =
     "Please be advised if you wish to set up a charitable event in the UK you shall make sure that your charity event complies with the law and fundraising legal duties of the country No matter how you decide to fundraise.";
@@ -37,6 +37,9 @@ export default function TCForm() {
             control={<Checkbox color="secondary" name="agreeTC" value="yes" />}
             label="Check here to indicate that you have read and agree to the terms of the Cha-Cha-Charity."
             required="true"
+            onChange={(event) =>
+              stepThreeActions.setEventOrganizer(event.target.check)
+            }
           />
         </Grid>
         <Grid item xs={12}></Grid>

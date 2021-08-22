@@ -89,29 +89,41 @@ export default function CreateNewEvent() {
   const [eventType, setEventType] = useState("");
   const [eventDate, setEventDate] = useState("");
   const [eventTime, setEventTime] = useState("");
-  const [eventDescription, setEventDescriptionEventDescription] = useState("");
+  const [eventDescription, setEventDescription] = useState("");
   const [eventStreet, setEventStreet] = useState("");
   const [eventCity, setEventCity] = useState("");
   const [eventState, setEventState] = useState("");
-  const [eventPostcode, setEventPostcode] = useState("");
+  const [eventPostcode, setEventPostCode] = useState("");
   const [eventCountry, setEventCountry] = useState("");
   const [eventOrganizer, setEventOrganizer] = useState("");
   const [eventImage, setEventImage] = useState("");
   const [hasReadTermAndConditions, setHasReadTermsAndConditions] =
     useState(false);
 
-  console.log(eventName);
+  console.log(
+    setEventName,
+    setEventType,
+    setEventDate,
+    setEventTime,
+    setEventDescription,
+    setEventStreet,
+    setEventCity,
+    setEventState,
+    setEventPostCode,
+    setEventCountry,
+    setEventOrganizer
+  );
 
   const stepOneActions = {
     setEventName,
     setEventType,
     setEventDate,
     setEventTime,
-    setEventDescriptionEventDescription,
+    setEventDescription,
     setEventStreet,
     setEventCity,
     setEventState,
-    setEventPostcode,
+    setEventPostCode,
     setEventCountry,
     setEventOrganizer,
   };

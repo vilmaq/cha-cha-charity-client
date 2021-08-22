@@ -10,11 +10,17 @@ import { setContext } from "@apollo/client/link/context";
 import Routes from "./Routes";
 import Navigation from "./components/NavigationBar";
 import UserProvider from "./contexts/UserProvider";
+import { ApolloLink } from "apollo-link";
+import { createUploadLink } from "apollo-upload-client";
 
 import "./App.css";
 
 const httpLink = createHttpLink({
-  uri: process.env.GRAPHQL_URL || "http://localhost:4000/",
+  uri: process.env.GRAPHQL_URL || "http://localhost:4000/graphql",
+});
+
+const uploadLink = createUploadLink({
+  uri: process.env.GRAPHQL_URL || "http://localhost:4000/graphql",
 });
 
 const authLink = setContext((_, { headers }) => {
@@ -27,9 +33,9 @@ const authLink = setContext((_, { headers }) => {
     },
   };
 });
-
+// link the apollo links together
 const client = new ApolloClient({
-  link: authLink.concat(httpLink),
+  link: ApolloLink.from([httpLink, authLink, uploadLink]),
   cache: new InMemoryCache(),
 });
 

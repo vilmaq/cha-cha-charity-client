@@ -69,7 +69,9 @@ export default function EventForm({ stepOneActions }) {
                 id="date-picker"
                 label="Date picker"
                 value={selectedDate}
-                onChange={handleDateChange}
+                onChange={(event) =>
+                  stepOneActions.setEventDate(event.target.value)
+                }
                 KeyboardButtonProps={{
                   "aria-label": "change date",
                 }}
@@ -79,7 +81,9 @@ export default function EventForm({ stepOneActions }) {
                 id="time-picker"
                 label="Time picker"
                 value={selectedDate}
-                onChange={handleDateChange}
+                onChange={(event) =>
+                  stepOneActions.setEventTime(event.target.value)
+                }
                 KeyboardButtonProps={{
                   "aria-label": "change time",
                 }}
@@ -96,7 +100,9 @@ export default function EventForm({ stepOneActions }) {
               labelId="demo-simple-select-autowidth-label"
               id="demo-simple-select-autowidth"
               value={type}
-              onChange={handleChange}
+              onChange={(event) =>
+                stepOneActions.setEventType(event.target.value)
+              }
               autoWidth
             >
               <MenuItem value="">
@@ -117,6 +123,9 @@ export default function EventForm({ stepOneActions }) {
             id="description"
             name="description"
             label="Description"
+            onChange={(event) =>
+              stepOneActions.setEventDescription(event.target.value)
+            }
             fullWidth
             autoComplete="Event Description"
           />
@@ -128,6 +137,9 @@ export default function EventForm({ stepOneActions }) {
             label="Street"
             fullWidth
             autoComplete="address-line2"
+            onChange={(event) =>
+              stepOneActions.setEventStreet(event.target.value)
+            }
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -138,6 +150,9 @@ export default function EventForm({ stepOneActions }) {
             label="City"
             fullWidth
             autoComplete="address-level2"
+            onChange={(event) =>
+              stepOneActions.setEventCity(event.target.value)
+            }
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -146,6 +161,9 @@ export default function EventForm({ stepOneActions }) {
             name="state"
             label="State/Province/Region"
             fullWidth
+            onChange={(event) =>
+              stepOneActions.setEventState(event.target.value)
+            }
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -156,6 +174,9 @@ export default function EventForm({ stepOneActions }) {
             label="Zip / Postal code"
             fullWidth
             autoComplete="postal-code"
+            onChange={(event) =>
+              stepOneActions.setEventPostCode(event.target.value)
+            }
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -166,6 +187,9 @@ export default function EventForm({ stepOneActions }) {
             label="Country"
             fullWidth
             autoComplete="country"
+            onChange={(event) =>
+              stepOneActions.setEventCountry(event.target.value)
+            }
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -176,6 +200,9 @@ export default function EventForm({ stepOneActions }) {
             label="Organizer Name"
             fullWidth
             autoComplete="Organizer Name"
+            onChange={(event) =>
+              stepOneActions.setEventOrganizer(event.target.value)
+            }
           />
         </Grid>
         <Grid item xs={12}>

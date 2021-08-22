@@ -1,23 +1,18 @@
-import http from "../http-common";
+import { useMutation } from "@apollo/client";
+import { UPLOADIMAGE } from "../graphql/mutations";
 
-class UploadFilesService {
-  upload(file, onUploadProgress) {
-    let formData = new FormData();
-
-    formData.append("file", file);
-
-    console.log(file);
-    return http.post("/upload", formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
+const UploadFilesService = async (file, onUploadProgress) => {
+  const [uploadImage, { error }] = useMutation(UPLOADIMAGE);
+  try {
+    const { data } = await uploadImage({
+      variables: {
+        file: file,
       },
-      onUploadProgress,
     });
+    console.log(data);
+  } catch (error) {
+    console.log(error);
   }
+};
 
-  getFiles() {
-    return http.get("/files");
-  }
-}
-
-export default new UploadFilesService();
+export default UploadFilesService();
