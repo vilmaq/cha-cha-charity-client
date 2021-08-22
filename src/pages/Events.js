@@ -11,7 +11,6 @@ const Events = () => {
   const { state } = useUserContext();
   const [search, setSearch] = useState("");
 
-  console.log(data);
   if (loading) {
     return <LoaderSpinner />;
   }
@@ -19,7 +18,7 @@ const Events = () => {
   if (error) {
     return <div>Error</div>;
   }
-
+  console.log(data);
   if (data) {
     const handleSearch = (e) => {
       setSearch(e.target.value);

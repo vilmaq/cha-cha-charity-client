@@ -16,8 +16,7 @@ export const EVENTS = gql`
       creator {
         id
         type
-        name
-        last_name
+        fullName
         password
         email
       }
@@ -25,8 +24,7 @@ export const EVENTS = gql`
       participants {
         id
         type
-        name
-        last_name
+        fullName
         password
         email
       }
@@ -52,8 +50,7 @@ export const MyEvents = gql`
         creator {
           id
           type
-          name
-          last_name
+          fullName
           password
           email
         }
@@ -61,8 +58,7 @@ export const MyEvents = gql`
         participants {
           id
           type
-          name
-          last_name
+          fullName
           password
           email
         }
@@ -88,7 +84,7 @@ export const EVENT = gql`
         id
         type
         name
-        last_name
+        fullName
         password
         email
       }
@@ -97,7 +93,7 @@ export const EVENT = gql`
         id
         type
         name
-        last_name
+        fullName
         password
         email
       }

@@ -1,5 +1,12 @@
 .main-content {
-  margin: 3rem 2rem 1rem 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  padding: 20px;
+  border: 3rem;
+  align-self: center;
+  justify-content: center;
+  align-items: center;
 }
 
 @media screen and (max-width: 768px) {
