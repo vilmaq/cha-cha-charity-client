@@ -1,7 +1,9 @@
+import classNames from "classnames";
 import { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
+import { useHistory } from "react-router-dom";
+import { useMutation } from "@apollo/client";
 import { Country, City } from "country-state-city";
-import classNames from "classnames";
 
 import { makeStyles } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
@@ -15,6 +17,7 @@ import Box from "@material-ui/core/Box";
 import Input from "@material-ui/core/Input";
 
 import ReactHookFormSelect from "./ReactHookFormSelect";
+import { SIGNUP } from "../../graphql/mutations";
 
 import "./SignUpForm.css";
 
@@ -38,11 +41,22 @@ const PREFERENCES = {
 
 const SignUpForm = () => {
   const classes = useStyles();
+  let history = useHistory();
 
   const { handleSubmit, control } = useForm();
 
   const [countries] = useState(Country.getAllCountries());
   const [cities, setCities] = useState();
+
+  const [signUp] = useMutation(SIGNUP, {
+    onCompleted: (data) => {
+      console.log(data);
+      history.push("/login");
+    },
+    onError: (error) => {
+      console.log(error);
+    },
+  });
 
   const handleChangeCountry = (event) => {
     const cities = City.getCitiesOfCountry(
@@ -52,8 +66,12 @@ const SignUpForm = () => {
     setCities(cities);
   };
 
-  const onSubmit = (formData) => {
-    console.log(formData);
+  const onSubmit = async (formData) => {
+    await signUp({
+      variables: {
+        signUpInput: formData,
+      },
+    });
   };
 
   return (
