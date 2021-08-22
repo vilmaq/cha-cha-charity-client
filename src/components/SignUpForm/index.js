@@ -27,44 +27,22 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ACCOUNT_TYPES = ["Business", "Volunteer", "Charity"];
+const PREFERENCES = {
+  animals: "Animals",
+  environmental: "Environmental",
+  international: "International",
+  education: "Education",
+  health: "Health",
+  artCulture: "Art Culture",
+};
 
 const SignUpForm = () => {
   const classes = useStyles();
 
   const { handleSubmit, control } = useForm();
 
-  const [animals, setAnimals] = useState(false);
-  const [environmental, setEnvironmental] = useState(false);
-  const [international, setInternational] = useState(false);
-  const [health, setHealth] = useState(false);
-  const [education, setEducation] = useState(false);
-  const [artCulture, setArtCulture] = useState(false);
   const [countries] = useState(Country.getAllCountries());
   const [cities, setCities] = useState();
-
-  const handleChangeAnimals = (event) => {
-    setAnimals(event.target.checked);
-  };
-
-  const handleChangeEnvironmental = (event) => {
-    setEnvironmental(event.target.checked);
-  };
-
-  const handleChangeInternational = (event) => {
-    setInternational(event.target.checked);
-  };
-
-  const handleChangeHealth = (event) => {
-    setHealth(event.target.checked);
-  };
-
-  const handleChangeEducation = (event) => {
-    setEducation(event.target.checked);
-  };
-
-  const handleChangeArtCulture = (event) => {
-    setArtCulture(event.target.checked);
-  };
 
   const handleChangeCountry = (event) => {
     const cities = City.getCitiesOfCountry(
@@ -236,83 +214,28 @@ const SignUpForm = () => {
           </ReactHookFormSelect>
         </Box>
       )}
-
-      <div className={classes.secondRoot}>
+      <Box component="div" m={1}>
         <FormControl component="fieldset" className={classes.formControl}>
           <FormGroup>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={animals}
-                  onChange={handleChangeAnimals}
-                  name="animals"
-                  color="primary"
-                />
-              }
-              label="Animals"
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={environmental}
-                  onChange={handleChangeEnvironmental}
-                  name="environmental"
-                  color="primary"
-                />
-              }
-              label="Environmental"
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={international}
-                  onChange={handleChangeInternational}
-                  name="international"
-                  color="primary"
-                />
-              }
-              label="International"
-            />
+            {Object.entries(PREFERENCES).map(([name, label]) => (
+              <FormControlLabel
+                control={
+                  <Controller
+                    name={name}
+                    control={control}
+                    defaultValue={false}
+                    render={({ field: { onChange, value } }) => (
+                      <Checkbox checked={value} onChange={onChange} />
+                    )}
+                  />
+                }
+                label={label}
+                key={name}
+              />
+            ))}
           </FormGroup>
         </FormControl>
-        <FormControl component="fieldset" className={classes.formControl}>
-          <FormGroup>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={health}
-                  onChange={handleChangeHealth}
-                  name="health"
-                  color="primary"
-                />
-              }
-              label="Health"
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={education}
-                  onChange={handleChangeEducation}
-                  name="education"
-                  color="primary"
-                />
-              }
-              label="ArtCulture"
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={artCulture}
-                  onChange={handleChangeArtCulture}
-                  name="artCulture"
-                  color="primary"
-                />
-              }
-              label="artCulture"
-            />
-          </FormGroup>
-        </FormControl>
-      </div>
+      </Box>
       <Box component="div" m={1}>
         <Button type="submit" variant="contained" color="primary">
           Signup
