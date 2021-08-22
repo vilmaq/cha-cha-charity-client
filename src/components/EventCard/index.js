@@ -28,7 +28,7 @@ const EventCard = ({
       </div>
       <div className="info-container">
         <section className="name">
-          <h4>Event Name{name}</h4>
+          <h4>{name}</h4>
         </section>
 
         <section className="description">
@@ -40,25 +40,25 @@ const EventCard = ({
         <section className="when-where">
           <div className="details">
             <img src={calendar} alt="calendar" height="24px" />
-            <text>12 September 2021{day}</text>
+            <text>{day}</text>
           </div>
 
           <div className="details">
             <img src={location} alt="location" height="24px" />
-            <text>Birmingham{city}</text>
+            <text>{city}</text>
           </div>
         </section>
 
         <section>
           <div className="buttonContainer">
-            <a href="/interest">
-              <button type="button" className="buttons">
-                I'm interested
-              </button>
-            </a>
             <a href="/signup">
               <button type="button" className="buttons">
                 Sign Up
+              </button>
+            </a>
+            <a href="/singleevent">
+              <button type="button" className="buttons">
+                See more
               </button>
             </a>
           </div>
