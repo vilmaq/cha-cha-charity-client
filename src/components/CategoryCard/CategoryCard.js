@@ -27,7 +27,7 @@ const categoryImages = {
   international: mrworldwide,
 };
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     width: 435,
     margin: 10,
@@ -90,9 +90,6 @@ export default function CategoryCard({ title, image }) {
           </Button>
         </CardActions>
       </Card>
-      <div>
-        <h1>Carousel</h1>
-      </div>
     </div>
   );
 }
