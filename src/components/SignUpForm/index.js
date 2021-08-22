@@ -15,21 +15,39 @@ import FormGroup from "@material-ui/core/FormGroup";
 import MenuItem from "@material-ui/core/MenuItem";
 import Box from "@material-ui/core/Box";
 import Input from "@material-ui/core/Input";
+import Paper from "@material-ui/core/Paper";
+import Divider from "@material-ui/core/Divider";
+import Typography from "@material-ui/core/Typography";
 
-import ReactHookFormSelect from "./ReactHookFormSelect";
 import { SIGNUP } from "../../graphql/mutations";
+
+import ReactHookFormSelect from "../ReactHookFormSelect";
+import ImageUpload from "../ImageUpload";
 
 import "./SignUpForm.css";
 
 const useStyles = makeStyles((theme) => ({
+  paper: {
+    margin: "16px 0px",
+  },
+  form: {
+    padding: 16,
+  },
   formControl: {
-    display: "flex",
-    margin: theme.spacing(3),
+    padding: "8px 16px",
     minWidth: "100%",
+  },
+  formLabel: {
+    padding: "8px 16px",
+  },
+  formTitle: {
+    padding: "16px",
+    textAlign: "center",
   },
 }));
 
-const ACCOUNT_TYPES = ["Business", "Volunteer", "Charity"];
+const ACCOUNT_TYPES = ["Charity", "Business", "Volunteer"];
+
 const PREFERENCES = {
   animals: "Animals",
   environmental: "Environmental",
@@ -46,7 +64,9 @@ const SignUpForm = () => {
   const { handleSubmit, control } = useForm();
 
   const [countries] = useState(Country.getAllCountries());
-  const [cities, setCities] = useState();
+  const [cities, setCities] = useState([]);
+  const [images, setImages] = useState([]);
+  const [imageUrl, setImageUrl] = useState();
 
   const [signUp] = useMutation(SIGNUP, {
     onCompleted: (data) => {
@@ -69,114 +89,22 @@ const SignUpForm = () => {
   const onSubmit = async (formData) => {
     await signUp({
       variables: {
-        signUpInput: formData,
+        signUpInput: { ...formData, imageUrl },
       },
     });
   };
 
-  return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <Box component="div" m={1}>
-        <Controller
-          name="fullName"
-          control={control}
-          rules={{ required: "Full name is required" }}
-          render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <FormControl className={classes.formControl}>
-              <InputLabel className={classNames({ "form-error": error })}>
-                Full Name
-              </InputLabel>
-              <Input value={value} onChange={onChange} error={!!error} />
-            </FormControl>
-          )}
-        />
-      </Box>
-      <Box component="div" m={1}>
-        <Controller
-          name="email"
-          control={control}
-          rules={{ required: "Email is required" }}
-          render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <FormControl className={classes.formControl}>
-              <InputLabel className={classNames({ "form-error": error })}>
-                Email Address
-              </InputLabel>
-              <Input value={value} onChange={onChange} error={!!error} />
-            </FormControl>
-          )}
-        />
-      </Box>
-      <Box component="div" m={1}>
-        <Controller
-          name="password"
-          control={control}
-          rules={{ required: "Password is required" }}
-          render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <FormControl className={classes.formControl}>
-              <InputLabel className={classNames({ "form-error": error })}>
-                Password
-              </InputLabel>
-              <Input
-                type="password"
-                value={value}
-                onChange={onChange}
-                error={!!error}
-              />
-            </FormControl>
-          )}
-        />
-      </Box>
-      <Box component="div" m={1}>
-        <Controller
-          name="phoneNumber"
-          control={control}
-          rules={{ required: "Phone number is required" }}
-          render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <FormControl className={classes.formControl}>
-              <InputLabel className={classNames({ "form-error": error })}>
-                Phone Number
-              </InputLabel>
-              <Input value={value} onChange={onChange} error={!!error} />
-            </FormControl>
-          )}
-        />
-      </Box>
-      <Box component="div" m={1}>
-        <Controller
-          name="street"
-          control={control}
-          rules={{ required: "Address is required" }}
-          render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <FormControl className={classes.formControl}>
-              <InputLabel className={classNames({ "form-error": error })}>
-                Address
-              </InputLabel>
-              <Input value={value} onChange={onChange} error={!!error} />
-            </FormControl>
-          )}
-        />
-      </Box>
-      <Box component="div" m={1}>
-        <Controller
-          name="postcode"
-          control={control}
-          rules={{ required: "Postcode is required" }}
-          render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <FormControl className={classes.formControl}>
-              <InputLabel className={classNames({ "form-error": error })}>
-                Postcode
-              </InputLabel>
-              <Input value={value} onChange={onChange} error={!!error} />
-            </FormControl>
-          )}
-        />
-      </Box>
+  const renderAccountPreferences = () => (
+    <Box>
+      <Typography variant="h5" className={classes.formTitle}>
+        Account Preferences
+      </Typography>
       <Box component="div" m={1}>
         <ReactHookFormSelect
           name="type"
           label="Select an account type"
           control={control}
-          defaultValue={ACCOUNT_TYPES[0]}
+          rules={{ required: true }}
         >
           {ACCOUNT_TYPES.map((accountType) => {
             return (
@@ -191,47 +119,6 @@ const SignUpForm = () => {
           })}
         </ReactHookFormSelect>
       </Box>
-      <Box component="div" m={1}>
-        <ReactHookFormSelect
-          name="country"
-          label="Select a country"
-          control={control}
-          handleChange={handleChangeCountry}
-        >
-          {countries.map((country) => {
-            return (
-              <MenuItem
-                name={country.isoCode}
-                value={country.name}
-                key={country.isoCode}
-              >
-                {country.name}
-              </MenuItem>
-            );
-          })}
-        </ReactHookFormSelect>
-      </Box>
-      {cities && (
-        <Box component="div" m={1}>
-          <ReactHookFormSelect
-            name="city"
-            label="Select a city"
-            control={control}
-          >
-            {cities.map((city, index) => {
-              return (
-                <MenuItem
-                  name={city.name}
-                  value={city.name}
-                  key={`${city.name}-${index}`}
-                >
-                  {city.name}
-                </MenuItem>
-              );
-            })}
-          </ReactHookFormSelect>
-        </Box>
-      )}
       <Box component="div" m={1}>
         <FormControl component="fieldset" className={classes.formControl}>
           <FormGroup>
@@ -254,12 +141,229 @@ const SignUpForm = () => {
           </FormGroup>
         </FormControl>
       </Box>
+    </Box>
+  );
+
+  const renderPersonalDetails = () => (
+    <Box>
+      <Typography variant="h5" className={classes.formTitle}>
+        Personal Details
+      </Typography>
       <Box component="div" m={1}>
-        <Button type="submit" variant="contained" color="primary">
-          Signup
-        </Button>
+        <Controller
+          name="fullName"
+          control={control}
+          rules={{ required: true }}
+          defaultValue=""
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <FormControl className={classes.formControl}>
+              <InputLabel
+                className={classNames(classes.formControl, {
+                  "form-error": error,
+                })}
+              >
+                Full Name
+              </InputLabel>
+              <Input value={value} onChange={onChange} error={!!error} />
+            </FormControl>
+          )}
+        />
       </Box>
-    </form>
+      <Box component="div" m={1}>
+        <Controller
+          name="phoneNumber"
+          control={control}
+          rules={{ required: true }}
+          defaultValue=""
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <FormControl className={classes.formControl}>
+              <InputLabel
+                className={classNames(classes.formControl, {
+                  "form-error": error,
+                })}
+              >
+                Phone Number
+              </InputLabel>
+              <Input value={value} onChange={onChange} error={!!error} />
+            </FormControl>
+          )}
+        />
+      </Box>
+      <Box component="div" m={1}>
+        <Controller
+          name="street"
+          control={control}
+          rules={{ required: true }}
+          defaultValue=""
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <FormControl className={classes.formControl}>
+              <InputLabel
+                className={classNames(classes.formControl, {
+                  "form-error": error,
+                })}
+              >
+                Address
+              </InputLabel>
+              <Input value={value} onChange={onChange} error={!!error} />
+            </FormControl>
+          )}
+        />
+      </Box>
+      <Box component="div" m={1}>
+        <Controller
+          name="postcode"
+          control={control}
+          rules={{ required: true }}
+          defaultValue=""
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <FormControl className={classes.formControl}>
+              <InputLabel
+                className={classNames(classes.formControl, {
+                  "form-error": error,
+                })}
+              >
+                Postcode
+              </InputLabel>
+              <Input value={value} onChange={onChange} error={!!error} />
+            </FormControl>
+          )}
+        />
+      </Box>
+      <Box component="div" m={1}>
+        <ReactHookFormSelect
+          name="country"
+          label="Select a country"
+          control={control}
+          handleChange={handleChangeCountry}
+          rules={{ required: true }}
+        >
+          {countries.map((country) => {
+            return (
+              <MenuItem
+                name={country.isoCode}
+                value={country.name}
+                key={country.isoCode}
+              >
+                {country.name}
+              </MenuItem>
+            );
+          })}
+        </ReactHookFormSelect>
+      </Box>
+      {cities && cities.length !== 0 && (
+        <Box component="div" m={1}>
+          <ReactHookFormSelect
+            name="city"
+            label="Select a city"
+            control={control}
+            rules={{ required: true }}
+          >
+            {cities.map((city, index) => {
+              return (
+                <MenuItem
+                  name={city.name}
+                  value={city.name}
+                  key={`${city.name}-${index}`}
+                >
+                  {city.name}
+                </MenuItem>
+              );
+            })}
+          </ReactHookFormSelect>
+        </Box>
+      )}
+    </Box>
+  );
+
+  const renderAccountDetails = () => (
+    <Box>
+      <Typography variant="h5" className={classes.formTitle}>
+        Account Details
+      </Typography>
+      <Box component="div" m={1}>
+        <Controller
+          name="email"
+          control={control}
+          rules={{ required: true }}
+          defaultValue=""
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <FormControl className={classes.formControl}>
+              <InputLabel
+                className={classNames(classes.formControl, {
+                  "form-error": error,
+                })}
+              >
+                Email Address
+              </InputLabel>
+              <Input value={value} onChange={onChange} error={!!error} />
+            </FormControl>
+          )}
+        />
+      </Box>
+      <Box component="div" m={1}>
+        <Controller
+          name="password"
+          control={control}
+          rules={{ required: true }}
+          defaultValue=""
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <FormControl className={classes.formControl}>
+              <InputLabel
+                className={classNames(classes.formControl, {
+                  "form-error": error,
+                })}
+              >
+                Password
+              </InputLabel>
+              <Input
+                type="password"
+                value={value}
+                onChange={onChange}
+                error={!!error}
+              />
+            </FormControl>
+          )}
+        />
+      </Box>
+    </Box>
+  );
+
+  return (
+    <Paper elevation={3} className={classes.paper}>
+      <Typography variant="h3" className={classes.formTitle}>
+        Sign Up
+      </Typography>
+      <Divider />
+      <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
+        {renderAccountDetails()}
+        <Divider />
+        {renderPersonalDetails()}
+        <Divider />
+        {renderAccountPreferences()}
+        <Divider />
+        <Box component="div" m={1} className={classes.formTitle}>
+          <ImageUpload
+            images={images}
+            imageUrl={imageUrl}
+            setImages={setImages}
+            setImageUrl={setImageUrl}
+            filePrefix=""
+          />
+        </Box>
+        <Divider />
+        <Box component="div" m={1} className={classes.formTitle}>
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            disableElevation
+            size="large"
+          >
+            Signup
+          </Button>
+        </Box>
+      </form>
+    </Paper>
   );
 };
 
