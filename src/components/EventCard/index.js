@@ -46,14 +46,14 @@ const EventCard = ({
 
         <section>
           <div className="buttonContainer">
-            <a href="/interest">
-              <button type="button" className="buttons">
-                I'm interested
-              </button>
-            </a>
             <a href="/signup">
               <button type="button" className="buttons">
                 Sign Up
+              </button>
+            </a>
+            <a href="/singleevent">
+              <button type="button" className="buttons">
+                See more
               </button>
             </a>
           </div>

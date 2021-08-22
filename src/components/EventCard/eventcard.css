@@ -58,7 +58,6 @@
 .details {
   display: flex;
   flex-direction: row;
-  background-color: #9fbfff;
 }
 
 .buttons {
