@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 // import AppBar from '@material-ui/core/AppBar';
@@ -14,6 +14,7 @@ import Typography from "@material-ui/core/Typography";
 import NewEventData from "./NewEventData";
 import UploadImages from "./UploadImage";
 import TermsAndConditions from "./TermsAndConditions";
+import { faGlasses } from "@fortawesome/free-solid-svg-icons";
 
 function Copyright() {
   return (
@@ -67,31 +68,85 @@ const useStyles = makeStyles((theme) => ({
 
 const steps = ["Event Form", "Image Upload", "Terms & Conditions"];
 
-function getStepContent(step) {
-  switch (step) {
-    case 0:
-      return <NewEventData />;
-    case 1:
-      return <UploadImages />;
-    case 2:
-      return <TermsAndConditions />;
-    default:
-      throw new Error("Unknown step");
-  }
-}
+// function getStepContent(step) {
+//   switch (step) {
+//     case 0:
+//       return <NewEventData />;
+//     case 1:
+//       return <UploadImages />;
+//     case 2:
+//       return <TermsAndConditions />;
+//     default:
+//       throw new Error("Unknown step");
+//   }
+// }
 
 export default function CreateNewEvent() {
   const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState(0);
+  const [activeStep, setActiveStep] = useState(0);
+
+  const [eventName, setEventName] = useState("");
+  const [eventType, setEventType] = useState("");
+  const [eventDate, setEventDate] = useState("");
+  const [eventTime, setEventTime] = useState("");
+  const [eventDescription, setEventDescriptionEventDescription] = useState("");
+  const [eventStreet, setEventStreet] = useState("");
+  const [eventCity, setEventCity] = useState("");
+  const [eventState, setEventState] = useState("");
+  const [eventPostcode, setEventPostcode] = useState("");
+  const [eventCountry, setEventCountry] = useState("");
+  const [eventOrganizer, setEventOrganizer] = useState("");
+  const [eventImage, setEventImage] = useState("");
+  const [hasReadTermAndConditions, setHasReadTermsAndConditions] =
+    useState(false);
+
+  console.log(eventName);
+
+  const stepOneActions = {
+    setEventName,
+    setEventType,
+    setEventDate,
+    setEventTime,
+    setEventDescriptionEventDescription,
+    setEventStreet,
+    setEventCity,
+    setEventState,
+    setEventPostcode,
+    setEventCountry,
+    setEventOrganizer,
+  };
+
+  const stepTwoActions = {
+    setEventImage,
+  };
+
+  const stepThreeActions = {
+    setHasReadTermsAndConditions,
+  };
 
   const handleNext = () => {
-    setActiveStep(activeStep + 1);
+    if (activeStep + 1 < 3) setActiveStep(activeStep + 1);
+    //  Step 0: hook up all the state actions with the form
+    // Step 1: Call useMutation(CREATEEVENTMUTATION) const [createEvent]
+    //Step2: Invoke createEvent(eventInput) eventInput is going to be a variable in the mutation call
+    //Step3: make the eventInput map to the form State
   };
 
   const handleBack = () => {
     setActiveStep(activeStep - 1);
   };
-
+  const getFormStep = () => {
+    switch (activeStep) {
+      case 0:
+        return <NewEventData stepOneActions={stepOneActions} />;
+      case 1:
+        return <UploadImages stepTwoActions={stepTwoActions} />;
+      case 2:
+        return <TermsAndConditions stepThreeActions={stepThreeActions} />;
+      default:
+        return null;
+    }
+  };
   return (
     <React.Fragment>
       <CssBaseline />
@@ -134,7 +189,7 @@ export default function CreateNewEvent() {
               </React.Fragment>
             ) : (
               <React.Fragment>
-                {getStepContent(activeStep)}
+                {getFormStep()}
                 <div className={classes.buttons}>
                   {activeStep !== 0 && (
                     <Button onClick={handleBack} className={classes.button}>

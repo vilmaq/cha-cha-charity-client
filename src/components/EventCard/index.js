@@ -8,12 +8,12 @@ const EventCard = ({
   name,
   description,
   day,
-  street,
-  postcode,
+  // street,
+  // postcode,
   city,
-  country,
-  organizer,
-  imageUrl,
+  // country,
+  // organizer,
+  // imageUrl,
 }) => {
   const { state } = useUserContext();
   console.log(state);
@@ -49,15 +49,24 @@ const EventCard = ({
           <h5>Date:{day}</h5>
           <h5>Location:{city}</h5>
         </section>
-        <section className="buttons">
-          <a href="/interest">
-            <button type="button">I'm interested</button>
-          </a>
-          <a href="/signup">
-            <button type="button" onClick={(e) => HandleSignUpToEvent(e)}>
-              Sign Up
-            </button>
-          </a>
+
+        <section>
+          <div className="buttonContainer">
+            <a href="/interest">
+              <button type="button" className="buttons">
+                I'm interested
+              </button>
+            </a>
+            <a href="/signup">
+              <button
+                type="button"
+                className="buttons"
+                onClick={(e) => HandleSignUpToEvent(e)}
+              >
+                Sign Up
+              </button>
+            </a>
+          </div>
         </section>
       </div>
     </article>
