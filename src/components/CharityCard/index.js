@@ -1,4 +1,4 @@
-import "./charitycard.css";
+import "./charityCard.css";
 
 const CharityCard = props => {
   return (

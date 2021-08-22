@@ -7,8 +7,35 @@ export const LOGIN = gql`
       user {
         id
         email
-        firstName
-        lastName
+        password
+      }
+    }
+  }
+`;
+
+export const SIGNUP = gql`
+  mutation Mutation($signUpInput: SignUpInput!) {
+    signUp(input: $signUpInput) {
+      token
+      user {
+        type
+        id
+        fullName
+        password
+        email
+        phoneNumber
+        street
+        postcode
+        city
+        country
+        imageUrl
+        bio
+        animals
+        environmental
+        international
+        health
+        education
+        artCulture
       }
     }
   }

@@ -1,5 +1,5 @@
 const reducer = (state, action) => {
-  if (action.type === "LOGIN") {
+  if (action.type === "LOGIN" || action.type === "SIGNUP") {
     return {
       ...state,
       user: action.payload,
