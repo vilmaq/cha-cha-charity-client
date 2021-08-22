@@ -10,7 +10,6 @@ import IconButton from "@material-ui/core/IconButton";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import ShareIcon from "@material-ui/icons/Share";
 import Button from "@material-ui/core/Button";
-// import clsx from "clsx";
 
 import animal from "../../assets/images/illustrations/whole-images/deer.png";
 import environmental from "../../assets/images/illustrations/whole-images/environment.png";
