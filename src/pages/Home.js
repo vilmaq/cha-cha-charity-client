@@ -7,7 +7,6 @@ import "./home.css";
 const Home = () => {
   return (
     <div>
-      <div></div>
       <div className="main">
         <h1 className="header">Cha-Cha-Charity!</h1>
         <section className="intro">
