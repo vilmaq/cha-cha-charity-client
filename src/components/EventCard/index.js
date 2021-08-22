@@ -28,7 +28,7 @@ const EventCard = ({
       </div>
       <div className="info-container">
         <section className="name">
-          <h4>Event Name{name}</h4>
+          <h4>{name}</h4>
         </section>
 
         <section className="description">{description}</section>
