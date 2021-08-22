@@ -5,7 +5,7 @@ import Nav from "react-bootstrap/Nav";
 import Button from "react-bootstrap/Button";
 // import { UserContext } from "../../context/UserContext";
 const NavigationBar = () => {
-  // const { currentUser, onLogout } = useContext(UserContext);
+  // const { state, dispatch} = useContext(UserContext);
   return (
     <Navbar
       collapseOnSelect
