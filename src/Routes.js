@@ -5,11 +5,8 @@ import SignUp from "./pages/SignUp";
 import Events from "./pages/Events";
 import Home from "./pages/Home";
 import SingleEvent from "./pages/SingleEvent";
-//import { useUserContext } from "./contexts/UserProvider";
 
 const Routes = () => {
-  // const { state, dispatch } = useUserContext();
-
   return (
     <Switch>
       <Route exact path="/login">
