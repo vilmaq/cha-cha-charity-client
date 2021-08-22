@@ -1,6 +1,6 @@
-import { useState } from "react";
 import S3 from "react-aws-s3";
 import ImageUploading from "react-images-uploading";
+import { useMediaQuery } from "react-responsive";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
@@ -10,21 +10,10 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import Button from "@material-ui/core/Button";
+import Grid from "@material-ui/core/Grid";
 import PhotoCamera from "@material-ui/icons/PhotoCamera";
 
-const useStyles = makeStyles({
-  root: {
-    maxWidth: 320,
-  },
-  media: {
-    height: 241,
-  },
-  title: {
-    textAlign: "center",
-    paddingTop: 8,
-    paddingBottom: 8,
-  },
-});
+import { MOBILE_BREAKPOINT } from "../../mediaQueries";
 
 const ImageUpload = ({
   images,
@@ -33,6 +22,25 @@ const ImageUpload = ({
   setImageUrl,
   filePrefix,
 }) => {
+  const isMobile = useMediaQuery(MOBILE_BREAKPOINT);
+
+  const useStyles = makeStyles({
+    root: {
+      width: "100%",
+    },
+    media: {
+      display: "block",
+      height: 241,
+      marginLeft: isMobile ? "16px" : "25%",
+      marginRight: isMobile ? "16px" : "25%",
+    },
+    title: {
+      textAlign: "center",
+      paddingTop: 8,
+      paddingBottom: 8,
+    },
+  });
+
   const classes = useStyles();
 
   const onChange = (imageList) => {
@@ -104,38 +112,45 @@ const ImageUpload = ({
             </CardContent>
           </CardActionArea>
           <CardActions>
-            {imageList.length === 0 && (
-              <IconButton
-                color="primary"
-                aria-label="upload picture"
-                component="span"
-                onClick={onImageUpload}
-              >
-                <PhotoCamera />
-              </IconButton>
-            )}
-            {imageList.length !== 0 && (
-              <Button
-                variant="contained"
-                color="secondary"
-                component="span"
-                onClick={onImageRemoveAll}
-                disableElevation
-              >
-                Delete
-              </Button>
-            )}
-            {imageList.length !== 0 && (
-              <Button
-                variant="contained"
-                color="primary"
-                component="span"
-                onClick={onUpload}
-                disableElevation
-              >
-                Upload
-              </Button>
-            )}
+            <Grid
+              container
+              direction="row"
+              justifyContent="space-evenly"
+              alignItems="center"
+            >
+              {imageList.length === 0 && (
+                <IconButton
+                  color="primary"
+                  aria-label="upload picture"
+                  component="span"
+                  onClick={onImageUpload}
+                >
+                  <PhotoCamera />
+                </IconButton>
+              )}
+              {imageList.length !== 0 && (
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  component="span"
+                  onClick={onImageRemoveAll}
+                  disableElevation
+                >
+                  Delete
+                </Button>
+              )}
+              {imageList.length !== 0 && (
+                <Button
+                  variant="contained"
+                  color="primary"
+                  component="span"
+                  onClick={onUpload}
+                  disableElevation
+                >
+                  Upload
+                </Button>
+              )}
+            </Grid>
           </CardActions>
         </Card>
       )}
