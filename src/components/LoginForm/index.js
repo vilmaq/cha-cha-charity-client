@@ -1,41 +1,58 @@
+import React from "react";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { useMutation } from "@apollo/client";
+import { makeStyles } from "@material-ui/core";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import FormControl from "@material-ui/core/FormControl";
+import { useUserContext } from "../../contexts/UserProvider";
 import { useHistory } from "react-router-dom";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
 
 import { LOGIN } from "../../graphql/mutations";
-import ErrorModal from "../ErrorModal";
-import { useUserContext } from "../../contexts/UserProvider";
+import { useMutation } from "@apollo/client";
+
+const useStyles = makeStyles((theme) => ({
+  button: {
+    display: "block",
+    marginTop: theme.spacing(2),
+  },
+
+  formControl: {
+    display: "flex",
+    margin: theme.spacing(3),
+    minWidth: 120,
+  },
+}));
 
 const LoginForm = () => {
   let history = useHistory();
+
   const { dispatch } = useUserContext();
 
-  const [show, setShow] = useState(false);
+  const [formValues, setFormValues] = useState({
+    email: "",
+    password: "",
+  });
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const [open, setOpen] = React.useState(false);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const onChange = (event) => {
+    const { name, value } = event.target;
+    console.log(value);
+    setFormValues({
+      ...formValues,
+      [name]: value,
+    });
+  };
 
-  const [login, { error }] = useMutation(LOGIN, {
+  const [login] = useMutation(LOGIN, {
     onCompleted: (data) => {
       const payload = {
         token: data.login.token,
         email: data.login.user.email,
-        firstName: data.login.user.firstName,
-        lastName: data.login.user.lastName,
+        password: data.login.password,
         id: data.login.user.id,
       };
-
-      localStorage.setItem("user", JSON.stringify(payload));
-
+      localStorage.setItem("user", JSON.ify(payload));
       dispatch({
         type: "LOGIN",
         payload,
@@ -43,59 +60,49 @@ const LoginForm = () => {
 
       history.push("/");
     },
-    onError: () => {
-      handleShow();
-    },
   });
 
-  const onSubmit = async (formData) => {
+  const handleSubmit = async (formData) => {
+    console.log(formValues);
+
+    const userData = {
+      password: formData.password,
+      email: formData.email,
+    };
     await login({
       variables: {
-        loginInput: formData,
+        loginInput: userData,
       },
     });
   };
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
-      <Form.Group className="mb-3">
-        <Form.Control
-          type="email"
-          placeholder="Enter email"
-          {...register("email", { required: true })}
+    <>
+      <form onSubmit={handleSubmit}>
+        <TextField
+          label="email"
+          name="email"
+          onChange={(event) => onChange(event)}
+          fullWidth
+          autocomplete="none"
         />
-        {errors.email && (
-          <Form.Text className="text-danger">
-            Please enter an email address.
-          </Form.Text>
-        )}
-      </Form.Group>
-      <Form.Group className="mb-3">
-        <Form.Control
+        <TextField
+          label="password"
+          name="password"
           type="password"
-          placeholder="Enter Password"
-          {...register("password", { required: true })}
+          onChange={(event) => onChange(event)}
+          fullWidth
+          autocomplete="none"
         />
-        {errors.password && (
-          <Form.Text className="text-danger">
-            Please enter a password.
-          </Form.Text>
-        )}
-      </Form.Group>
-      <div className="d-grid gap-2">
-        <Button variant="primary" type="submit">
-          Login
-        </Button>
-      </div>
-      {error && (
-        <ErrorModal
-          show={show}
-          handleClose={handleClose}
-          title="Login Failed"
-          message="Please enter the correct email address and/or password."
-        />
-      )}
-    </Form>
+        <FormControl />
+
+        <div>
+          <Button type="submit" variant="contained" color="primary">
+            Login
+          </Button>
+        </div>
+      </form>
+    </>
   );
 };
 
