@@ -1,14 +1,16 @@
-import MainContainer from "../components/MainContainer";
+import { useMediaQuery } from "react-responsive";
+import Container from "@material-ui/core/Container";
+
 import SignUpForm from "../components/SignUpForm";
+import { MOBILE_BREAKPOINT } from "../mediaQueries";
+
 const SignUp = () => {
+  const isMobile = useMediaQuery(MOBILE_BREAKPOINT);
+
   return (
-    <MainContainer>
-      <div>
-        <h2 className="my-4 text-center">Sign Up</h2>
-        <hr />
-      </div>
+    <Container maxWidth={isMobile ? "sm" : "md"}>
       <SignUpForm />
-    </MainContainer>
+    </Container>
   );
 };
 
