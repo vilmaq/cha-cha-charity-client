@@ -36,29 +36,21 @@
 .header-info {
   margin: auto;
   justify-content: center;
-  width: 40%;
+  width: 80%;
   display: flex;
   flex-direction: column;
   background-color: #f9d9eb;
   color: #353535;
   padding: 30px;
-  position: absolute;
-  top: 65%;
-  left: 50%;
-  transform: translateX(-50%) translateY(-50%);
 }
-.top-column {
+.column {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
 }
 .info {
-  width: 50%;
   display: flex;
   flex-direction: row;
-  text-align: center;
-}
-.bottom-column {
   text-align: center;
 }
 
@@ -67,17 +59,18 @@
 .event-info {
   display: flex;
   flex-direction: row;
-  width: 70%;
+  width: 80%;
   margin: auto;
   padding-top: 80px;
 }
 .event-description {
   background-color: #82b5a5;
-  padding: 40px;
-  width: 70%;
+  padding: 50px 30px;
+  width: 80%;
 }
 .event-sidebar {
   background-color: #9fbfff;
+  padding: 50px 0px;
   width: 30%;
   text-align: center;
 }
