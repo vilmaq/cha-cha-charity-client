@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const foo = (props) => {
+const SearchBar = (props) => {
   const classes = useStyles();
   let history = useHistory();
 
@@ -77,4 +77,4 @@ const foo = (props) => {
   );
 };
 
-export default foo;
+export default SearchBar;
