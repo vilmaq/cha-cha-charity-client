@@ -81,10 +81,20 @@ export const EVENT = gql`
       country
       organizer
       creator {
-        type
+        id
         fullName
+        email
+        phoneNumber
+        type
+        bio
+        country
+        imageUrl
       }
       imageUrl
+      participants {
+        id
+        fullName
+      }
     }
   }
 `;
