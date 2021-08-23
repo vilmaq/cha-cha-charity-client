@@ -7,8 +7,7 @@ export const LOGIN = gql`
       user {
         id
         email
-        firstName
-        lastName
+        password
       }
     }
   }
@@ -20,6 +19,7 @@ export const SIGNUP = gql`
       token
       user {
         type
+        id
         fullName
         password
         email
