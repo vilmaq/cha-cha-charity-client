@@ -50,11 +50,7 @@ const EventCard = ({
                 Sign Up
               </button>
             </a>
-<<<<<<< HEAD
             <a href="/event">
-=======
-            <a href="/singleevent">
->>>>>>> 66d298ad69a0b0c59a8d819ced3e9384726d4de6
               <button type="button" className="buttons">
                 See more
               </button>
