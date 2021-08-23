@@ -3,10 +3,11 @@ import CategoryCard from "../components/CategoryCard/CategoryCard";
 import MainContainer from "../components/MainContainer";
 import { eventCategories } from "../data";
 import "./home.css";
+//import img1 from "../images/charity.jpg";
 
 const Home = () => {
   return (
-    <div>
+    <div className="background">
       <div className="main">
         <h1 className="header">Cha-Cha-Charity!</h1>
         <section className="intro">
