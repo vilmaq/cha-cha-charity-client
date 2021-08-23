@@ -26,12 +26,14 @@
   opacity: 0.7;
 }
 .header-title {
-  color: #f8f9fa;
+  color: #f0f0f0;
   position: absolute;
+  text-align: center;
   top: 30%;
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
 }
+
 .header-info {
   margin: auto;
   justify-content: center;
@@ -63,12 +65,12 @@
   padding-top: 80px;
 }
 .event-description {
-  background-color: #82b5a5;
+  background-color: #f0f0f0;
   padding: 80px;
   width: 80%;
 }
 .event-sidebar {
-  background-color: #eeeeee;
+  background-color: #f0f0f0;
   padding: 50px 0px;
   width: 30%;
   text-align: center;

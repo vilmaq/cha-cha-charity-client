@@ -4,9 +4,10 @@
 // import LoaderSpinner from "../components/Loader/LoaderSpinner";
 // import { useState } from "react";
 
-import calendar from "../assets/images/illustrations/elements/pablo-68.png";
-import location from "../assets/images/illustrations/elements/pablo-51.png";
-import participant from "../assets/images/illustrations/elements/pablo-telephone.png";
+import LocationOnRoundedIcon from "@material-ui/icons/LocationOn";
+import EventRoundedIcon from "@material-ui/icons/EventRounded";
+import PeopleRoundedIcon from "@material-ui/icons/PeopleRounded";
+
 import "./singleevent.css";
 
 const SingleEvent = () => {
@@ -34,16 +35,16 @@ const SingleEvent = () => {
         <section className="header-info">
           <div className="column">
             <div className="info">
-              <img src={calendar} alt="calendar" height="36px" />
+              <LocationOnRoundedIcon style={{ color: "#f36b7f" }} />
               <h5>12 September 2021</h5>
             </div>
             <div className="info">
-              <img src={location} alt="location" height="36px" />
-              <h5>Birmingham</h5>
+              <EventRoundedIcon style={{ color: "#9fbfff" }} />
+              <h5>BIRMINGHAM</h5>
             </div>
             <div className="info">
-              <img src={participant} alt="participant" height="36px" />
-              <h5>Participants</h5>
+              <PeopleRoundedIcon style={{ color: "#82b5a5" }} />
+              <h5>35 Participants</h5>
             </div>
           </div>
         </section>
@@ -66,7 +67,7 @@ const SingleEvent = () => {
         </article>
         <article className="event-sidebar">
           <div className="sidebar-info">
-            <h5>by (organizer) </h5>
+            <h5>Hosted by (organizer) </h5>
             <h5>specific time</h5>
             <h5>specific location</h5>
           </div>
