@@ -10,6 +10,7 @@ import { setContext } from "@apollo/client/link/context";
 import Routes from "./Routes";
 import Navigation from "./components/NavigationBar";
 import UserProvider from "./contexts/UserProvider";
+
 import "./App.css";
 
 const httpLink = createHttpLink({
