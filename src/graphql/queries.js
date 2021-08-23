@@ -86,6 +86,9 @@ export const EVENT = gql`
         email
         phoneNumber
         type
+        bio
+        country
+        imageUrl
       }
       imageUrl
       participants {
