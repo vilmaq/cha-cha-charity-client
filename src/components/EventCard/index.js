@@ -4,7 +4,6 @@ import location from "./pablo-51.png";
 import "./eventcard.css";
 
 const EventCard = ({
-  props,
   name,
   description,
   day,
@@ -46,14 +45,14 @@ const EventCard = ({
 
         <section>
           <div className="buttonContainer">
-            <a href="/interest">
-              <button type="button" className="buttons">
-                I'm interested
-              </button>
-            </a>
             <a href="/signup">
               <button type="button" className="buttons">
                 Sign Up
+              </button>
+            </a>
+            <a href="/event">
+              <button type="button" className="buttons">
+                See more
               </button>
             </a>
           </div>
