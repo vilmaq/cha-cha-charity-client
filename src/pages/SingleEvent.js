@@ -1,8 +1,9 @@
-// import { useQuery } from "@apollo/client";
-// import { useUserContext } from "../context/UserProvider";
-// import { EVENT } from "../graphql/queries";
-// import LoaderSpinner from "../components/Loader/LoaderSpinner";
-// import { useState } from "react";
+/* eslint-disable no-restricted-globals */
+
+import { useQuery } from "@apollo/client";
+import { useParams } from "react-router";
+import { EVENT } from "../graphql/queries";
+//import LoaderSpinner from "../components/Loader/LoaderSpinner";
 
 import LocationOnRoundedIcon from "@material-ui/icons/LocationOn";
 import EventRoundedIcon from "@material-ui/icons/EventRounded";
@@ -11,19 +12,27 @@ import PeopleRoundedIcon from "@material-ui/icons/PeopleRounded";
 import "./singleevent.css";
 
 const SingleEvent = () => {
+  const { eventId } = useParams();
+  const { data, loading, error } = useQuery(EVENT, {
+    variables: { eventId },
+  });
+
+  if (loading) {
+    return <div>Loading</div>;
+  }
+  if (error) {
+    console.log(error);
+    return <div>error!!</div>;
+  }
+  console.log(data.event.city);
   return (
     <div className="event-container">
-      <section
-        className="header-container"
-        // style={{
-        //   backgroundImage: `url: (../assets/images/headerholder.png)`,
-        // }}
-      >
+      <section className="header-container">
         <header className="header-img">
           <img src={"./headerholder.png"} alt="event"></img>
         </header>
         <div className="header-title">
-          <h1>Event Name{}</h1>
+          <h1>{data.event.name}</h1>
           <a href="/signupfor" className="btn-tag">
             {/* this button will save the event for the user to my events */}
             <button type="button" className="buttons">
@@ -36,11 +45,11 @@ const SingleEvent = () => {
           <div className="column">
             <div className="info">
               <LocationOnRoundedIcon style={{ color: "#f36b7f" }} />
-              <h5>12 September 2021</h5>
+              <h5>{data.event.day}</h5>
             </div>
             <div className="info">
               <EventRoundedIcon style={{ color: "#9fbfff" }} />
-              <h5>BIRMINGHAM</h5>
+              <h5>{data.event.city}</h5>
             </div>
             <div className="info">
               <PeopleRoundedIcon style={{ color: "#82b5a5" }} />
@@ -51,25 +60,14 @@ const SingleEvent = () => {
       </section>
       <section className="event-info">
         <article className="event-description">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ipsum nunc
-          aliquet bibendum enim facilisis gravida neque convallis a. Lectus
-          vestibulum mattis ullamcorper velit sed ullamcorper morbi. Sapien
-          faucibus et molestie ac feugiat sed lectus vestibulum mattis. Turpis
-          egestas sed tempus urna et pharetra pharetra massa. Sed cras ornare
-          arcu dui vivamus arcu felis bibendum. Massa sapien faucibus et
-          molestie ac feugiat sed. Mollis nunc sed id semper risus in. Vulputate
-          sapien nec sagittis aliquam malesuada bibendum arcu. Accumsan in nisl
-          nisi scelerisque eu. Est ultricies integer quis auctor elit sed
-          vulputate mi. Lacinia quis vel eros donec ac odio. Ornare arcu dui
-          vivamus arcu felis bibendum ut. Aliquam sem fringilla ut morbi
-          tincidunt.
+          {data.event.description}
         </article>
         <article className="event-sidebar">
           <div className="sidebar-info">
-            <h5>Hosted by (organizer) </h5>
-            <h5>specific time</h5>
-            <h5>specific location</h5>
+            <h5>Hosted by {data.event.organizer} </h5>
+            <h5>{data.event.city}</h5>
+            <h6>{data.event.street}</h6>
+            <h6>{data.event.postcode}</h6>
           </div>
         </article>
       </section>

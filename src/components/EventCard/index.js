@@ -29,6 +29,7 @@ const useStyles = makeStyles({
 });
 
 const EventCard = ({
+  id,
   name,
   description,
   day,
@@ -73,7 +74,7 @@ const EventCard = ({
               Sign Up
             </Button>
           </Link>
-          <Link href="/event">
+          <Link href={"/event/" + id}>
             <Button size="small" color="primary">
               See More
             </Button>
