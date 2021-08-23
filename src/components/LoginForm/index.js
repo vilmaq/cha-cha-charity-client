@@ -1,108 +1,369 @@
-import React from "react";
+import classNames from "classnames";
 import { useState } from "react";
+import { useForm, Controller } from "react-hook-form";
+import { useHistory } from "react-router-dom";
+import { useMutation } from "@apollo/client";
+import { Country, City } from "country-state-city";
+
 import { makeStyles } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
 import FormControl from "@material-ui/core/FormControl";
-import { useUserContext } from "../../contexts/UserProvider";
-import { useHistory } from "react-router-dom";
+import InputLabel from "@material-ui/core/InputLabel";
+import Checkbox from "@material-ui/core/Checkbox";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormGroup from "@material-ui/core/FormGroup";
+import MenuItem from "@material-ui/core/MenuItem";
+import Box from "@material-ui/core/Box";
+import Input from "@material-ui/core/Input";
+import Paper from "@material-ui/core/Paper";
+import Divider from "@material-ui/core/Divider";
+import Typography from "@material-ui/core/Typography";
 
 import { LOGIN } from "../../graphql/mutations";
-import { useMutation } from "@apollo/client";
+
+import ReactHookFormSelect from "../ReactHookFormSelect";
+import ImageUpload from "../ImageUpload";
+
+import "./LoginForm.css";
 
 const useStyles = makeStyles((theme) => ({
-  button: {
-    display: "block",
-    marginTop: theme.spacing(2),
+  paper: {
+    margin: "16px 0px",
   },
-
+  form: {
+    padding: 16,
+  },
   formControl: {
-    display: "flex",
-    margin: theme.spacing(3),
-    minWidth: 120,
+    padding: "8px 16px",
+    minWidth: "100%",
+  },
+  formLabel: {
+    padding: "8px 16px",
+  },
+  formTitle: {
+    padding: "16px",
+    textAlign: "center",
   },
 }));
 
+const ACCOUNT_TYPES = ["Charity", "Business", "Volunteer"];
+
+const PREFERENCES = {
+  animals: "Animals",
+  environmental: "Environmental",
+  international: "International",
+  education: "Education",
+  health: "Health",
+  artCulture: "Art Culture",
+};
+
 const LoginForm = () => {
+  const classes = useStyles();
   let history = useHistory();
 
-  const { dispatch } = useUserContext();
+  const { handleSubmit, control } = useForm();
 
-  const [formValues, setFormValues] = useState({
-    email: "",
-    password: "",
-  });
-
-  const [open, setOpen] = React.useState(false);
-
-  const onChange = (event) => {
-    const { name, value } = event.target;
-    console.log(value);
-    setFormValues({
-      ...formValues,
-      [name]: value,
-    });
-  };
+  const [countries] = useState(Country.getAllCountries());
+  const [cities, setCities] = useState([]);
+  const [images, setImages] = useState([]);
+  const [imageUrl, setImageUrl] = useState();
 
   const [login] = useMutation(LOGIN, {
     onCompleted: (data) => {
-      const payload = {
-        token: data.login.token,
-        email: data.login.user.email,
-        password: data.login.password,
-        id: data.login.user.id,
-      };
-      localStorage.setItem("user", JSON.ify(payload));
-      dispatch({
-        type: "LOGIN",
-        payload,
-      });
-
+      console.log(data);
       history.push("/");
+    },
+    onError: (error) => {
+      console.log(error);
     },
   });
 
-  const handleSubmit = async (formData) => {
-    console.log(formValues);
+  const handleChangeCountry = (event) => {
+    const cities = City.getCitiesOfCountry(
+      event.currentTarget.getAttribute("name")
+    );
 
-    const userData = {
-      password: formData.password,
-      email: formData.email,
-    };
+    setCities(cities);
+  };
+
+  const onSubmit = async (formData) => {
     await login({
       variables: {
-        loginInput: userData,
+        loginInput: { ...formData, imageUrl },
       },
     });
   };
 
-  return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <TextField
-          label="email"
-          name="email"
-          onChange={(event) => onChange(event)}
-          fullWidth
-          autocomplete="none"
-        />
-        <TextField
-          label="password"
-          name="password"
-          type="password"
-          onChange={(event) => onChange(event)}
-          fullWidth
-          autocomplete="none"
-        />
-        <FormControl />
+  const renderAccountPreferences = () => (
+    <Box>
+      <Typography variant="h5" className={classes.formTitle}>
+        Account Preferences
+      </Typography>
+      <Box component="div" m={1}>
+        <ReactHookFormSelect
+          name="type"
+          label="Select an account type"
+          control={control}
+          rules={{ required: true }}
+        >
+          {ACCOUNT_TYPES.map((accountType) => {
+            return (
+              <MenuItem
+                name={accountType}
+                value={accountType}
+                key={accountType}
+              >
+                {accountType}
+              </MenuItem>
+            );
+          })}
+        </ReactHookFormSelect>
+      </Box>
+      <Box component="div" m={1}>
+        <FormControl component="fieldset" className={classes.formControl}>
+          <FormGroup>
+            {Object.entries(PREFERENCES).map(([name, label]) => (
+              <FormControlLabel
+                control={
+                  <Controller
+                    name={name}
+                    control={control}
+                    defaultValue={false}
+                    render={({ field: { onChange, value } }) => (
+                      <Checkbox checked={value} onChange={onChange} />
+                    )}
+                  />
+                }
+                label={label}
+                key={name}
+              />
+            ))}
+          </FormGroup>
+        </FormControl>
+      </Box>
+    </Box>
+  );
 
-        <div>
-          <Button type="submit" variant="contained" color="primary">
-            Login
+  const renderPersonalDetails = () => (
+    <Box>
+      <Typography variant="h5" className={classes.formTitle}>
+        Personal Details
+      </Typography>
+      <Box component="div" m={1}>
+        <Controller
+          name="fullName"
+          control={control}
+          rules={{ required: true }}
+          defaultValue=""
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <FormControl className={classes.formControl}>
+              <InputLabel
+                className={classNames(classes.formControl, {
+                  "form-error": error,
+                })}
+              >
+                Full Name
+              </InputLabel>
+              <Input value={value} onChange={onChange} error={!!error} />
+            </FormControl>
+          )}
+        />
+      </Box>
+      <Box component="div" m={1}>
+        <Controller
+          name="phoneNumber"
+          control={control}
+          rules={{ required: true }}
+          defaultValue=""
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <FormControl className={classes.formControl}>
+              <InputLabel
+                className={classNames(classes.formControl, {
+                  "form-error": error,
+                })}
+              >
+                Phone Number
+              </InputLabel>
+              <Input value={value} onChange={onChange} error={!!error} />
+            </FormControl>
+          )}
+        />
+      </Box>
+      <Box component="div" m={1}>
+        <Controller
+          name="street"
+          control={control}
+          rules={{ required: true }}
+          defaultValue=""
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <FormControl className={classes.formControl}>
+              <InputLabel
+                className={classNames(classes.formControl, {
+                  "form-error": error,
+                })}
+              >
+                Address
+              </InputLabel>
+              <Input value={value} onChange={onChange} error={!!error} />
+            </FormControl>
+          )}
+        />
+      </Box>
+      <Box component="div" m={1}>
+        <Controller
+          name="postcode"
+          control={control}
+          rules={{ required: true }}
+          defaultValue=""
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <FormControl className={classes.formControl}>
+              <InputLabel
+                className={classNames(classes.formControl, {
+                  "form-error": error,
+                })}
+              >
+                Postcode
+              </InputLabel>
+              <Input value={value} onChange={onChange} error={!!error} />
+            </FormControl>
+          )}
+        />
+      </Box>
+      <Box component="div" m={1}>
+        <ReactHookFormSelect
+          name="country"
+          label="Select a country"
+          control={control}
+          handleChange={handleChangeCountry}
+          rules={{ required: true }}
+        >
+          {countries.map((country) => {
+            return (
+              <MenuItem
+                name={country.isoCode}
+                value={country.name}
+                key={country.isoCode}
+              >
+                {country.name}
+              </MenuItem>
+            );
+          })}
+        </ReactHookFormSelect>
+      </Box>
+      {cities && cities.length !== 0 && (
+        <Box component="div" m={1}>
+          <ReactHookFormSelect
+            name="city"
+            label="Select a city"
+            control={control}
+            rules={{ required: true }}
+          >
+            {cities.map((city, index) => {
+              return (
+                <MenuItem
+                  name={city.name}
+                  value={city.name}
+                  key={`${city.name}-${index}`}
+                >
+                  {city.name}
+                </MenuItem>
+              );
+            })}
+          </ReactHookFormSelect>
+        </Box>
+      )}
+    </Box>
+  );
+
+  const renderAccountDetails = () => (
+    <Box>
+      <Typography variant="h5" className={classes.formTitle}>
+        Account Details
+      </Typography>
+      <Box component="div" m={1}>
+        <Controller
+          name="email"
+          control={control}
+          rules={{ required: true }}
+          defaultValue=""
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <FormControl className={classes.formControl}>
+              <InputLabel
+                className={classNames(classes.formControl, {
+                  "form-error": error,
+                })}
+              >
+                Email Address
+              </InputLabel>
+              <Input value={value} onChange={onChange} error={!!error} />
+            </FormControl>
+          )}
+        />
+      </Box>
+      <Box component="div" m={1}>
+        <Controller
+          name="password"
+          control={control}
+          rules={{ required: true }}
+          defaultValue=""
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <FormControl className={classes.formControl}>
+              <InputLabel
+                className={classNames(classes.formControl, {
+                  "form-error": error,
+                })}
+              >
+                Password
+              </InputLabel>
+              <Input
+                type="password"
+                value={value}
+                onChange={onChange}
+                error={!!error}
+              />
+            </FormControl>
+          )}
+        />
+      </Box>
+    </Box>
+  );
+
+  return (
+    <Paper elevation={3} className={classes.paper}>
+      <Typography variant="h3" className={classes.formTitle}>
+        Sign Up
+      </Typography>
+      <Divider />
+      <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
+        {renderAccountDetails()}
+        <Divider />
+        {renderPersonalDetails()}
+        <Divider />
+        {renderAccountPreferences()}
+        <Divider />
+        <Box component="div" m={1} className={classes.formTitle}>
+          <ImageUpload
+            images={images}
+            imageUrl={imageUrl}
+            setImages={setImages}
+            setImageUrl={setImageUrl}
+            filePrefix=""
+          />
+        </Box>
+        <Divider />
+        <Box component="div" m={1} className={classes.formTitle}>
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            disableElevation
+            size="large"
+          >
+            Signup
           </Button>
-        </div>
+        </Box>
       </form>
-    </>
+    </Paper>
   );
 };
 
