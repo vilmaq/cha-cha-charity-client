@@ -5,6 +5,7 @@ import LoaderSpinner from "../components/Loader/LoaderSpinner.js";
 import { EVENTS } from "../graphql/queries";
 import EventCard from "../components/EventCard";
 import { useState } from "react";
+import SearchBar from "../components/SearchBar/SearchBar";
 
 const Events = () => {
   const { data, loading, error } = useQuery(EVENTS);
@@ -30,15 +31,15 @@ const Events = () => {
     };
     return (
       <MainContainer>
-        <div>
+        <SearchBar />
+        {/* <div>
           <input
             type="text"
             value={search}
             onChange={(e) => handleSearch(e)}
             placeholder="Search by Event Type"
           ></input>
-        </div>
-        <br></br>
+        </div> */}
         {dynamicSearch().map((event) => {
           return (
             <EventCard
