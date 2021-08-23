@@ -15,7 +15,7 @@
 /* Header styling */
 
 .header-container {
-  background-color: #f8cf61;
+  background-color: #555555;
   height: 60vh;
 }
 .header-img {
@@ -35,7 +35,7 @@
 .header-info {
   margin: auto;
   justify-content: center;
-  width: 80%;
+  width: 60%;
   display: flex;
   flex-direction: column;
   background-color: #f9d9eb;
@@ -58,17 +58,17 @@
 .event-info {
   display: flex;
   flex-direction: row;
-  width: 80%;
+  width: 60%;
   margin: auto;
   padding-top: 80px;
 }
 .event-description {
   background-color: #82b5a5;
-  padding: 50px 30px;
+  padding: 80px;
   width: 80%;
 }
 .event-sidebar {
-  background-color: #9fbfff;
+  background-color: #eeeeee;
   padding: 50px 0px;
   width: 30%;
   text-align: center;

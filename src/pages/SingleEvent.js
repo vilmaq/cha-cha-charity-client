@@ -10,25 +10,6 @@ import participant from "../assets/images/illustrations/elements/pablo-telephone
 import "./singleevent.css";
 
 const SingleEvent = () => {
-  // const { state } = useUserConh5();
-  // const { data, loading, error } = useQuery(EVENT, {
-  //   variables: {
-  //     eventId: state.eventId,
-  //   },
-  // });
-
-  // const [search, setSearch] = useState("");
-
-  // if (loading) {
-  //   return <LoaderSpinner />;
-  // }
-
-  // if (error) {
-  //   console.log(error);
-  //   return <div>Error</div>;
-  // }
-  // if (data) {
-  //   const handleData = () => {};
   return (
     <div className="event-container">
       <section
@@ -42,7 +23,7 @@ const SingleEvent = () => {
         </header>
         <div className="header-title">
           <h1>Event Name{}</h1>
-          <a href="/addevent" className="btn-tag">
+          <a href="/signupfor" className="btn-tag">
             {/* this button will save the event for the user to my events */}
             <button type="button" className="buttons">
               Sign Up
