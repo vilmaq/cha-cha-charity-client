@@ -6,6 +6,7 @@ import { EVENTS } from "../graphql/queries";
 import EventCard from "../components/EventCard";
 import { useState, useContext } from "react";
 import { CategoryContext } from "../contexts/CategoryProvider";
+import "./home.css";
 
 const Events = () => {
   const { data, loading, error } = useQuery(EVENTS);
