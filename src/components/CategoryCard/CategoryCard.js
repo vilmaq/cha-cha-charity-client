@@ -26,10 +26,10 @@ const categoryImages = {
   international,
 };
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     width: 435,
-    margin: 10,
+    margin: 20,
     backgroundColor: "#f8cf61",
     padding: 5,
   },
