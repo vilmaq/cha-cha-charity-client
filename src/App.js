@@ -9,6 +9,7 @@ import { setContext } from "@apollo/client/link/context";
 
 import Routes from "./Routes";
 import Navigation from "./components/NavigationBar";
+import Footer from "./components/Footer/Footer";
 import UserProvider from "./contexts/UserProvider";
 import CategoryProvider from "./contexts/CategoryProvider";
 
@@ -42,6 +43,7 @@ const App = () => {
           <Router>
             <Navigation />
             <Routes />
+            <Footer />
           </Router>
         </CategoryProvider>
       </UserProvider>
