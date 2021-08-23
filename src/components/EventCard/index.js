@@ -4,7 +4,6 @@ import location from "./pablo-51.png";
 import "./eventcard.css";
 
 const EventCard = ({
-  props,
   name,
   description,
   day,
@@ -31,12 +30,7 @@ const EventCard = ({
           <h4>{name}</h4>
         </section>
 
-        <section className="description">
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book{description}
-        </section>
+        <section className="description">{description}</section>
         <section className="when-where">
           <div className="details">
             <img src={calendar} alt="calendar" height="24px" />
@@ -51,12 +45,12 @@ const EventCard = ({
 
         <section>
           <div className="buttonContainer">
-            <a href="/signup">
+            <a href="/signupfor">
               <button type="button" className="buttons">
                 Sign Up
               </button>
             </a>
-            <a href="/singleevent">
+            <a href="/event">
               <button type="button" className="buttons">
                 See more
               </button>

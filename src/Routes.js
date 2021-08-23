@@ -4,6 +4,7 @@ import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import Events from "./pages/Events";
 import Home from "./pages/Home";
+import SingleEvent from "./pages/SingleEvent";
 
 const Routes = () => {
   return (
@@ -19,6 +20,9 @@ const Routes = () => {
       </Route>
       <Route exact path="/">
         <Home />
+      </Route>
+      <Route exact path="/event">
+        <SingleEvent />
       </Route>
     </Switch>
   );
