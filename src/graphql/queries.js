@@ -70,19 +70,26 @@ export const MY_EVENTS = gql`
 export const EVENT = gql`
   query Query($eventId: ID!) {
     event(id: $eventId) {
+      id
       type
       name
       description
       day
       street
-      creator {
-        fullName
-      }
       postcode
       city
       country
       organizer
+      creator {
+        id
+        fullName
+        email
+        phoneNumber
+        type
+      }
+      imageUrl
       participants {
+        id
         fullName
       }
     }
