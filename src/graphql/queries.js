@@ -89,6 +89,34 @@ export const EVENT = gql`
   }
 `;
 
+// export const EVENTS = gql`
+// query Query($eventsSortBy: String, $eventsTop: Int) {
+//   events(sortBy: $eventsSortBy, top: $eventsTop) {
+//     id
+//     type
+//     name
+//     description
+//     day
+//     street
+//     postcode
+//     city
+//     country
+//     organizer
+//     creator {
+//       id
+//       type
+//       fullName
+//       password
+//       email
+//       phoneNumber
+//       street
+//       postcode
+//     }
+//   }
+// }
+// }
+//`;
+
 //original EVENT query
 // export const EVENT = gql`
 //   query Query($id: ID!) {
