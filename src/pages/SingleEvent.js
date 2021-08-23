@@ -1,16 +1,30 @@
-// import { useQuery } from "@apollo/client";
-// import { useUserContext } from "../context/UserProvider";
-// import { EVENT } from "../graphql/queries";
-// import LoaderSpinner from "../components/Loader/LoaderSpinner";
-// import { useState } from "react";
+import { useQuery } from "@apollo/client";
+//import { useUserContext } from "../context/UserProvider";
+import { EVENT } from "../graphql/queries";
+//import LoaderSpinner from "../components/Loader/LoaderSpinner";
+//import { useState } from "react";
 
 import LocationOnRoundedIcon from "@material-ui/icons/LocationOn";
 import EventRoundedIcon from "@material-ui/icons/EventRounded";
 import PeopleRoundedIcon from "@material-ui/icons/PeopleRounded";
 
 import "./singleevent.css";
+import { useParams } from "react-router";
 
 const SingleEvent = () => {
+  const { eventId } = useParams();
+  const { data, loading, error } = useQuery(EVENT, {
+    variables: { eventId },
+  });
+
+  if (loading) {
+    return <div>Loading</div>;
+  }
+  if (error) {
+    console.log(error);
+    return <div>error!!</div>;
+  }
+  console.log(data);
   return (
     <div className="event-container">
       <section

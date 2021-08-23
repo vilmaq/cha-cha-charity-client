@@ -4,6 +4,7 @@ import location from "./pablo-51.png";
 import "./eventcard.css";
 
 const EventCard = ({
+  id,
   name,
   description,
   day,
@@ -50,7 +51,7 @@ const EventCard = ({
                 Sign Up
               </button>
             </a>
-            <a href="/event">
+            <a href={"/event/" + id}>
               <button type="button" className="buttons">
                 See more
               </button>
