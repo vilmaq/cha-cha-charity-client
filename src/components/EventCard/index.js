@@ -1,7 +1,10 @@
-import { useMutation } from "@apollo/client";
-import { useUserContext } from "../../contexts/UserProvider";
+import calendar from "./pablo-68.png";
+import location from "./pablo-51.png";
+
 import "./eventcard.css";
 import { SIGNUPTOEVENT } from "../../graphql/mutations";
+import { useMutation } from "@apollo/client";
+import { useUserContext } from "../../contexts/UserProvider";
 
 const EventCard = ({
   id,
@@ -41,29 +44,37 @@ const EventCard = ({
       </div>
       <div className="info-container">
         <section className="name">
-          <h3>{name}</h3>
+          <h4>{name}</h4>
         </section>
 
-        <section className="description">{description}</section>
+        <section className="description">
+          Lorem Ipsum is simply dummy text of the printing and typesetting
+          industry. Lorem Ipsum has been the industry's standard dummy text ever
+          since the 1500s, when an unknown printer took a galley of type and
+          scrambled it to make a type specimen book{description}
+        </section>
         <section className="when-where">
-          <h5>Date:{day}</h5>
-          <h5>Location:{city}</h5>
+          <div className="details">
+            <img src={calendar} alt="calendar" height="24px" />
+            <text>{day}</text>
+          </div>
+
+          <div className="details">
+            <img src={location} alt="location" height="24px" />
+            <text>{city}</text>
+          </div>
         </section>
 
         <section>
           <div className="buttonContainer">
-            <a href="/interest">
+            <a href="/signup">
               <button type="button" className="buttons">
-                I'm interested
+                Sign Up
               </button>
             </a>
-            <a href="/signup">
-              <button
-                type="button"
-                className="buttons"
-                onClick={(e) => HandleSignUpToEvent(e)}
-              >
-                Sign Up
+            <a href="/singleevent">
+              <button type="button" className="buttons">
+                See more
               </button>
             </a>
           </div>
