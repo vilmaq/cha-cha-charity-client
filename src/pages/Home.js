@@ -3,13 +3,24 @@ import CategoryCard from "../components/CategoryCard/CategoryCard";
 import MainContainer from "../components/MainContainer";
 import { eventCategories } from "../data";
 import "./home.css";
-//import img1 from "../images/charity.jpg";
+import Typed from "react-typed";
 
 const Home = () => {
   return (
     <div className="background">
       <div className="main">
         <h1 className="header">Cha-Cha-Charity!</h1>
+        <Typed
+          className="text-typed"
+          strings={[
+            "Where charity begins!",
+            "Being human is given but keeping our Humanity is a choice",
+            "Show Compassion & the Will to help others",
+          ]}
+          typeSpeed={40}
+          backSpeed={50}
+          loop
+        />
         <section className="intro">
           Welcome to cha-cha-charity and Enjoy connecting and meeting other's.
           Cha-cha-charity is a website which connects a charity to a company and
