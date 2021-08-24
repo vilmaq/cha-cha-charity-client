@@ -28,9 +28,12 @@ const SingleEvent = () => {
   return (
     <div className="event-container">
       <section className="header-container">
-        <header className="header-img">
-          <img src={"./headerholder.png"} alt="event"></img>
-        </header>
+        <header
+          className="header-img"
+          style={{
+            backgroundImage: `url(${data.event.imageUrl})`,
+          }}
+        ></header>
         <div className="header-title">
           <h1>{data.event.name}</h1>
           <a href="/signupfor" className="btn-tag">
