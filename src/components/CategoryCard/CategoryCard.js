@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
 
 import { makeStyles } from "@material-ui/core/styles";
@@ -10,7 +10,6 @@ import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import { CategoryContext } from "../../contexts/CategoryProvider";
 
 import animals from "../../assets/images/illustrations/whole-images/deer.png";
 import environmental from "../../assets/images/illustrations/whole-images/environment.png";
@@ -28,7 +27,7 @@ const categoryImages = {
   international,
 };
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     width: 435,
     margin: 20,
@@ -54,12 +53,11 @@ const useStyles = makeStyles(theme => ({
 
 const CategoryCard = ({ title, image }) => {
   const classes = useStyles();
-  const { setCategory } = useContext(CategoryContext);
+
   const history = useHistory();
 
   const handleClick = () => {
-    setCategory(title);
-    history.push("/events");
+    history.push(`/events/${title}`);
   };
 
   return (

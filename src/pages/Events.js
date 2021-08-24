@@ -4,15 +4,19 @@ import { useUserContext } from "../contexts/UserProvider";
 import LoaderSpinner from "../components/Loader/LoaderSpinner.js";
 import { EVENTS } from "../graphql/queries";
 import EventCard from "../components/EventCard";
-import { useState, useContext } from "react";
-import { CategoryContext } from "../contexts/CategoryProvider";
+import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import "./home.css";
 
 const Events = () => {
   const { data, loading, error } = useQuery(EVENTS);
   const { state } = useUserContext();
   const [search, setSearch] = useState("");
-  const { category } = useContext(CategoryContext);
+
+  const location = useLocation();
+
+  const category = location.pathname.split("/")[2];
+  console.log(category);
 
   if (loading) {
     return <LoaderSpinner />;
@@ -23,11 +27,12 @@ const Events = () => {
   }
 
   if (data) {
-    const handleSearch = e => {
+    console.log(data.events);
+    const handleSearch = (e) => {
       setSearch(e.target.value);
     };
     const dynamicSearch = () => {
-      return data.events.filter(event =>
+      return data.events.filter((event) =>
         event.type.toLowerCase().includes(category.toLowerCase())
       );
     };
@@ -39,12 +44,12 @@ const Events = () => {
             <input
               type="text"
               value={search}
-              onChange={e => handleSearch(e)}
+              onChange={(e) => handleSearch(e)}
               placeholder="Search by Event Type"
             ></input>
           </div>
           <br></br>
-          {dynamicSearch().map(event => {
+          {dynamicSearch().map((event) => {
             return (
               <EventCard
                 id={event.id}
