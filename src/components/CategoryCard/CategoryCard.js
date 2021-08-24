@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import { useHistory } from "react-router-dom";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
@@ -9,6 +10,7 @@ import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
+import { CategoryContext } from "../../contexts/CategoryProvider";
 
 import animals from "../../assets/images/illustrations/whole-images/deer.png";
 import environmental from "../../assets/images/illustrations/whole-images/environment.png";
@@ -26,10 +28,10 @@ const categoryImages = {
   international,
 };
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     width: 435,
-    margin: 10,
+    margin: 20,
     backgroundColor: "#f8cf61",
     padding: 5,
   },
@@ -52,6 +54,13 @@ const useStyles = makeStyles((theme) => ({
 
 const CategoryCard = ({ title, image }) => {
   const classes = useStyles();
+  const { setCategory } = useContext(CategoryContext);
+  const history = useHistory();
+
+  const handleClick = () => {
+    setCategory(title);
+    history.push("/events");
+  };
 
   return (
     <div className={classes.container}>
@@ -77,6 +86,7 @@ const CategoryCard = ({ title, image }) => {
             alignItems="center"
           >
             <Button
+              onClick={handleClick}
               className={classes.btn}
               variant="contained"
               size="medium"
