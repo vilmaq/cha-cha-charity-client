@@ -102,21 +102,24 @@ export default function CreateNewEvent() {
   const [imageUrl, setImageUrl] = useState();
   const [hasReadTermAndConditions, setHasReadTermsAndConditions] =
     useState(false);
+  const [disabled, setDisabled] = useState(false);
 
   console.log(
-    eventName,
-    eventType,
-    eventDate,
-    eventTime,
-    eventDescription,
-    eventStreet,
-    eventCity,
-    eventState,
-    eventPostcode,
-    eventCountry,
-    eventOrganizer,
-    eventImage,
-    hasReadTermAndConditions
+    // eventName,
+    // eventType,
+    // eventDate,
+    // eventTime,
+    // eventDescription,
+    // eventStreet,
+    // eventCity,
+    // eventState,
+    // eventPostcode,
+    // eventCountry,
+    // eventOrganizer,
+    // eventImage,
+    hasReadTermAndConditions,
+    disabled,
+    activeStep
   );
 
   const stepOneActions = {
@@ -154,6 +157,11 @@ export default function CreateNewEvent() {
   const handleBack = () => {
     setActiveStep(activeStep - 1);
   };
+
+  // if (activeStep === 2 && hasReadTermAndConditions === false) {
+  //   setDisabled(true);
+  // }
+
   const getFormStep = () => {
     switch (activeStep) {
       case 0:
@@ -230,6 +238,9 @@ export default function CreateNewEvent() {
                     color="primary"
                     onClick={handleNext}
                     className={classes.button}
+                    disabled={
+                      activeStep === 2 && hasReadTermAndConditions === false
+                    }
                   >
                     {activeStep === steps.length - 1 ? "Create Event" : "Next"}
                   </Button>
