@@ -5,12 +5,12 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
+import { Link } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
 import LocationOnRoundedIcon from "@material-ui/icons/LocationOn";
 import EventRoundedIcon from "@material-ui/icons/EventRounded";
 
 import "./eventcard.css";
-import Link from "@material-ui/core/Link";
 
 const useStyles = makeStyles({
   root: {
@@ -32,6 +32,7 @@ const useStyles = makeStyles({
   },
   links: {
     justifyContent: "center",
+    color: "red",
   },
   description: {
     display: "inline-block",
@@ -71,7 +72,9 @@ const EventCard = ({
             variant="subtitle1"
             component="h2"
           >
-            <LocationOnRoundedIcon style={{ color: "#f36b7f" }} />
+            <LocationOnRoundedIcon
+              style={{ color: "#f36b7f", verticalAlign: "middle" }}
+            />
             {city}
           </Typography>
           <Typography
@@ -80,7 +83,9 @@ const EventCard = ({
             variant="subtitle1"
             component="h2"
           >
-            <EventRoundedIcon style={{ color: "#9fbfff" }} />
+            <EventRoundedIcon
+              style={{ color: "#9fbfff", verticalAlign: "middle" }}
+            />
             {day}
           </Typography>
         </CardContent>
@@ -106,13 +111,13 @@ const EventCard = ({
           </Typography>
         </CardContent>
         <CardActions className={classes.links}>
-          <Link>
-            <Button size="small" color="primary">
+          <Link style={{ textDecoration: "none" }}>
+            <Button size="small" style={{ color: "#f36b7f" }}>
               Sign Up
             </Button>
           </Link>
-          <Link href={"/event/" + id}>
-            <Button size="small" color="primary">
+          <Link href={"/event/" + id} style={{ textDecoration: "none" }}>
+            <Button size="small" style={{ color: "#f36b7f" }}>
               See More
             </Button>
           </Link>
