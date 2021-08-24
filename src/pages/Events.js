@@ -15,7 +15,12 @@ const Events = () => {
 
   const location = useLocation();
 
-  const category = location.pathname.split("/")[2];
+  let category = "";
+  if (search !== "") {
+    category = search;
+  } else {
+    category = location.pathname.split("/")[2];
+  }
   console.log(category);
 
   if (loading) {
@@ -28,11 +33,11 @@ const Events = () => {
 
   if (data) {
     console.log(data.events);
-    const handleSearch = (e) => {
-      setSearch(e.target.value);
+    const handleSearch = event => {
+      setSearch(event.target.value);
     };
     const dynamicSearch = () => {
-      return data.events.filter((event) =>
+      return data.events.filter(event =>
         event.type.toLowerCase().includes(category.toLowerCase())
       );
     };
@@ -44,12 +49,12 @@ const Events = () => {
             <input
               type="text"
               value={search}
-              onChange={(e) => handleSearch(e)}
+              onChange={e => handleSearch(e)}
               placeholder="Search by Event Type"
             ></input>
           </div>
           <br></br>
-          {dynamicSearch().map((event) => {
+          {dynamicSearch().map(event => {
             return (
               <EventCard
                 id={event.id}
