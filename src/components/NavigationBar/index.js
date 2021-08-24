@@ -3,6 +3,7 @@ import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Button from "react-bootstrap/Button";
+import charityLogo from "../../images/charityLogo.png"
 // import { UserContext } from "../../context/UserContext";
 const NavigationBar = () => {
   // const { state, dispatch} = useContext(UserContext);
@@ -15,7 +16,7 @@ const NavigationBar = () => {
       style={{ zIndex: "100" }}
     >
       <Container>
-        <Navbar.Brand href="/">cha-cha-charity</Navbar.Brand>
+        <Navbar.Brand href="/"><img src={charityLogo} alt="logo" className = "logo"/></Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">

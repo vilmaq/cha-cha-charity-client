@@ -13,9 +13,9 @@ const Home = () => {
         <Typed
           className="text-typed"
           strings={[
-            "Where charity begins!",
-            "Being human is given but keeping our Humanity is a choice",
-            "Show Compassion & the Will to help others",
+            "Cha Cha Charity, where charity begins!",
+            "Being human is given but keeping our humanity is a choice",
+            "Show compassion and the will to help others",
           ]}
           typeSpeed={40}
           backSpeed={50}

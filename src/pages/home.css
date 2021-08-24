@@ -1,3 +1,9 @@
+/*@import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap");*/
+
+.body {
+  font-family: "Permanent Marker", cursive !important;
+}
+
 .header {
   text-align: center;
   padding: 20px;
@@ -27,5 +33,5 @@
 
 .text-typed {
   font-size: 2rem;
-  color: #353535; 
+  color: #353535;
 }
