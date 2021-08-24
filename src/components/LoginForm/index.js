@@ -1,108 +1,144 @@
-import React from "react";
-import { useState } from "react";
-import { makeStyles } from "@material-ui/core";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import FormControl from "@material-ui/core/FormControl";
-import { useUserContext } from "../../contexts/UserProvider";
+import classNames from "classnames";
+import { useForm, Controller } from "react-hook-form";
 import { useHistory } from "react-router-dom";
-
-import { LOGIN } from "../../graphql/mutations";
 import { useMutation } from "@apollo/client";
 
-const useStyles = makeStyles((theme) => ({
-  button: {
-    display: "block",
-    marginTop: theme.spacing(2),
-  },
+import { makeStyles } from "@material-ui/core";
+import Button from "@material-ui/core/Button";
+import FormControl from "@material-ui/core/FormControl";
+import InputLabel from "@material-ui/core/InputLabel";
+import Box from "@material-ui/core/Box";
+import Input from "@material-ui/core/Input";
+import Paper from "@material-ui/core/Paper";
+import Divider from "@material-ui/core/Divider";
+import Typography from "@material-ui/core/Typography";
 
+import { LOGIN } from "../../graphql/mutations";
+
+import "./LoginForm.css";
+
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    margin: "16px 0px",
+  },
+  form: {
+    padding: 16,
+  },
   formControl: {
-    display: "flex",
-    margin: theme.spacing(3),
-    minWidth: 120,
+    padding: "8px 16px",
+    minWidth: "100%",
+  },
+  formLabel: {
+    padding: "8px 16px",
+  },
+  formTitle: {
+    padding: "16px",
+    textAlign: "center",
   },
 }));
 
 const LoginForm = () => {
+  const classes = useStyles();
   let history = useHistory();
 
-  const { dispatch } = useUserContext();
-
-  const [formValues, setFormValues] = useState({
-    email: "",
-    password: "",
-  });
-
-  const [open, setOpen] = React.useState(false);
-
-  const onChange = (event) => {
-    const { name, value } = event.target;
-    console.log(value);
-    setFormValues({
-      ...formValues,
-      [name]: value,
-    });
-  };
+  const { handleSubmit, control } = useForm();
 
   const [login] = useMutation(LOGIN, {
     onCompleted: (data) => {
-      const payload = {
-        token: data.login.token,
-        email: data.login.user.email,
-        password: data.login.password,
-        id: data.login.user.id,
-      };
-      localStorage.setItem("user", JSON.ify(payload));
-      dispatch({
-        type: "LOGIN",
-        payload,
-      });
-
+      console.log(data);
       history.push("/");
+    },
+    onError: (error) => {
+      console.log(error);
     },
   });
 
-  const handleSubmit = async (formData) => {
-    console.log(formValues);
-
-    const userData = {
-      password: formData.password,
-      email: formData.email,
-    };
+  const onSubmit = async (formData) => {
     await login({
       variables: {
-        loginInput: userData,
+        loginInput: {
+          email: formData.email,
+          password: formData.password,
+        },
       },
     });
   };
 
-  return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <TextField
-          label="email"
+  const renderAccountDetails = () => (
+    <Box>
+      <Typography variant="h5" className={classes.formTitle}>
+        Account Details
+      </Typography>
+      <Box component="div" m={1}>
+        <Controller
           name="email"
-          onChange={(event) => onChange(event)}
-          fullWidth
-          autocomplete="none"
+          control={control}
+          rules={{ required: true }}
+          defaultValue=""
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <FormControl className={classes.formControl}>
+              <InputLabel
+                className={classNames(classes.formControl, {
+                  "form-error": error,
+                })}
+              >
+                Email Address
+              </InputLabel>
+              <Input value={value} onChange={onChange} error={!!error} />
+            </FormControl>
+          )}
         />
-        <TextField
-          label="password"
+      </Box>
+      <Box component="div" m={1}>
+        <Controller
           name="password"
-          type="password"
-          onChange={(event) => onChange(event)}
-          fullWidth
-          autocomplete="none"
+          control={control}
+          rules={{ required: true }}
+          defaultValue=""
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <FormControl className={classes.formControl}>
+              <InputLabel
+                className={classNames(classes.formControl, {
+                  "form-error": error,
+                })}
+              >
+                Password
+              </InputLabel>
+              <Input
+                type="password"
+                value={value}
+                onChange={onChange}
+                error={!!error}
+              />
+            </FormControl>
+          )}
         />
-        <FormControl />
+      </Box>
+    </Box>
+  );
 
-        <div>
-          <Button type="submit" variant="contained" color="primary">
+  return (
+    <Paper elevation={3} className={classes.paper}>
+      <Typography variant="h3" className={classes.formTitle}>
+        Login
+      </Typography>
+      <Divider />
+      <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
+        {renderAccountDetails()}
+        <Divider />
+        <Box component="div" m={1} className={classes.formTitle}>
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            disableElevation
+            size="large"
+          >
             Login
           </Button>
-        </div>
+        </Box>
       </form>
-    </>
+    </Paper>
   );
 };
 
