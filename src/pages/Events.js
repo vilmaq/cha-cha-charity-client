@@ -31,7 +31,6 @@ const Events = () => {
     };
     return (
       <MainContainer>
-        <SearchBar />
         {/* <div>
           <input
             type="text"
@@ -40,6 +39,7 @@ const Events = () => {
             placeholder="Search by Event Type"
           ></input>
         </div> */}
+        <br></br>
         {dynamicSearch().map((event) => {
           return (
             <EventCard
