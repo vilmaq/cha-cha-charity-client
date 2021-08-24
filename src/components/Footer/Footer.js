@@ -10,9 +10,12 @@ const useStyles = makeStyles(theme => ({
   },
   footer: {
     padding: 3,
+    width: "100%",
     textAlign: "center",
     backgroundColor: "black",
     color: "white",
+    position: "absolute",
+    bottom: 0,
   },
 }));
 
