@@ -24,7 +24,6 @@ const SingleEvent = () => {
     console.log(error);
     return <div>error!!</div>;
   }
-  console.log(data.event.city);
   return (
     <div className="event-container">
       <section className="header-container">
@@ -67,7 +66,8 @@ const SingleEvent = () => {
         </article>
         <article className="event-sidebar">
           <div className="sidebar-info">
-            <h5>Hosted by {data.event.organizer} </h5>
+            <h5>Hosted by</h5>
+            <h5>{data.event.organizer} </h5>
             <h5>{data.event.city}</h5>
             <h6>{data.event.street}</h6>
             <h6>{data.event.postcode}</h6>
