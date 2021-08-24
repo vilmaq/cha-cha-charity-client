@@ -21,7 +21,7 @@ const Routes = () => {
       <Route exact path="/">
         <Home />
       </Route>
-      <Route exact path="/event">
+      <Route exact path="/event/:eventId">
         <SingleEvent />
       </Route>
     </Switch>
