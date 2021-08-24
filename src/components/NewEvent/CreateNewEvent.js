@@ -101,17 +101,19 @@ export default function CreateNewEvent() {
     useState(false);
 
   console.log(
-    setEventName,
-    setEventType,
-    setEventDate,
-    setEventTime,
-    setEventDescription,
-    setEventStreet,
-    setEventCity,
-    setEventState,
-    setEventPostCode,
-    setEventCountry,
-    setEventOrganizer
+    eventName,
+    eventType,
+    eventDate,
+    eventTime,
+    eventDescription,
+    eventStreet,
+    eventCity,
+    eventState,
+    eventPostcode,
+    eventCountry,
+    eventOrganizer,
+    eventImage,
+    hasReadTermAndConditions
   );
 
   const stepOneActions = {

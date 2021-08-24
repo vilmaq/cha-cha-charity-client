@@ -32,7 +32,7 @@ export const EVENTS = gql`
   }
 `;
 
-export const MyEvents = gql`
+export const MY_EVENTS = gql`
   query Query($userId: ID) {
     events(userId: $userId) {
       events {
@@ -68,8 +68,8 @@ export const MyEvents = gql`
 `;
 
 export const EVENT = gql`
-  query Query($id: ID!) {
-    event(id: id) {
+  query Query($eventId: ID!) {
+    event(id: $eventId) {
       id
       type
       name
@@ -82,21 +82,54 @@ export const EVENT = gql`
       organizer
       creator {
         id
-        type
-        name
         fullName
-        password
         email
+        phoneNumber
+        type
+        bio
+        country
+        imageUrl
       }
       imageUrl
       participants {
         id
-        type
-        name
         fullName
-        password
-        email
       }
     }
   }
 `;
+
+//original EVENT query
+// export const EVENT = gql`
+//   query Query($id: ID!) {
+//     event(id: id) {
+//       id
+//       type
+//       name
+//       description
+//       day
+//       street
+//       postcode
+//       city
+//       country
+//       organizer
+//       creator {
+//         id
+//         type
+//         name
+//         fullName
+//         password
+//         email
+//       }
+//       imageUrl
+//       participants {
+//         id
+//         type
+//         name
+//         fullName
+//         password
+//         email
+//       }
+//     }
+//   }
+// `;
