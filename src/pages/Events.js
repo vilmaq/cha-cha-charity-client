@@ -33,9 +33,9 @@ const Events = () => {
 
   if (data) {
     console.log(data.events);
-    const handleSearch = event => {
-      setSearch(event.target.value);
-    };
+    // const handleSearch = event => {
+    //   setSearch(event.target.value);
+    // };
     const dynamicSearch = () => {
       return data.events.filter(event =>
         event.type.toLowerCase().includes(category.toLowerCase())
@@ -45,14 +45,14 @@ const Events = () => {
     return (
       <div className="background">
         <MainContainer>
-          <div>
+          {/* <div>
             <input
               type="text"
               value={search}
               onChange={e => handleSearch(e)}
               placeholder="Search by Event Type"
             ></input>
-          </div>
+          </div> */}
           <br></br>
           {dynamicSearch().map(event => {
             return (
