@@ -15,6 +15,7 @@ import NewEventData from "./NewEventData";
 import UploadImages from "./UploadImage";
 import TermsAndConditions from "./TermsAndConditions";
 import { faGlasses } from "@fortawesome/free-solid-svg-icons";
+import ImageUpload from "../ImageUpload";
 
 function Copyright() {
   return (
@@ -97,6 +98,8 @@ export default function CreateNewEvent() {
   const [eventCountry, setEventCountry] = useState("");
   const [eventOrganizer, setEventOrganizer] = useState("");
   const [eventImage, setEventImage] = useState("");
+  const [images, setImages] = useState([]);
+  const [imageUrl, setImageUrl] = useState();
   const [hasReadTermAndConditions, setHasReadTermsAndConditions] =
     useState(false);
 
@@ -131,7 +134,9 @@ export default function CreateNewEvent() {
   };
 
   const stepTwoActions = {
-    setEventImage,
+    // setEventImage,
+    setImages,
+    setImageUrl,
   };
 
   const stepThreeActions = {
@@ -154,7 +159,17 @@ export default function CreateNewEvent() {
       case 0:
         return <NewEventData stepOneActions={stepOneActions} />;
       case 1:
-        return <UploadImages stepTwoActions={stepTwoActions} />;
+        return (
+          <div>
+            <ImageUpload
+              images={images}
+              imageUrl={imageUrl}
+              setImages={setImages}
+              setImageUrl={setImageUrl}
+              filePrefix=""
+            />
+          </div>
+        );
       case 2:
         return <TermsAndConditions stepThreeActions={stepThreeActions} />;
       default:

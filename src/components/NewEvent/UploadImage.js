@@ -9,6 +9,7 @@ import {
 } from "@material-ui/core";
 import { useMutation } from "@apollo/client";
 import { UPLOADIMAGE } from "../../graphql/mutations";
+import ImageUpload from "../ImageUpload";
 
 const BorderLinearProgress = withStyles((theme) => ({
   root: {
