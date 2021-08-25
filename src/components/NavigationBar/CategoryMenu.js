@@ -3,6 +3,7 @@ import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import { useHistory } from "react-router-dom";
+import Chip from "@material-ui/core/Chip";
 
 export default function SimpleMenu() {
   const history = useHistory();
@@ -20,12 +21,13 @@ export default function SimpleMenu() {
   return (
     <div>
       <Button
-        aria-controls="simple-menu"
+        // aria-controls="simple-menu"
         aria-haspopup="true"
         onClick={handleClick}
-        style={{ color: "#ffffff" }}
+        style={{ color: "#f8cf61" }}
+        fontSize="small"
       >
-        Category
+        <Chip label="Category" />
       </Button>
       <Menu
         id="simple-menu"
