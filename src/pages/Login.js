@@ -8,9 +8,14 @@ const Login = () => {
   const isMobile = useMediaQuery(MOBILE_BREAKPOINT);
 
   return (
-    <Container maxWidth={isMobile ? "sm" : "md"}>
-      <LoginForm />
-    </Container>
+    <div className="background">
+      <Container
+        maxWidth={isMobile ? "sm" : "md"}
+        style={{ paddingTop: "16px" }}
+      >
+        <LoginForm />
+      </Container>
+    </div>
   );
 };
 
