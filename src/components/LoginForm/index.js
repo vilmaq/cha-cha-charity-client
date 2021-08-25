@@ -21,7 +21,7 @@ import "./LoginForm.css";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    margin: "16px 0px",
+    padding: "16px 0px",
   },
   form: {
     padding: 16,

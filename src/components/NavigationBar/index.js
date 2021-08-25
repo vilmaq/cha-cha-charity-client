@@ -1,11 +1,16 @@
-// import { useContext } from "react";
+import React from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Button from "react-bootstrap/Button";
-// import { UserContext } from "../../context/UserContext";
+import charityLogo from "../../images/charityLogo.png";
+import { useUserContext } from "../../contexts/UserProvider";
+
+import CategoryMenu from "./CategoryMenu";
+
 const NavigationBar = () => {
-  // const { state, dispatch} = useContext(UserContext);
+  const { user } = useUserContext();
+
   return (
     <Navbar
       collapseOnSelect
@@ -15,26 +20,35 @@ const NavigationBar = () => {
       style={{ zIndex: "100" }}
     >
       <Container>
-        <Navbar.Brand href="/">cha-cha-charity</Navbar.Brand>
+        <Navbar.Brand href="/">
+          <img src={charityLogo} alt="logo" className="logo" />
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="/events">Events</Nav.Link>
+            <Nav.Link href="/events" page="events">
+              Events
+            </Nav.Link>
           </Nav>
-          {/* {!currentUser && ( */}
-          <Nav>
-            <Nav.Link href="/login">Login</Nav.Link>
-            <Nav.Link href="/signup">Sign Up</Nav.Link>
-          </Nav>
-          {/* )} */}
-          {/* {currentUser && ( */}
-          <Nav>
-            <Button variant="link" className="nav-link">
-              Logout
-            </Button>
-          </Nav>
-          {/* )} */}
+          if (page = "events")
+          {
+            <Nav>
+              <CategoryMenu />
+            </Nav>
+          }
+          {user ? (
+            <Nav>
+              <Button variant="link" className="nav-link">
+                Logout
+              </Button>
+            </Nav>
+          ) : (
+            <Nav>
+              <Nav.Link href="/login">Login</Nav.Link>
+              <Nav.Link href="/signup">Sign Up</Nav.Link>
+            </Nav>
+          )}
         </Navbar.Collapse>
       </Container>
     </Navbar>
