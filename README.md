@@ -1,7 +1,8 @@
-<h1>Cha cha charity</h1>
+## Cha cha charity
 
 <h2> Table of Contents </h2>
 
+- [Cha cha charity](#cha-cha-charity)
 - [Project link](#project-link)
 - [Getting started](#getting-started)
 - [Link to deploy react app](#link-to-deploy-react-app)
