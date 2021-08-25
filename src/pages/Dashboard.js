@@ -5,7 +5,6 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-import CardActions from "@material-ui/core/CardActions";
 import CardMedia from "@material-ui/core/CardMedia";
 import EditRoundedIcon from "@material-ui/icons/EditRounded";
 
@@ -13,59 +12,68 @@ import example from "../assets/images/illustrations/whole-images/pablo-201.png";
 import EventCard from "../components/EventCard";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    backgroundColor: "#f9d9eb",
-  },
+  root: { margin: "auto" },
   paper: {
+    margin: 15,
+    backgroundColor: "#f9d9eb",
     padding: theme.spacing(2),
-    textAlign: "center",
-  },
-  header: {
-    backgroundColor: "#353535",
-    color: "white",
   },
   title: {
     textAlign: "center",
   },
+  events: {},
   myEvent: {
-    backgroundColor: "yellow",
+    display: "flex",
+    flexWrap: "wrap",
+    flexDirection: "row",
+    backgroundColor: "#f8cf61",
+  },
+  myInfo: {
+    backgroundColor: "#f8cf61",
+    padding: theme.spacing(2),
+    textAlign: "center",
+    margin: 10,
   },
   details: {
     textAlign: "center",
   },
+  createEvent: {
+    backgroundColor: "#f9d9eb",
+    padding: theme.spacing(2),
+    textAlign: "center",
+    margin: 10,
+  },
 }));
 
-const Dashboard = (params) => {
+const Dashboard = () => {
   const classes = useStyles();
   return (
     <Container className={classes.root}>
-      <div className={classes.header}>
-        <Typography className={classes.title} variant="h3">
-          Dashboard
-        </Typography>
-      </div>
       <div>
-        <Grid container spacing={3}>
-          <Grid item xs={12}>
-            <Paper className={classes.paper}>
-              <Typography className={classes.title} variant="h5">
-                My Events
-              </Typography>
-            </Paper>
-          </Grid>
-          <Grid item xs={12} sm={9}>
-            <Paper className={classes.paper}>
+        <Grid item sm={12}>
+          <Paper className={classes.paper}>
+            <Typography className={classes.title} variant="h5">
               My Events
-              <div className={classes.myEvent}>
+            </Typography>
+          </Paper>
+        </Grid>
+        <Grid container sm={12}>
+          <Grid xs={6} sm={8} className={classes.events}>
+            <Paper className={classes.myEvent}>
+              <div>
                 <EventCard />
+              </div>
+              <div>
                 <EventCard />
+              </div>
+              <div>
                 <EventCard />
               </div>
             </Paper>
           </Grid>
-          <Grid item xs={12} sm={3}>
+          <Grid item xs={6} sm={4}>
             <Grid>
-              <Paper className={classes.paper}>
+              <Paper className={classes.myInfo}>
                 <Card>
                   <CardContent>
                     <Typography>
@@ -84,13 +92,17 @@ const Dashboard = (params) => {
                     <Typography variant="h5">Bob Mortimer</Typography>
                     <Typography variant="h6">Phone number</Typography>
                     <Typography variant="h6">Address</Typography>
+                    <Typography variant="h6">Bio</Typography>
+                    <Typography variant="h6">Interests</Typography>
                   </CardContent>
                 </Card>
               </Paper>
             </Grid>
             <Grid>
-              <Paper className={classes.paper}>
-                <Typography variant="h5">Create Event(?)</Typography>
+              <Paper className={classes.createEvent}>
+                <Typography variant="h5" style={{ color: "#353535" }}>
+                  Create Event(?)
+                </Typography>
               </Paper>
             </Grid>
           </Grid>
