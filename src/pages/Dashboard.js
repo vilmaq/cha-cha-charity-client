@@ -12,9 +12,13 @@ import EditRoundedIcon from "@material-ui/icons/EditRounded";
 import example from "../assets/images/illustrations/whole-images/pablo-201.png";
 import EventCard from "../components/EventCard";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: "#f9d9eb",
+  },
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: "center",
   },
   header: {
     backgroundColor: "#353535",
@@ -29,7 +33,7 @@ const useStyles = makeStyles({
   details: {
     textAlign: "center",
   },
-});
+}));
 
 const Dashboard = (params) => {
   const classes = useStyles();
@@ -60,28 +64,35 @@ const Dashboard = (params) => {
             </Paper>
           </Grid>
           <Grid item xs={12} sm={3}>
-            <Paper className={classes.paper}>
-              <Card>
-                <CardContent>
-                  <Typography>
-                    My Info
-                    <EditRoundedIcon marginLeft="5px" />
-                  </Typography>
-                </CardContent>
-                <CardMedia
-                  component="img"
-                  alt="event-image"
-                  height="180"
-                  image={example}
-                  title="event-image"
-                />
-                <CardContent className={classes.details}>
-                  <Typography variant="h5">Bob Mortimer</Typography>
-                  <Typography variant="h6">Phone number</Typography>
-                  <Typography variant="h6">Address</Typography>
-                </CardContent>
-              </Card>
-            </Paper>
+            <Grid>
+              <Paper className={classes.paper}>
+                <Card>
+                  <CardContent>
+                    <Typography>
+                      My Info
+                      <EditRoundedIcon marginLeft="5px" />
+                    </Typography>
+                  </CardContent>
+                  <CardMedia
+                    component="img"
+                    alt="event-image"
+                    height="180"
+                    image={example}
+                    title="event-image"
+                  />
+                  <CardContent className={classes.details}>
+                    <Typography variant="h5">Bob Mortimer</Typography>
+                    <Typography variant="h6">Phone number</Typography>
+                    <Typography variant="h6">Address</Typography>
+                  </CardContent>
+                </Card>
+              </Paper>
+            </Grid>
+            <Grid>
+              <Paper className={classes.paper}>
+                <Typography variant="h5">Create Event(?)</Typography>
+              </Paper>
+            </Grid>
           </Grid>
         </Grid>
       </div>
