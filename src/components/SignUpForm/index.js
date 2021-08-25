@@ -26,9 +26,9 @@ import ImageUpload from "../ImageUpload";
 
 import "./SignUpForm.css";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   paper: {
-    margin: "16px 0px",
+    padding: "16px 0px",
   },
   form: {
     padding: 16,
@@ -69,16 +69,16 @@ const SignUpForm = () => {
   const [imageUrl, setImageUrl] = useState();
 
   const [signUp] = useMutation(SIGNUP, {
-    onCompleted: (data) => {
+    onCompleted: data => {
       console.log(data);
       history.push("/login");
     },
-    onError: (error) => {
+    onError: error => {
       console.log(error);
     },
   });
 
-  const handleChangeCountry = (event) => {
+  const handleChangeCountry = event => {
     const cities = City.getCitiesOfCountry(
       event.currentTarget.getAttribute("name")
     );
@@ -86,7 +86,7 @@ const SignUpForm = () => {
     setCities(cities);
   };
 
-  const onSubmit = async (formData) => {
+  const onSubmit = async formData => {
     await signUp({
       variables: {
         signUpInput: { ...formData, imageUrl },
@@ -106,7 +106,7 @@ const SignUpForm = () => {
           control={control}
           rules={{ required: true }}
         >
-          {ACCOUNT_TYPES.map((accountType) => {
+          {ACCOUNT_TYPES.map(accountType => {
             return (
               <MenuItem
                 name={accountType}
@@ -237,7 +237,7 @@ const SignUpForm = () => {
           handleChange={handleChangeCountry}
           rules={{ required: true }}
         >
-          {countries.map((country) => {
+          {countries.map(country => {
             return (
               <MenuItem
                 name={country.isoCode}
