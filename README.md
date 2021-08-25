@@ -136,4 +136,18 @@ mutation Mutation($loginInput: LoginInput!) {
 
 ```
 
+```
+mutation Mutation($updateEventInput: UpdateEvent!) {
+  updateEvent(input: $updateEventInput) {
+    id
+    name
+    description
+    postcode
+    street
+    }
+  }
+}
+
+```
+
 ## Screenshots
