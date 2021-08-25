@@ -9,6 +9,7 @@ import { setContext } from "@apollo/client/link/context";
 
 import Routes from "./Routes";
 import Navigation from "./components/NavigationBar";
+import Footer from "./components/Footer/Footer";
 import UserProvider from "./contexts/UserProvider";
 import { ApolloLink } from "apollo-link";
 import { createUploadLink } from "apollo-upload-client";
@@ -46,6 +47,7 @@ const App = () => {
         <Router>
           <Navigation />
           <Routes />
+          <Footer />
         </Router>
       </UserProvider>
     </ApolloProvider>

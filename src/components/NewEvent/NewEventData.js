@@ -28,7 +28,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function EventForm({ stepOneActions, stepOneData }) {
   const classes = useStyles();
-
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
