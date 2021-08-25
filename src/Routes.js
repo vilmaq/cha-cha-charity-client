@@ -6,6 +6,7 @@ import Events from "./pages/Events";
 import Home from "./pages/Home";
 import SingleEvent from "./pages/SingleEvent";
 import NewEvent from "./pages/NewEvent";
+import Dashboard from "./pages/Dashboard";
 
 const Routes = () => {
   return (
@@ -27,6 +28,9 @@ const Routes = () => {
       </Route>
       <Route exact path="/event/:eventId">
         <SingleEvent />
+      </Route>
+      <Route exact path="/dashboard">
+        <Dashboard />
       </Route>
     </Switch>
   );
