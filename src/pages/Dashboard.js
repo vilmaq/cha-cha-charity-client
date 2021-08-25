@@ -7,6 +7,7 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import CardMedia from "@material-ui/core/CardMedia";
+import EditRoundedIcon from "@material-ui/icons/EditRounded";
 
 import example from "../assets/images/illustrations/whole-images/pablo-201.png";
 import EventCard from "../components/EventCard";
@@ -24,6 +25,9 @@ const useStyles = makeStyles({
   },
   myEvent: {
     backgroundColor: "yellow",
+  },
+  details: {
+    textAlign: "center",
   },
 });
 
@@ -59,7 +63,10 @@ const Dashboard = (params) => {
             <Paper className={classes.paper}>
               <Card>
                 <CardContent>
-                  <Typography>My Info</Typography>
+                  <Typography>
+                    My Info
+                    <EditRoundedIcon marginLeft="5px" />
+                  </Typography>
                 </CardContent>
                 <CardMedia
                   component="img"
@@ -68,8 +75,10 @@ const Dashboard = (params) => {
                   image={example}
                   title="event-image"
                 />
-                <CardContent>
-                  <Typography>Hewiur</Typography>
+                <CardContent className={classes.details}>
+                  <Typography variant="h5">Bob Mortimer</Typography>
+                  <Typography variant="h6">Phone number</Typography>
+                  <Typography variant="h6">Address</Typography>
                 </CardContent>
               </Card>
             </Paper>
