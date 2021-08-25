@@ -16,11 +16,7 @@ const useStyles = makeStyles({
   root: {
     width: 400,
     textAlign: "center",
-<<<<<<< HEAD
     margin: 20,
-=======
-    margin: 40,
->>>>>>> d50918303897a936373cf8533020b4775d93fddb
   },
   header: {
     backgroundColor: "#f9d9eb",
