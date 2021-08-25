@@ -40,3 +40,75 @@ export const SIGNUP = gql`
     }
   }
 `;
+
+export const SIGNUPTOEVENT = gql`
+  mutation Mutation($userId: ID!, $eventId: ID!) {
+    signUpToEvent(userId: $userId, eventId: $eventId) {
+      events {
+        id
+        type
+        name
+        description
+        day
+        street
+        postcode
+        city
+        country
+        organizer
+        creator {
+          id
+          type
+          fullName
+          password
+          email
+        }
+        imageUrl
+        participants {
+          id
+          type
+          fullName
+          password
+          email
+        }
+      }
+    }
+  }
+`;
+
+export const CREATEEVENT = gql`
+  mutation Mutation($eventId: ID!, $userId: ID!) {
+    createEvent(userId: $userId, eventId: $eventId) {
+      events {
+        id
+        type
+        name
+        description
+        day
+        street
+        postcode
+        city
+        country
+        organizer
+        creator {
+          id
+          type
+          fullName
+          password
+          email
+        }
+        imageUrl
+      }
+    }
+  }
+`;
+
+export const UPLOADIMAGE = gql`
+  mutation Mutation($imageUploadInput: Image) {
+    imageUpload(input: $imageUploadInput)
+  }
+  # mutation Mutation($input: Image) {
+  #   uploadImage(imageUploadInput: $input) {
+  #     name
+  #   }
+  # }
+`;

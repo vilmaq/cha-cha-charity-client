@@ -4,27 +4,45 @@ import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
-import CardHeader from "@material-ui/core/CardHeader";
 import Button from "@material-ui/core/Button";
+import Link from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
 import LocationOnRoundedIcon from "@material-ui/icons/LocationOn";
 import EventRoundedIcon from "@material-ui/icons/EventRounded";
-import calendar from "./sign-in.png";
 
 import "./eventcard.css";
-import Link from "@material-ui/core/Link";
 
 const useStyles = makeStyles({
   root: {
-    width: 405,
+    width: 400,
     textAlign: "center",
+<<<<<<< HEAD
     margin: 20,
+=======
+    margin: 40,
+>>>>>>> d50918303897a936373cf8533020b4775d93fddb
   },
   header: {
     backgroundColor: "#f9d9eb",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+  },
+  title: {
+    height: 60,
+  },
+  iconinfo: {
+    margin: "auto",
   },
   links: {
     justifyContent: "center",
+    color: "red",
+  },
+  description: {
+    display: "inline-block",
+    overflow: "hidden",
+    height: "3.6em",
+    lineHeight: "1.2em",
   },
 });
 
@@ -33,10 +51,7 @@ const EventCard = ({
   name,
   description,
   day,
-  street,
-  postcode,
   city,
-  country,
   organizer,
   imageUrl,
 }) => {
@@ -48,34 +63,62 @@ const EventCard = ({
           component="img"
           alt="event-image"
           height="180"
-          image={calendar}
+          image={imageUrl}
           title="event-image"
         />
-        <CardHeader className={classes.header}>
-          <Typography gutterBottom variant="h6" component="h2">
-            <LocationOnRoundedIcon style={{ color: "#f36b7f" }} />
-            <EventRoundedIcon style={{ color: "#9fbfff" }} />
+        <CardContent className={classes.header}>
+          <Typography
+            className={classes.iconinfo}
+            gutterBottom
+            variant="subtitle1"
+            component="h2"
+          >
+            <LocationOnRoundedIcon
+              style={{ color: "#f36b7f", verticalAlign: "middle" }}
+            />
+            {city}
           </Typography>
-        </CardHeader>
+          <Typography
+            className={classes.iconinfo}
+            gutterBottom
+            variant="subtitle1"
+            component="h2"
+          >
+            <EventRoundedIcon
+              style={{ color: "#9fbfff", verticalAlign: "middle" }}
+            />
+            {day}
+          </Typography>
+        </CardContent>
         <CardContent>
-          <Typography gutterBottom variant="h6" component="h2">
+          <Typography
+            className={classes.title}
+            gutterBottom
+            variant="h6"
+            component="h2"
+          >
             {name}
           </Typography>
           <Typography gutterBottom variant="subtitle2" component="h4">
             by {organizer}
           </Typography>
-          <Typography variant="subtitle1" color="textSecondary" component="p">
+          <Typography
+            className={classes.description}
+            variant="subtitle1"
+            color="textSecondary"
+            component="p"
+          >
             {description}
           </Typography>
         </CardContent>
         <CardActions className={classes.links}>
-          <Link>
-            <Button size="small" color="primary">
+          <Link style={{ textDecoration: "none" }}>
+            <Button size="small" style={{ color: "#f36b7f" }}>
               Sign Up
             </Button>
           </Link>
-          <Link href={"/event/" + id}>
-            <Button size="small" color="primary">
+          <Link href={"/event/" + id} style={{ textDecoration: "none" }}>
+            <Button size="small" style={{ color: "#f36b7f" }}>
               See More
             </Button>
           </Link>

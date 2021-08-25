@@ -1,17 +1,17 @@
-import MainContainer from "../components/MainContainer";
-import LoginForm from "../../src/components/LoginForm";
+import { useMediaQuery } from "react-responsive";
+import Container from "@material-ui/core/Container";
 
-const LoginPage = () => {
+import LoginForm from "../components/LoginForm";
+import { MOBILE_BREAKPOINT } from "../mediaQueries";
+
+const Login = () => {
+  const isMobile = useMediaQuery(MOBILE_BREAKPOINT);
+
   return (
-    <MainContainer>
-      <div>
-        <h2 className="my-4 text-center">Login</h2>
-        <hr />
-      </div>
-
+    <Container maxWidth={isMobile ? "sm" : "md"}>
       <LoginForm />
-    </MainContainer>
+    </Container>
   );
 };
 
-export default LoginPage;
+export default Login;
