@@ -15,7 +15,7 @@ import Typography from "@material-ui/core/Typography";
 
 import { LOGIN } from "../../graphql/mutations";
 
-import { useUserContext } from "../contexts/UserProvider";
+import { useUserContext } from "../../contexts/UserProvider";
 
 import "./LoginForm.css";
 
