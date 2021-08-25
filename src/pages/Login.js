@@ -11,7 +11,7 @@ const Login = () => {
     <div className="background">
       <Container
         maxWidth={isMobile ? "sm" : "md"}
-        style={{ paddingTop: "16px" }}
+        style={{ paddingTop: "16px", paddingBottom: "16px" }}
       >
         <LoginForm />
       </Container>
