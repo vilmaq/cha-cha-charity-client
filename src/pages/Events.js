@@ -30,14 +30,14 @@ const Events = () => {
     };
     return (
       <MainContainer>
-        <div>
+        {/* <div>
           <input
             type="text"
             value={search}
             onChange={(e) => handleSearch(e)}
             placeholder="Search by Event Type"
           ></input>
-        </div>
+        </div> */}
         <br></br>
         {dynamicSearch().map((event) => {
           return (
