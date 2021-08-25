@@ -4,10 +4,13 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Button from "react-bootstrap/Button";
 import charityLogo from "../../images/charityLogo.png";
+import { useUserContext } from "../../contexts/UserProvider";
 
 import CategoryMenu from "./CategoryMenu";
 
 const NavigationBar = () => {
+  const { user } = useUserContext();
+
   return (
     <Navbar
       collapseOnSelect
@@ -34,15 +37,18 @@ const NavigationBar = () => {
               <CategoryMenu />
             </Nav>
           }
-          <Nav>
-            <Nav.Link href="/login">Login</Nav.Link>
-            <Nav.Link href="/signup">Sign Up</Nav.Link>
-          </Nav>
-          <Nav>
-            <Button variant="link" className="nav-link">
-              Logout
-            </Button>
-          </Nav>
+          {user ? (
+            <Nav>
+              <Button variant="link" className="nav-link">
+                Logout
+              </Button>
+            </Nav>
+          ) : (
+            <Nav>
+              <Nav.Link href="/login">Login</Nav.Link>
+              <Nav.Link href="/signup">Sign Up</Nav.Link>
+            </Nav>
+          )}
         </Navbar.Collapse>
       </Container>
     </Navbar>
