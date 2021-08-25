@@ -79,16 +79,11 @@ $ npm run dev
   }
   "updateEventInput": {
     "eventId": "612556204c0ea163708a812f",
-    "type": "Health",
     "name": "Arizona Poised to Permit Canyon Uranium Mine",
     "description": "An unnecessary uranium mine near the Grand Canyon poses a threat to fragile water resources and shouldn’t be allowed to continue",
-    "day": "2022-05-02",
     "street": "New Street",
     "postcode": "B2 3DF",
-    "city": "Birmingham",
-    "country": "United Kingdom",
-    "organizer": "Grand Canyon Trust",
-    "creator": "61255b0d063ea120cc5125ae"
+
 
   }
 }
