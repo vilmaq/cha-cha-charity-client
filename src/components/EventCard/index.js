@@ -47,12 +47,9 @@ const EventCard = ({
   name,
   description,
   day,
-  // street,
-  // postcode,
   city,
-  // country,
   organizer,
-  // imageUrl,
+  imageUrl,
 }) => {
   const classes = useStyles();
   return (
