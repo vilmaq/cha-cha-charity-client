@@ -17,9 +17,9 @@ import { LOGIN } from "../../graphql/mutations";
 
 import "./LoginForm.css";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   paper: {
-    margin: "16px 0px",
+    padding: "16px 0px",
   },
   form: {
     padding: 16,
@@ -44,16 +44,16 @@ const LoginForm = () => {
   const { handleSubmit, control } = useForm();
 
   const [login] = useMutation(LOGIN, {
-    onCompleted: (data) => {
+    onCompleted: data => {
       console.log(data);
       history.push("/");
     },
-    onError: (error) => {
+    onError: error => {
       console.log(error);
     },
   });
 
-  const onSubmit = async (formData) => {
+  const onSubmit = async formData => {
     await login({
       variables: {
         loginInput: {
