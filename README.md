@@ -1,20 +1,42 @@
-## Cha cha charity
+# Cha cha charity
 
-<h2> Table of Contents </h2>
-
-- [Cha cha charity](#cha-cha-charity)
-- [Project link](#project-link)
-- [Getting started](#getting-started)
-- [Link to deploy react app](#link-to-deploy-react-app)
-- [About](#about)
-- [Running the project](#running-the-project)
-- [Variables](#variables)
-- [Mutations](#mutations)
-- [Screenshots](#screenshots)
+- Cha-Cha-Charity is an application which connects everyone together.
+- Any volunteer, charity organization or any company could come on our website and click on any charity and they will be shown the related events.
+- Anyone could see more information related to the events and then sign up for the same, if they are interested in the same.
 
 ## Project link
 
 Click [here]() to view the project on Heroku.
+
+**Contributors**
+
+- Vilma: [Github](https://github.com/vilmaq)
+
+- Otilia [Github](https://github.com/otivisan22)
+
+- Nazim: [Github](https://github.com/MRasheed1991)
+
+- Nazia: [Github](https://github.com/Nrasool21)
+
+- Misha [Github](https://github.com/misha244)
+  <br>
+- Marcus [Github](https://github.com/marcuslau0903)
+
+- Eti Priya: [Github](https://github.com/Etipriya)
+
+## Table of Contents
+
+- [Cha cha charity](#cha-cha-charity)
+  - [Project link](#project-link)
+  - [Table of Contents](#table-of-contents)
+  - [Getting started](#getting-started)
+  - [About](#about)
+  - [Technology/Framework used](#technologyframework-used)
+  - [Link to deploy react app](#link-to-deploy-react-app)
+  - [Running the project](#running-the-project)
+  - [Variables](#variables)
+  - [Mutations](#mutations)
+  - [Screenshots](#screenshots)
 
 ## Getting started
 
@@ -28,9 +50,26 @@ $ npm i
 
 ```
 
-## Link to deploy react app
-
 ## About
+
+- Cha-Cha-Charity is an application which helps to connect and bring together everyone in multiple events.
+- This is a website on which any user, any company or any charity organization could come and enter the details of any event or participate in any event.
+
+- Homepage - Whenever anyone comes to the homepage, they could see the categories with a button "Learn More". As per their choice, they could click on the button of the category of their choice and they will be moved to the next page where various events related to that category will be rendered.
+- Events page - On this page, anyone could see the various events related to the category clicked.
+- Category - In the navbar, you could see a button named category. If you click on that, then it shows a dropdown list of various categories. You just need to click on any category and it will show the events related to that category.
+-
+
+![image](./public/assets/images/create-quiz.png)
+
+## Technology/Framework used
+
+- React
+- Apollo GraphQL
+- Material UI
+- React Bootstrap
+
+## Link to deploy react app
 
 ## Running the project
 
