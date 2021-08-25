@@ -26,19 +26,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function EventForm({ stepOneActions }) {
-  const [selectedDate, setSelectedDate] = React.useState(new Date());
-
+export default function EventForm({ stepOneActions, stepOneData }) {
   const classes = useStyles();
-  const [type, setType] = React.useState("");
 
-  const handleChange = (event) => {
-    setType(event.target.value);
-  };
-
-  const handleDateChange = (date) => {
-    setSelectedDate(date);
-  };
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
@@ -47,6 +37,7 @@ export default function EventForm({ stepOneActions }) {
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6}>
           <TextField
+            value={stepOneData.eventName}
             onChange={(event) =>
               stepOneActions.setEventName(event.target.value)
             }
@@ -68,10 +59,10 @@ export default function EventForm({ stepOneActions }) {
                 margin="normal"
                 id="date-picker"
                 label="Date picker"
-                value={selectedDate}
-                onChange={(event) =>
-                  stepOneActions.setEventDate(event.target.value)
-                }
+                value={stepOneData.eventDate}
+                onChange={(date, value) => {
+                  stepOneActions.setEventDate(value);
+                }}
                 KeyboardButtonProps={{
                   "aria-label": "change date",
                 }}
@@ -80,10 +71,10 @@ export default function EventForm({ stepOneActions }) {
                 margin="normal"
                 id="time-picker"
                 label="Time picker"
-                value={selectedDate}
-                onChange={(event) =>
-                  stepOneActions.setEventTime(event.target.value)
-                }
+                inputValue={stepOneData.eventTime}
+                onChange={(date, value) => {
+                  stepOneActions.setEventTime(value);
+                }}
                 KeyboardButtonProps={{
                   "aria-label": "change time",
                 }}
@@ -99,7 +90,7 @@ export default function EventForm({ stepOneActions }) {
             <Select
               labelId="demo-simple-select-autowidth-label"
               id="demo-simple-select-autowidth"
-              value={type}
+              value={stepOneData.eventType}
               onChange={(event) =>
                 stepOneActions.setEventType(event.target.value)
               }
@@ -119,6 +110,7 @@ export default function EventForm({ stepOneActions }) {
         </Grid>
         <Grid item xs={12}>
           <TextField
+            value={stepOneData.eventDescription}
             required
             id="description"
             name="description"
@@ -132,6 +124,7 @@ export default function EventForm({ stepOneActions }) {
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
+            value={stepOneData.eventStreet}
             id="street"
             name="street"
             label="Street"
@@ -144,6 +137,7 @@ export default function EventForm({ stepOneActions }) {
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
+            value={stepOneData.eventCity}
             required
             id="city"
             name="city"
@@ -157,17 +151,7 @@ export default function EventForm({ stepOneActions }) {
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
-            id="state"
-            name="state"
-            label="State/Province/Region"
-            fullWidth
-            onChange={(event) =>
-              stepOneActions.setEventState(event.target.value)
-            }
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
+            value={stepOneData.eventPostCode}
             required
             id="postcode"
             name="postcode"
@@ -181,6 +165,7 @@ export default function EventForm({ stepOneActions }) {
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
+            value={stepOneData.eventCountry}
             required
             id="country"
             name="country"
@@ -194,6 +179,7 @@ export default function EventForm({ stepOneActions }) {
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
+            value={stepOneData.eventOrganizer}
             required
             id="organizer"
             name="organizer"

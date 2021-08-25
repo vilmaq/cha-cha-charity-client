@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import { useForm } from "react-hook-form";
+import { useHistory } from "react-router-dom";
 import CssBaseline from "@material-ui/core/CssBaseline";
-// import AppBar from '@material-ui/core/AppBar';
-// import Toolbar from '@material-ui/core/Toolbar';
+import { useUserContext } from "../../contexts/UserProvider";
 import Paper from "@material-ui/core/Paper";
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
@@ -12,10 +13,15 @@ import Link from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
 
 import NewEventData from "./NewEventData";
-import UploadImages from "./UploadImage";
+import UploadImage from "./UploadImage";
 import TermsAndConditions from "./TermsAndConditions";
 import { faGlasses } from "@fortawesome/free-solid-svg-icons";
 import ImageUpload from "../ImageUpload";
+
+import { CREATEEVENT } from "../../graphql/mutations";
+import { useMutation } from "@apollo/client";
+// import MomentUtils from "@date-io/moment";
+import moment from "moment";
 
 function Copyright() {
   return (
@@ -83,18 +89,22 @@ const steps = ["Event Form", "Image Upload", "Terms & Conditions"];
 // }
 
 export default function CreateNewEvent() {
+  const { state } = useUserContext();
+  let history = useHistory();
+
   const classes = useStyles();
   const [activeStep, setActiveStep] = useState(0);
-
+  const today = new Date();
   const [eventName, setEventName] = useState("");
   const [eventType, setEventType] = useState("");
-  const [eventDate, setEventDate] = useState("");
-  const [eventTime, setEventTime] = useState("");
+  const [eventDate, setEventDate] = useState(`${today}`);
+  const [eventTime, setEventTime] = useState(
+    `${moment(today).format("HH:mm A")}`
+  );
   const [eventDescription, setEventDescription] = useState("");
   const [eventStreet, setEventStreet] = useState("");
   const [eventCity, setEventCity] = useState("");
-  const [eventState, setEventState] = useState("");
-  const [eventPostcode, setEventPostCode] = useState("");
+  const [eventPostCode, setEventPostCode] = useState("");
   const [eventCountry, setEventCountry] = useState("");
   const [eventOrganizer, setEventOrganizer] = useState("");
   const [eventImage, setEventImage] = useState("");
@@ -104,24 +114,6 @@ export default function CreateNewEvent() {
     useState(false);
   const [disabled, setDisabled] = useState(false);
 
-  console.log(
-    // eventName,
-    // eventType,
-    // eventDate,
-    // eventTime,
-    // eventDescription,
-    // eventStreet,
-    // eventCity,
-    // eventState,
-    // eventPostcode,
-    // eventCountry,
-    // eventOrganizer,
-    // eventImage,
-    hasReadTermAndConditions,
-    disabled,
-    activeStep
-  );
-
   const stepOneActions = {
     setEventName,
     setEventType,
@@ -130,10 +122,23 @@ export default function CreateNewEvent() {
     setEventDescription,
     setEventStreet,
     setEventCity,
-    setEventState,
+
     setEventPostCode,
     setEventCountry,
     setEventOrganizer,
+  };
+  const stepOneData = {
+    eventName,
+    eventType,
+    eventDate,
+    eventTime,
+    eventDescription,
+    eventStreet,
+    eventCity,
+
+    eventPostCode,
+    eventCountry,
+    eventOrganizer,
   };
 
   const stepTwoActions = {
@@ -146,16 +151,42 @@ export default function CreateNewEvent() {
     setHasReadTermsAndConditions,
   };
 
-  const handleNext = () => {
-    if (activeStep + 1 < 3) setActiveStep(activeStep + 1);
-    //  Step 0: hook up all the state actions with the form
-    // Step 1: Call useMutation(CREATEEVENTMUTATION) const [createEvent]
-    //Step2: Invoke createEvent(eventInput) eventInput is going to be a variable in the mutation call
-    //Step3: make the eventInput map to the form State
-  };
-
   const handleBack = () => {
     setActiveStep(activeStep - 1);
+  };
+
+  const [createEvent] = useMutation(CREATEEVENT, {
+    onCompleted: (data) => {
+      history.push("/events");
+    },
+    onError: (error) => {
+      console.log(error);
+    },
+  });
+
+  const handleNext = async () => {
+    if (activeStep + 1 < 3) setActiveStep(activeStep + 1);
+    if (activeStep === 2) {
+      const { data } = await createEvent({
+        variables: {
+          createEventInput: {
+            type: eventType,
+            name: eventName,
+            description: eventDescription,
+            day: eventDate,
+            time: eventTime,
+            street: eventStreet,
+            postcode: eventPostCode,
+            city: eventCity,
+            country: eventCountry,
+            organizer: eventOrganizer,
+            imageUrl: eventImage,
+            creator: state.user.id,
+          },
+        },
+      });
+      console.log(data);
+    }
   };
 
   // if (activeStep === 2 && hasReadTermAndConditions === false) {
@@ -165,7 +196,12 @@ export default function CreateNewEvent() {
   const getFormStep = () => {
     switch (activeStep) {
       case 0:
-        return <NewEventData stepOneActions={stepOneActions} />;
+        return (
+          <NewEventData
+            stepOneActions={stepOneActions}
+            stepOneData={stepOneData}
+          />
+        );
       case 1:
         return (
           <div>
