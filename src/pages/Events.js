@@ -6,12 +6,15 @@ import { EVENTS } from "../graphql/queries";
 import EventCard from "../components/EventCard";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
+import { useMediaQuery } from "react-responsive";
+import { MOBILE_BREAKPOINT } from "../mediaQueries";
 import "./home.css";
 
 const Events = () => {
   const { data, loading, error } = useQuery(EVENTS);
   const { state } = useUserContext();
   const [search, setSearch] = useState("");
+  const isMobile = useMediaQuery(MOBILE_BREAKPOINT);
 
   const location = useLocation();
 
@@ -44,7 +47,7 @@ const Events = () => {
 
     return (
       <div className="background">
-        <MainContainer>
+        <MainContainer maxWidth={isMobile ? "sm" : "md"}>
           {/* <div>
             <input
               type="text"
