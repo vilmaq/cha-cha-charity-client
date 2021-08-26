@@ -1,13 +1,14 @@
 import { gql } from "@apollo/client";
 
 export const EVENTS = gql`
-  query Query {
-    events {
+  query Query($eventsCreatorId: ID, $eventsCategory: String!) {
+    events(creatorId: $eventsCreatorId, category: $eventsCategory) {
       id
       type
       name
       description
       day
+      time
       street
       postcode
       city
@@ -17,7 +18,6 @@ export const EVENTS = gql`
         id
         type
         fullName
-        password
         email
       }
       imageUrl
@@ -25,7 +25,6 @@ export const EVENTS = gql`
         id
         type
         fullName
-        password
         email
       }
     }
@@ -33,35 +32,35 @@ export const EVENTS = gql`
 `;
 
 export const MY_EVENTS = gql`
-  query Query($userId: ID) {
-    events(userId: $userId) {
-      events {
+  query Query($eventsCreatorId: ID, $eventsCategory: String!) {
+    events(creatorId: $eventsCreatorId, category: $eventsCategory) {
+      id
+      type
+      name
+      description
+      day
+      time
+      street
+      postcode
+      city
+      country
+      organizer
+      creator {
         id
         type
-        name
-        description
-        day
-        street
-        postcode
+        fullName
+        phoneNumber
         city
         country
-        organizer
-        creator
-        creator {
-          id
-          type
-          fullName
-          password
-          email
-        }
+        bio
         imageUrl
-        participants {
-          id
-          type
-          fullName
-          password
-          email
-        }
+      }
+      imageUrl
+      participants {
+        id
+        type
+        fullName
+        email
       }
     }
   }
