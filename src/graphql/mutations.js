@@ -76,28 +76,23 @@ export const SIGNUPTOEVENT = gql`
 `;
 
 export const CREATEEVENT = gql`
-  mutation Mutation($eventId: ID!, $userId: ID!) {
-    createEvent(userId: $userId, eventId: $eventId) {
-      events {
+  mutation Mutation($eventInput: EventInput!) {
+    createEvent(input: $eventInput) {
+      id
+      type
+      name
+      description
+      day
+      time
+      street
+      postcode
+      city
+      country
+      organizer
+      creator {
         id
-        type
-        name
-        description
-        day
-        street
-        postcode
-        city
-        country
-        organizer
-        creator {
-          id
-          type
-          fullName
-          password
-          email
-        }
-        imageUrl
       }
+      imageUrl
     }
   }
 `;

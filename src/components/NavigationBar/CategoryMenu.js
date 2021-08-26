@@ -1,48 +1,58 @@
-import React from "react";
-import Button from "@material-ui/core/Button";
-import Menu from "@material-ui/core/Menu";
+import { useState } from "react";
+import { useHistory, useParams } from "react-router-dom";
+import { makeStyles } from "@material-ui/core/styles";
 import MenuItem from "@material-ui/core/MenuItem";
-import { useHistory } from "react-router-dom";
-import Chip from "@material-ui/core/Chip";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
 
-export default function SimpleMenu() {
+const useStyles = makeStyles((theme) => ({
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 200,
+    color: "#fff !important",
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+  select: {
+    color: "#fff",
+    "&:before": {
+      borderColor: "#fff",
+    },
+    "&:after": {
+      borderColor: "#fff",
+    },
+  },
+}));
+
+const CategoryMenu = () => {
+  const classes = useStyles();
   const history = useHistory();
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const { category } = useParams();
+  const [eventCategory, setEventCategory] = useState(category || "all");
 
-  const handleClick = event => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = event => {
-    history.push(`/events/${event.currentTarget.innerText}`);
-    setAnchorEl(null);
+  const handleChange = (event) => {
+    setEventCategory(event.target.value);
+    history.push(`/events/${event.target.value}`);
   };
 
   return (
-    <div>
-      <Button
-        // aria-controls="simple-menu"
-        aria-haspopup="true"
-        onClick={handleClick}
-        style={{ color: "#f8cf61" }}
-        fontSize="small"
+    <FormControl className={classes.formControl}>
+      <Select
+        value={eventCategory}
+        onChange={handleChange}
+        className={classes.select}
       >
-        <Chip label="Category" />
-      </Button>
-      <Menu
-        id="simple-menu"
-        anchorEl={anchorEl}
-        keepMounted
-        open={Boolean(anchorEl)}
-        onClose={handleClose}
-      >
-        <MenuItem onClick={handleClose}>Animals</MenuItem>
-        <MenuItem onClick={handleClose}>Environmental</MenuItem>
-        <MenuItem onClick={handleClose}>Art and Culture</MenuItem>
-        <MenuItem onClick={handleClose}>Health</MenuItem>
-        <MenuItem onClick={handleClose}>Education</MenuItem>
-        <MenuItem onClick={handleClose}>International</MenuItem>
-      </Menu>
-    </div>
+        <MenuItem value="all">All</MenuItem>
+        <MenuItem value="Animals">Animals</MenuItem>
+        <MenuItem value="Environmental">Environmental</MenuItem>
+        <MenuItem value="Art">Art and Culture</MenuItem>
+        <MenuItem value="Health">Health</MenuItem>
+        <MenuItem value="Education">Education</MenuItem>
+        <MenuItem value="International">International</MenuItem>
+      </Select>
+    </FormControl>
   );
-}
+};
+
+export default CategoryMenu;
