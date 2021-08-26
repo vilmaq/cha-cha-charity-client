@@ -72,7 +72,6 @@ const Dashboard = () => {
   }
 
   console.log(data.events);
-  console.log(data);
 
   return (
     <Container className={classes.root}>
@@ -112,30 +111,39 @@ const Dashboard = () => {
           <Grid item xs={6} sm={3}>
             <Grid>
               <Paper className={classes.myInfo}>
-                <Card>
-                  <CardContent>
-                    <Typography>
-                      My Info
-                      <EditRoundedIcon />
-                    </Typography>
-                  </CardContent>
-                  <CardMedia
-                    component="img"
-                    alt="event-image"
-                    height="180"
-                    image={example}
-                    title="event-image"
-                  />
-                  <CardContent className={classes.details}>
-                    <Typography variant="h5">Bob Mortimer</Typography>
-                    <Typography variant="h6">Phone number</Typography>
-                    <Typography variant="h6">Address</Typography>
-                    <Typography variant="h6">Bio</Typography>
-                    <Typography variant="h6">Interests</Typography>
-                  </CardContent>
-                </Card>
+                {data.events.map((event) => (
+                  <Card>
+                    <CardContent>
+                      <Typography>
+                        My Info
+                        <EditRoundedIcon />
+                      </Typography>
+                    </CardContent>
+                    <CardMedia
+                      component="img"
+                      alt="event-image"
+                      height="180"
+                      image={event.creator.imageUrl}
+                      title="event-image"
+                    />
+                    <CardContent className={classes.details}>
+                      <Typography variant="h5">
+                        {event.creator.fullName}
+                      </Typography>
+                      <Typography variant="h6">
+                        {event.creator.phoneNumber}
+                      </Typography>
+                      <Typography variant="h6">{event.creator.city}</Typography>
+                      <Typography variant="h6">
+                        {event.creator.country}
+                      </Typography>
+                      <Typography variant="h6">{event.creator.bio}</Typography>
+                    </CardContent>
+                  </Card>
+                ))}
               </Paper>
             </Grid>
+
             <Grid>
               <Paper className={classes.createEvent}>
                 <Typography variant="h5" style={{ color: "#353535" }}>
