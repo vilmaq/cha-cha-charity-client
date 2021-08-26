@@ -17,7 +17,7 @@ const useStyles = makeStyles({
     maxWidth: 400,
     maxHeight: 500,
     textAlign: "center",
-    margin: 40,
+    margin: 20,
   },
   header: {
     backgroundColor: "#f9d9eb",
