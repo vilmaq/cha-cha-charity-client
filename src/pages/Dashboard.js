@@ -101,14 +101,11 @@ const Dashboard = () => {
                     organizer={event.organizer}
                     creator={event.creator}
                     imageUrl={event.imageUrl}
-                    // isMyEvent={state.user && event.user.id === state.user.id}
-                    // participants: []
                   />
                 ))}
             </MainContainer>
-            {/* <Paper className={classes.myEvent}></Paper> */}
           </Grid>
-          <Grid item xs={6} sm={3}>
+          <Grid item xs={4} sm={3}>
             <Grid>
               <Paper className={classes.myInfo}>
                 {data.events.map((event) => (
