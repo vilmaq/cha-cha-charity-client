@@ -28,7 +28,7 @@ const NavigationBar = () => {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="/events" page="events">
+            <Nav.Link href="/events/all" page="events">
               Events
             </Nav.Link>
           </Nav>
