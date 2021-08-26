@@ -49,7 +49,11 @@ export const MY_EVENTS = gql`
         id
         type
         fullName
-        email
+        phoneNumber
+        city
+        country
+        bio
+        imageUrl
       }
       imageUrl
       participants {
