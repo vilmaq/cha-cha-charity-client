@@ -109,7 +109,7 @@ export default function CreateNewEvent() {
   const [eventOrganizer, setEventOrganizer] = useState("");
   const [eventImage, setEventImage] = useState("");
   const [images, setImages] = useState([]);
-  const [imageUrl, setImageUrl] = useState();
+  const [imageUrl, setImageUrl] = useState("");
   const [hasReadTermAndConditions, setHasReadTermsAndConditions] =
     useState(false);
   const [disabled, setDisabled] = useState(false);
@@ -160,7 +160,7 @@ export default function CreateNewEvent() {
 
   const [createEvent] = useMutation(CREATEEVENT, {
     onCompleted: (data) => {
-      history.push("/events");
+      history.push(`event/${data.createEvent.id}`);
     },
     onError: (error) => {
       console.log(error);
@@ -170,9 +170,10 @@ export default function CreateNewEvent() {
   const handleNext = async () => {
     if (activeStep + 1 < 3) setActiveStep(activeStep + 1);
     if (activeStep === 2) {
+      console.log(imageUrl);
       const { data } = await createEvent({
         variables: {
-          createEventInput: {
+          eventInput: {
             type: eventType,
             name: eventName,
             description: eventDescription,
