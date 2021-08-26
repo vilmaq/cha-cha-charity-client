@@ -7,6 +7,9 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import EditRoundedIcon from "@material-ui/icons/EditRounded";
+import MainContainer from "../components/MainContainer";
+import { useMediaQuery } from "react-responsive";
+import { MOBILE_BREAKPOINT } from "../mediaQueries";
 
 import example from "../assets/images/illustrations/whole-images/pablo-201.png";
 import EventCard from "../components/EventCard";
@@ -49,6 +52,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Dashboard = () => {
+  const isMobile = useMediaQuery(MOBILE_BREAKPOINT);
   const classes = useStyles();
   const { state } = useUserContext();
 
@@ -67,7 +71,7 @@ const Dashboard = () => {
     return <div>Error</div>;
   }
 
-  console.log(data);
+  console.log(data.events);
 
   return (
     <Container className={classes.root}>
@@ -79,47 +83,64 @@ const Dashboard = () => {
             </Typography>
           </Paper>
         </Grid>
-        <Grid container sm={12}>
-          <Grid xs={6} sm={8} className={classes.events}>
-            <Paper className={classes.myEvent}>
-              <div>
-                <EventCard />
-              </div>
-              <div>
-                <EventCard />
-              </div>
-              <div>
-                <EventCard />
-              </div>
-            </Paper>
+        <Grid container>
+          <Grid className={classes.events}>
+            <MainContainer maxWidth={isMobile ? "sm" : "md"}>
+              {data.events &&
+                data.events.map((event) => (
+                  <EventCard
+                    id={event.id}
+                    key={event.id}
+                    name={event.name}
+                    description={event.description}
+                    day={event.day}
+                    street={event.street}
+                    postcode={event.postcode}
+                    city={event.city}
+                    country={event.country}
+                    organizer={event.organizer}
+                    creator={event.creator}
+                    imageUrl={event.imageUrl}
+                  />
+                ))}
+            </MainContainer>
           </Grid>
-          <Grid item xs={6} sm={4}>
+          <Grid item xs={4} sm={3}>
             <Grid>
               <Paper className={classes.myInfo}>
-                <Card>
-                  <CardContent>
-                    <Typography>
-                      My Info
-                      <EditRoundedIcon marginLeft="5px" />
-                    </Typography>
-                  </CardContent>
-                  <CardMedia
-                    component="img"
-                    alt="event-image"
-                    height="180"
-                    image={example}
-                    title="event-image"
-                  />
-                  <CardContent className={classes.details}>
-                    <Typography variant="h5">Bob Mortimer</Typography>
-                    <Typography variant="h6">Phone number</Typography>
-                    <Typography variant="h6">Address</Typography>
-                    <Typography variant="h6">Bio</Typography>
-                    <Typography variant="h6">Interests</Typography>
-                  </CardContent>
-                </Card>
+                {data.events.map((event) => (
+                  <Card>
+                    <CardContent>
+                      <Typography>
+                        My Info
+                        <EditRoundedIcon />
+                      </Typography>
+                    </CardContent>
+                    <CardMedia
+                      component="img"
+                      alt="event-image"
+                      height="180"
+                      image={event.creator.imageUrl}
+                      title="event-image"
+                    />
+                    <CardContent className={classes.details}>
+                      <Typography variant="h5">
+                        {event.creator.fullName}
+                      </Typography>
+                      <Typography variant="h6">
+                        {event.creator.phoneNumber}
+                      </Typography>
+                      <Typography variant="h6">{event.creator.city}</Typography>
+                      <Typography variant="h6">
+                        {event.creator.country}
+                      </Typography>
+                      <Typography variant="h6">{event.creator.bio}</Typography>
+                    </CardContent>
+                  </Card>
+                ))}
               </Paper>
             </Grid>
+
             <Grid>
               <Paper className={classes.createEvent}>
                 <Typography variant="h5" style={{ color: "#353535" }}>
