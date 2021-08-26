@@ -71,8 +71,6 @@ const Dashboard = () => {
     return <div>Error</div>;
   }
 
-  console.log(data.events);
-
   return (
     <Container className={classes.root}>
       <div>
@@ -111,7 +109,7 @@ const Dashboard = () => {
                 {data.events.map((event) => (
                   <Card>
                     <CardContent>
-                      <Typography>
+                      <Typography variant="subtitle1">
                         My Info
                         <EditRoundedIcon />
                       </Typography>
@@ -119,7 +117,7 @@ const Dashboard = () => {
                     <CardMedia
                       component="img"
                       alt="event-image"
-                      height="180"
+                      height="220"
                       image={event.creator.imageUrl}
                       title="event-image"
                     />
@@ -134,7 +132,9 @@ const Dashboard = () => {
                       <Typography variant="h6">
                         {event.creator.country}
                       </Typography>
-                      <Typography variant="h6">{event.creator.bio}</Typography>
+                      <Typography variant="subtitle2">
+                        {event.creator.bio}
+                      </Typography>
                     </CardContent>
                   </Card>
                 ))}
