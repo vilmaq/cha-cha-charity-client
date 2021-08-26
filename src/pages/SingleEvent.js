@@ -109,28 +109,28 @@ const SingleEvent = () => {
                   fontSize="large"
                   style={{ color: "#f36b7f" }}
                 />
-                <Typography variant="subtitle1">{data.event.day}</Typography>
+                <Typography variant="h6">{data.event.city}</Typography>
               </div>
               <div className={classes.infoDivs}>
                 <AccessTimeRoundedIcon
                   fontSize="large"
                   style={{ color: "#9fbfff" }}
                 />
-                <Typography variant="subtitle1">{data.event.day}</Typography>
+                <Typography variant="h6">{data.event.time}</Typography>
               </div>
               <div className={classes.infoDivs}>
                 <EventRoundedIcon
                   fontSize="large"
                   style={{ color: "#f36b7f" }}
                 />
-                <Typography variant="subtitle1">{data.event.city}</Typography>
+                <Typography variant="h6">{data.event.day}</Typography>
               </div>
               <div className={classes.infoDivs}>
                 <PeopleRoundedIcon
                   fontSize="large"
                   style={{ color: "#82b5a5" }}
                 />
-                <Typography variant="subtitle1">35 attending</Typography>
+                <Typography variant="h6">35 attending</Typography>
               </div>
             </Paper>
           </Grid>
