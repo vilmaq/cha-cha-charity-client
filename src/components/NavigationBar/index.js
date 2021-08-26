@@ -3,14 +3,18 @@ import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Button from "react-bootstrap/Button";
+
 import charityLogo from "../../images/charityLogo.png";
 import { useUserContext } from "../../contexts/UserProvider";
-// import { useLocation } from "react-router-dom";
 import CategoryMenu from "./CategoryMenu";
 
 const NavigationBar = () => {
-  const { state } = useUserContext();
-  // const location = useLocation();
+  const { state, dispatch } = useUserContext();
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    dispatch({ type: "LOGOUT" });
+  };
 
   return (
     <Navbar
@@ -32,14 +36,16 @@ const NavigationBar = () => {
               Events
             </Nav.Link>
           </Nav>
-
           <Nav>
             <CategoryMenu />
           </Nav>
-
           {state.user ? (
             <Nav>
-              <Button variant="link" className="nav-link">
+              <Button
+                variant="link"
+                className="nav-link"
+                onClick={handleLogout}
+              >
                 Logout
               </Button>
             </Nav>
