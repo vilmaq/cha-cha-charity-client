@@ -29,7 +29,6 @@ const Events = () => {
 
   if (data) {
     console.log(data.events);
-<<<<<<< HEAD
     // const handleSearch = event => {
     //   setSearch(event.target.value);
     // };
@@ -76,33 +75,6 @@ const Events = () => {
           </MainContainer>
         </div>
       </>
-=======
-
-    return (
-      <div className="background">
-        <MainContainer maxWidth={isMobile ? "sm" : "md"}>
-          {data.events &&
-            data.events.map((event) => (
-              <EventCard
-                id={event.id}
-                key={event.id}
-                name={event.name}
-                description={event.description}
-                day={event.day}
-                street={event.street}
-                postcode={event.postcode}
-                city={event.city}
-                country={event.country}
-                organizer={event.organizer}
-                creator={event.creator}
-                imageUrl={event.imageUrl}
-                // isMyEvent={state.user && event.user.id === state.user.id}
-                // participants: []
-              />
-            ))}
-        </MainContainer>
-      </div>
->>>>>>> 3d7f10ae89a14a8aac50dd20c3efea82fe171627
     );
   }
 };
