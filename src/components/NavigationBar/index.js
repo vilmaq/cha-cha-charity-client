@@ -11,7 +11,7 @@ import CategoryMenu from "./CategoryMenu";
 const NavigationBar = () => {
   const { user } = useUserContext();
   const location = useLocation();
-  console.log(location);
+
   return (
     <Navbar
       collapseOnSelect
