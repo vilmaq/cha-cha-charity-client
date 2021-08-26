@@ -60,7 +60,8 @@ const LoginForm = () => {
         type: "LOGIN",
         payload,
       });
-      history.push("/");
+
+      history.push("/dashboard");
     },
     onError: (error) => {
       console.log(error);
@@ -71,7 +72,8 @@ const LoginForm = () => {
     await login({
       variables: {
         loginInput: {
-          formData,
+          email: formData.email,
+          password: formData.password,
         },
       },
     });
