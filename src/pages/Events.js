@@ -4,19 +4,18 @@ import { useUserContext } from "../contexts/UserProvider";
 import LoaderSpinner from "../components/Loader/LoaderSpinner.js";
 import { EVENTS } from "../graphql/queries";
 import EventCard from "../components/EventCard";
-import { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import { MOBILE_BREAKPOINT } from "../mediaQueries";
 import "./home.css";
 
 const Events = () => {
   const { state } = useUserContext();
-  const location = useLocation();
+  const { category } = useParams();
   const isMobile = useMediaQuery(MOBILE_BREAKPOINT);
   const { data, loading, error } = useQuery(EVENTS, {
     variables: {
-      eventsCategory: location.pathname.split("/")[2],
+      eventsCategory: category || "all",
     },
   });
 
