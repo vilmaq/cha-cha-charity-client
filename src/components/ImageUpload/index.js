@@ -49,8 +49,7 @@ const ImageUpload = ({
 
   const onUpload = async () => {
     const file = images[0].file;
-    const fileName = `${filePrefix}${file.name}`;
-
+    let fileName = `${filePrefix}${file.name.replace(/\s/g, "")}`;
     const config = {
       bucketName: process.env.REACT_APP_BUCKET_NAME,
       region: process.env.REACT_APP_REGION,

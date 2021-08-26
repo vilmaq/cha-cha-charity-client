@@ -14,7 +14,8 @@ import "./eventcard.css";
 
 const useStyles = makeStyles({
   root: {
-    width: 400,
+    maxWidth: 400,
+    maxHeight: 500,
     textAlign: "center",
     margin: 20,
   },
