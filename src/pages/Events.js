@@ -11,20 +11,14 @@ import { MOBILE_BREAKPOINT } from "../mediaQueries";
 import "./home.css";
 
 const Events = () => {
-  const { data, loading, error } = useQuery(EVENTS);
   const { state } = useUserContext();
-  const [search, setSearch] = useState("");
-  const isMobile = useMediaQuery(MOBILE_BREAKPOINT);
-
   const location = useLocation();
-
-  let category = "";
-  if (search !== "") {
-    category = search;
-  } else {
-    category = location.pathname.split("/")[2];
-  }
-  console.log(category);
+  const isMobile = useMediaQuery(MOBILE_BREAKPOINT);
+  const { data, loading, error } = useQuery(EVENTS, {
+    variables: {
+      eventsCategory: location.pathname.split("/")[2],
+    },
+  });
 
   if (loading) {
     return <LoaderSpinner />;
@@ -36,29 +30,12 @@ const Events = () => {
 
   if (data) {
     console.log(data.events);
-    // const handleSearch = event => {
-    //   setSearch(event.target.value);
-    // };
-    const dynamicSearch = () => {
-      return data.events.filter(event =>
-        event.type.toLowerCase().includes(category.toLowerCase())
-      );
-    };
 
     return (
       <div className="background">
         <MainContainer maxWidth={isMobile ? "sm" : "md"}>
-          {/* <div>
-            <input
-              type="text"
-              value={search}
-              onChange={e => handleSearch(e)}
-              placeholder="Search by Event Type"
-            ></input>
-          </div> */}
-          <br></br>
-          {dynamicSearch().map(event => {
-            return (
+          {data.events &&
+            data.events.map((event) => (
               <EventCard
                 id={event.id}
                 key={event.id}
@@ -72,11 +49,10 @@ const Events = () => {
                 organizer={event.organizer}
                 creator={event.creator}
                 imageUrl={event.imageUrl}
-                isMyEvent={state.user && event.user.id === state.user.id}
+                // isMyEvent={state.user && event.user.id === state.user.id}
                 // participants: []
               />
-            );
-          })}
+            ))}
         </MainContainer>
       </div>
     );
