@@ -10,6 +10,9 @@ import EditRoundedIcon from "@material-ui/icons/EditRounded";
 
 import example from "../assets/images/illustrations/whole-images/pablo-201.png";
 import EventCard from "../components/EventCard";
+import { useQuery } from "@apollo/client";
+import { MY_EVENTS } from "../graphql/queries";
+import { useUserContext } from "../contexts/UserProvider";
 
 const useStyles = makeStyles((theme) => ({
   root: { margin: "auto" },
@@ -47,6 +50,25 @@ const useStyles = makeStyles((theme) => ({
 
 const Dashboard = () => {
   const classes = useStyles();
+  const { state } = useUserContext();
+
+  const { data, loading, error } = useQuery(MY_EVENTS, {
+    variables: {
+      eventsCreatorId: state.user.id,
+      eventsCategory: "all",
+    },
+  });
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error</div>;
+  }
+
+  console.log(data);
+
   return (
     <Container className={classes.root}>
       <div>
