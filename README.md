@@ -29,23 +29,26 @@ Click [here]() to view the project on Heroku.
 - [Cha cha charity](#cha-cha-charity)
   - [Project link](#project-link)
   - [Table of Contents](#table-of-contents)
+  - [Link to deployed react app](#link-to-deployed-react-app)
   - [Getting started](#getting-started)
   - [About](#about)
   - [Technology/Framework used](#technologyframework-used)
-  - [Link to deploy react app](#link-to-deploy-react-app)
   - [Running the project](#running-the-project)
   - [Variables](#variables)
   - [Mutations](#mutations)
   - [Screenshots](#screenshots)
 
+## Link to deployed react app
+
 ## Getting started
 
 ```
+$ git clone https://github.com/vilmaq/cha-cha-charity
+$ cd cha-cha-charity
+$ npm i
+
 $ git clone https://github.com/vilmaq/cha-cha-charity-client
 $ cd cha-cha-charity-client
-$ cd client
-$ npm i
-$ cd server
 $ npm i
 
 ```
@@ -68,8 +71,6 @@ $ npm i
 - Apollo GraphQL
 - Material UI
 - React Bootstrap
-
-## Link to deploy react app
 
 ## Running the project
 
