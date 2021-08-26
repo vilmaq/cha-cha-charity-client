@@ -7,6 +7,9 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import EditRoundedIcon from "@material-ui/icons/EditRounded";
+import MainContainer from "../components/MainContainer";
+import { useMediaQuery } from "react-responsive";
+import { MOBILE_BREAKPOINT } from "../mediaQueries";
 
 import example from "../assets/images/illustrations/whole-images/pablo-201.png";
 import EventCard from "../components/EventCard";
@@ -49,6 +52,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Dashboard = () => {
+  const isMobile = useMediaQuery(MOBILE_BREAKPOINT);
   const classes = useStyles();
   const { state } = useUserContext();
 
@@ -67,6 +71,7 @@ const Dashboard = () => {
     return <div>Error</div>;
   }
 
+  console.log(data.events);
   console.log(data);
 
   return (
@@ -79,28 +84,39 @@ const Dashboard = () => {
             </Typography>
           </Paper>
         </Grid>
-        <Grid container sm={12}>
-          <Grid xs={6} sm={8} className={classes.events}>
-            <Paper className={classes.myEvent}>
-              <div>
-                <EventCard />
-              </div>
-              <div>
-                <EventCard />
-              </div>
-              <div>
-                <EventCard />
-              </div>
-            </Paper>
+        <Grid container>
+          <Grid className={classes.events}>
+            <MainContainer maxWidth={isMobile ? "sm" : "md"}>
+              {data.events &&
+                data.events.map((event) => (
+                  <EventCard
+                    id={event.id}
+                    key={event.id}
+                    name={event.name}
+                    description={event.description}
+                    day={event.day}
+                    street={event.street}
+                    postcode={event.postcode}
+                    city={event.city}
+                    country={event.country}
+                    organizer={event.organizer}
+                    creator={event.creator}
+                    imageUrl={event.imageUrl}
+                    // isMyEvent={state.user && event.user.id === state.user.id}
+                    // participants: []
+                  />
+                ))}
+            </MainContainer>
+            {/* <Paper className={classes.myEvent}></Paper> */}
           </Grid>
-          <Grid item xs={6} sm={4}>
+          <Grid item xs={6} sm={3}>
             <Grid>
               <Paper className={classes.myInfo}>
                 <Card>
                   <CardContent>
                     <Typography>
                       My Info
-                      <EditRoundedIcon marginLeft="5px" />
+                      <EditRoundedIcon />
                     </Typography>
                   </CardContent>
                   <CardMedia
