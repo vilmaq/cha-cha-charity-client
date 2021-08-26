@@ -1,7 +1,7 @@
-// import { useQuery } from "@apollo/client";
-// import { useParams } from "react-router";
-// import { EVENT } from "../graphql/queries";
-//import LoaderSpinner from "../components/Loader/LoaderSpinner";
+import { useQuery } from "@apollo/client";
+import { useParams } from "react-router";
+import { EVENT } from "../graphql/queries";
+import LoaderSpinner from "../components/Loader/LoaderSpinner";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
@@ -69,30 +69,30 @@ const useStyles = makeStyles((theme) => ({
 
 const SingleEvent = () => {
   const classes = useStyles();
-  // const { eventId } = useParams();
-  // const { data, loading, error } = useQuery(EVENT, {
-  //   variables: { eventId },
-  // });
-  // if (loading) {
-  //   return <div>Loading</div>;
-  // }
-  // if (error) {
-  //   console.log(error);
-  //   return <div>error!!</div>;
-  // }
+  const { eventId } = useParams();
+  const { data, loading, error } = useQuery(EVENT, {
+    variables: { eventId },
+  });
+  if (loading) {
+    return <div>Loading</div>;
+  }
+  if (error) {
+    console.log(error);
+    return <div>error!!</div>;
+  }
 
-  // console.log(data.event.participants);
+  console.log(data.event.participants);
   return (
     <div className={classes.root}>
       <section className={"header-container"}>
         <header
           className="header-img"
-          // style={{
-          //   backgroundImage: `url(${data.event.imageUrl})`,
-          // }}
+          style={{
+            backgroundImage: `url(${data.event.imageUrl})`,
+          }}
         ></header>
         <div className={classes.eventName}>
-          <h1>Data{/* {data.event.name} */}</h1>
+          <h1>{data.event.name}</h1>
 
           {/* this button will save the event for the user to my events */}
 
@@ -111,7 +111,7 @@ const SingleEvent = () => {
                   style={{ color: "#f36b7f" }}
                 />
                 <Typography className={classes.infoText} variant="h5">
-                  day{/*  {data.event.day} */}
+                  {data.event.day}
                 </Typography>
               </div>
               <div className={classes.infoDivs}>
@@ -120,7 +120,7 @@ const SingleEvent = () => {
                   style={{ color: "#9fbfff" }}
                 />
                 <Typography className={classes.infoText} variant="h5">
-                  day{/* {data.event.day} */}
+                  {data.event.day}
                 </Typography>
               </div>
               <div className={classes.infoDivs}>
@@ -129,7 +129,7 @@ const SingleEvent = () => {
                   style={{ color: "#f36b7f" }}
                 />
                 <Typography className={classes.infoText} variant="h5">
-                  city{/* {data.event.city} */}
+                  {data.event.city}
                 </Typography>
               </div>
               <div className={classes.infoDivs}>
@@ -162,7 +162,7 @@ const SingleEvent = () => {
                   iure reprehenderit qui in ea voluptate velit esse quam nihil
                   molestiae consequatur, vel illum qui dolorem eum fugiat quo
                   voluptas nulla pariatur?
-                  {/* {data.event.description} */}
+                  {data.event.description}
                 </Typography>
               </Paper>
               <Paper>
@@ -197,13 +197,11 @@ const SingleEvent = () => {
               <Paper className={classes.eventSidebar}>
                 <div>
                   <Typography>Hosted by</Typography>
-                  <Typography>
-                    bla bla{/* {data.event.organizer}  */}
-                  </Typography>
+                  <Typography>{data.event.organizer}</Typography>
                   <Typography>_______</Typography>
-                  <Typography>bla bla{/* {data.event.city} */}</Typography>
-                  <Typography>bla bla{/* {data.event.street} */}</Typography>
-                  <Typography>bla bla{/* {data.event.postcode} */}</Typography>
+                  <Typography> {data.event.city}</Typography>
+                  <Typography> {data.event.street}</Typography>
+                  <Typography> {data.event.postcode}</Typography>
                 </div>
               </Paper>
             </Grid>
