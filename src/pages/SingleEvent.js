@@ -33,14 +33,13 @@ const useStyles = makeStyles((theme) => ({
   },
   // info header
   infoHeader: {
-    backgroundColor: "yellow",
+    backgroundColor: "#f9d9eb",
     display: "flex",
     padding: 25,
     margin: "auto",
     justifyContent: "space-around",
   },
   infoDivs: {
-    backgroundColor: "red",
     display: "flex",
     flexDirection: "row",
   },
