@@ -15,11 +15,13 @@ import Typography from "@material-ui/core/Typography";
 
 import { LOGIN } from "../../graphql/mutations";
 
+import { useUserContext } from "../../contexts/UserProvider";
+
 import "./LoginForm.css";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    margin: "16px 0px",
+    padding: "16px 0px",
   },
   form: {
     padding: 16,
@@ -40,12 +42,24 @@ const useStyles = makeStyles((theme) => ({
 const LoginForm = () => {
   const classes = useStyles();
   let history = useHistory();
+  const { dispatch } = useUserContext();
 
   const { handleSubmit, control } = useForm();
 
   const [login] = useMutation(LOGIN, {
     onCompleted: (data) => {
-      console.log(data);
+      const payload = {
+        token: data.login.token,
+        email: data.login.user.email,
+        id: data.login.user.id,
+      };
+
+      localStorage.setItem("user", JSON.stringify(payload));
+
+      dispatch({
+        type: "LOGIN",
+        payload,
+      });
       history.push("/");
     },
     onError: (error) => {
@@ -57,8 +71,7 @@ const LoginForm = () => {
     await login({
       variables: {
         loginInput: {
-          email: formData.email,
-          password: formData.password,
+          formData,
         },
       },
     });
