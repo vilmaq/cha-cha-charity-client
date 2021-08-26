@@ -32,35 +32,31 @@ export const EVENTS = gql`
 `;
 
 export const MY_EVENTS = gql`
-  query Query($userId: ID) {
-    events(userId: $userId) {
-      events {
+  query Query($eventsCreatorId: ID, $eventsCategory: String!) {
+    events(creatorId: $eventsCreatorId, category: $eventsCategory) {
+      id
+      type
+      name
+      description
+      day
+      time
+      street
+      postcode
+      city
+      country
+      organizer
+      creator {
         id
         type
-        name
-        description
-        day
-        street
-        postcode
-        city
-        country
-        organizer
-        creator
-        creator {
-          id
-          type
-          fullName
-          password
-          email
-        }
-        imageUrl
-        participants {
-          id
-          type
-          fullName
-          password
-          email
-        }
+        fullName
+        email
+      }
+      imageUrl
+      participants {
+        id
+        type
+        fullName
+        email
       }
     }
   }
