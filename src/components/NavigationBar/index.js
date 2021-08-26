@@ -5,12 +5,13 @@ import Nav from "react-bootstrap/Nav";
 import Button from "react-bootstrap/Button";
 import charityLogo from "../../images/charityLogo.png";
 import { useUserContext } from "../../contexts/UserProvider";
-
+import { useLocation } from "react-router-dom";
 import CategoryMenu from "./CategoryMenu";
 
 const NavigationBar = () => {
   const { user } = useUserContext();
-
+  const location = useLocation();
+  console.log(location);
   return (
     <Navbar
       collapseOnSelect
@@ -31,12 +32,11 @@ const NavigationBar = () => {
               Events
             </Nav.Link>
           </Nav>
-          if (page = "events")
-          {
+          {location.pathname === "/events" && (
             <Nav>
               <CategoryMenu />
             </Nav>
-          }
+          )}
           {user ? (
             <Nav>
               <Button variant="link" className="nav-link">
