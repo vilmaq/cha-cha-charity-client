@@ -16,7 +16,7 @@ import {
   KeyboardDatePicker,
 } from "@material-ui/pickers";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
     minWidth: 120,
@@ -32,11 +32,11 @@ export default function EventForm({ stepOneActions }) {
   const classes = useStyles();
   const [type, setType] = React.useState("");
 
-  const handleChange = event => {
+  const handleChange = (event) => {
     setType(event.target.value);
   };
 
-  const handleDateChange = date => {
+  const handleDateChange = (date) => {
     setSelectedDate(date);
   };
   return (
@@ -47,7 +47,9 @@ export default function EventForm({ stepOneActions }) {
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6}>
           <TextField
-            onChange={event => stepOneActions.setEventName(event.target.value)}
+            onChange={(event) =>
+              stepOneActions.setEventName(event.target.value)
+            }
             required
             id="name"
             name="name"
@@ -67,7 +69,7 @@ export default function EventForm({ stepOneActions }) {
                 id="date-picker"
                 label="Date picker"
                 value={selectedDate}
-                onChange={event =>
+                onChange={(event) =>
                   stepOneActions.setEventDate(event.target.value)
                 }
                 KeyboardButtonProps={{
@@ -79,7 +81,7 @@ export default function EventForm({ stepOneActions }) {
                 id="time-picker"
                 label="Time picker"
                 value={selectedDate}
-                onChange={event =>
+                onChange={(event) =>
                   stepOneActions.setEventTime(event.target.value)
                 }
                 KeyboardButtonProps={{
@@ -98,7 +100,7 @@ export default function EventForm({ stepOneActions }) {
               labelId="demo-simple-select-autowidth-label"
               id="demo-simple-select-autowidth"
               value={type}
-              onChange={event =>
+              onChange={(event) =>
                 stepOneActions.setEventType(event.target.value)
               }
               autoWidth
@@ -121,7 +123,7 @@ export default function EventForm({ stepOneActions }) {
             id="description"
             name="description"
             label="Description"
-            onChange={event =>
+            onChange={(event) =>
               stepOneActions.setEventDescription(event.target.value)
             }
             fullWidth
@@ -135,7 +137,7 @@ export default function EventForm({ stepOneActions }) {
             label="Street"
             fullWidth
             autoComplete="address-line2"
-            onChange={event =>
+            onChange={(event) =>
               stepOneActions.setEventStreet(event.target.value)
             }
           />
@@ -148,7 +150,9 @@ export default function EventForm({ stepOneActions }) {
             label="City"
             fullWidth
             autoComplete="address-level2"
-            onChange={event => stepOneActions.setEventCity(event.target.value)}
+            onChange={(event) =>
+              stepOneActions.setEventCity(event.target.value)
+            }
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -157,7 +161,9 @@ export default function EventForm({ stepOneActions }) {
             name="state"
             label="State/Province/Region"
             fullWidth
-            onChange={event => stepOneActions.setEventState(event.target.value)}
+            onChange={(event) =>
+              stepOneActions.setEventState(event.target.value)
+            }
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -168,7 +174,7 @@ export default function EventForm({ stepOneActions }) {
             label="Zip / Postal code"
             fullWidth
             autoComplete="postal-code"
-            onChange={event =>
+            onChange={(event) =>
               stepOneActions.setEventPostCode(event.target.value)
             }
           />
@@ -181,7 +187,7 @@ export default function EventForm({ stepOneActions }) {
             label="Country"
             fullWidth
             autoComplete="country"
-            onChange={event =>
+            onChange={(event) =>
               stepOneActions.setEventCountry(event.target.value)
             }
           />
@@ -194,7 +200,7 @@ export default function EventForm({ stepOneActions }) {
             label="Organizer Name"
             fullWidth
             autoComplete="Organizer Name"
-            onChange={event =>
+            onChange={(event) =>
               stepOneActions.setEventOrganizer(event.target.value)
             }
           />
