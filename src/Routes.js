@@ -1,4 +1,4 @@
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
@@ -7,8 +7,11 @@ import Home from "./pages/Home";
 import SingleEvent from "./pages/SingleEvent";
 import NewEvent from "./pages/NewEvent";
 import Dashboard from "./pages/Dashboard";
+import { useUserContext } from "./contexts/UserProvider";
 
 const Routes = () => {
+  const { state } = useUserContext();
+
   return (
     <Switch>
       <Route exact path="/login">
@@ -32,9 +35,13 @@ const Routes = () => {
       <Route exact path="/event/:eventId">
         <SingleEvent />
       </Route>
-      <Route exact path="/dashboard">
-        <Dashboard />
-      </Route>
+      {state?.user ? (
+        <Route exact path="/dashboard">
+          <Dashboard />
+        </Route>
+      ) : (
+        <Redirect to="/login" />
+      )}
     </Switch>
   );
 };
