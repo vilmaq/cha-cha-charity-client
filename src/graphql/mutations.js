@@ -77,7 +77,7 @@ export const SIGNUPTOEVENT = gql`
 
 export const CREATEEVENT = gql`
   mutation Mutation($eventInput: EventInput!, $userId: ID!) {
-    createEvent(input: $eventInput, userId: $userId) {
+    createEvent(input: $eventInput, userId: "6127c6f4168d150fe064d4b3") {
       events {
         type
         name

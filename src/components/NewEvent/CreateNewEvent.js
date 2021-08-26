@@ -146,9 +146,8 @@ export default function CreateNewEvent() {
     setImages,
     setImageUrl,
   };
+
   const stepTwoData = {
-    // setEventImage,
-    images,
     imageUrl,
   };
   const stepThreeActions = {
@@ -184,7 +183,7 @@ export default function CreateNewEvent() {
             city: eventCity,
             country: eventCountry,
             organizer: eventOrganizer,
-            imageUrl: eventImage,
+            imageUrl: imageUrl,
             creator: state.user.id,
           },
         },

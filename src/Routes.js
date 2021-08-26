@@ -19,6 +19,9 @@ const Routes = () => {
       <Route exact path="/events/:category">
         <Events />
       </Route>
+      <Route exact path="/events">
+        <Events />
+      </Route>
       <Route exact path="/newEvent">
         <NewEvent />
       </Route>
