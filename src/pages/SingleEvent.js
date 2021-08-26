@@ -35,15 +35,14 @@ const useStyles = makeStyles((theme) => ({
   infoHeader: {
     backgroundColor: "#f9d9eb",
     display: "flex",
-    padding: 25,
+    padding: 20,
     margin: "auto",
     justifyContent: "space-around",
   },
   infoDivs: {
     display: "flex",
-    flexDirection: "row",
   },
-  mainGrid: {
+  secondaryGrid: {
     marginTop: 20,
     paddingBottom: 50,
   },
@@ -110,40 +109,32 @@ const SingleEvent = () => {
                   fontSize="large"
                   style={{ color: "#f36b7f" }}
                 />
-                <Typography className={classes.infoText} variant="h5">
-                  {data.event.day}
-                </Typography>
+                <Typography variant="subtitle1">{data.event.day}</Typography>
               </div>
               <div className={classes.infoDivs}>
                 <AccessTimeRoundedIcon
                   fontSize="large"
                   style={{ color: "#9fbfff" }}
                 />
-                <Typography className={classes.infoText} variant="h5">
-                  {data.event.day}
-                </Typography>
+                <Typography variant="subtitle1">{data.event.day}</Typography>
               </div>
               <div className={classes.infoDivs}>
                 <EventRoundedIcon
                   fontSize="large"
                   style={{ color: "#f36b7f" }}
                 />
-                <Typography className={classes.infoText} variant="h5">
-                  {data.event.city}
-                </Typography>
+                <Typography variant="subtitle1">{data.event.city}</Typography>
               </div>
               <div className={classes.infoDivs}>
                 <PeopleRoundedIcon
                   fontSize="large"
                   style={{ color: "#82b5a5" }}
                 />
-                <Typography className={classes.infoText} variant="h5">
-                  35 Participants
-                </Typography>
+                <Typography variant="subtitle1">35 attending</Typography>
               </div>
             </Paper>
           </Grid>
-          <Grid container spacing={3} className={classes.mainGrid}>
+          <Grid container spacing={3} className={classes.secondaryGrid}>
             <Grid item xs={9}>
               <Paper className={classes.eventDescription}>
                 <Typography>
