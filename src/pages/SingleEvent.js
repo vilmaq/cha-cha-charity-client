@@ -79,8 +79,9 @@ const SingleEvent = () => {
     console.log(error);
     return <div>error!!</div>;
   }
+  const attendants = data.event.participants;
+  console.log(attendants);
 
-  console.log(data.event.participants);
   return (
     <div className={classes.root}>
       <section className={"header-container"}>
@@ -130,7 +131,9 @@ const SingleEvent = () => {
                   fontSize="large"
                   style={{ color: "#82b5a5" }}
                 />
-                <Typography variant="h6">35 attending</Typography>
+                <Typography variant="h6">
+                  {data.event.participants.length} attending
+                </Typography>
               </div>
             </Paper>
           </Grid>
