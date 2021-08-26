@@ -60,7 +60,10 @@ const LoginForm = () => {
         type: "LOGIN",
         payload,
       });
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3d7f10ae89a14a8aac50dd20c3efea82fe171627
       history.push("/dashboard");
     },
     onError: (error) => {
@@ -71,10 +74,14 @@ const LoginForm = () => {
   const onSubmit = async (formData) => {
     await login({
       variables: {
+<<<<<<< HEAD
         loginInput: {
           email: formData.email,
           password: formData.password,
         },
+=======
+        loginInput: formData,
+>>>>>>> 3d7f10ae89a14a8aac50dd20c3efea82fe171627
       },
     });
   };
