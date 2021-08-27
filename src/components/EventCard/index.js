@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
@@ -10,11 +10,19 @@ import Typography from "@material-ui/core/Typography";
 import LocationOnRoundedIcon from "@material-ui/icons/LocationOn";
 import EventRoundedIcon from "@material-ui/icons/EventRounded";
 
+import { SIGNUPTOEVENT } from "../../graphql/mutations";
+import { useMutation } from "@apollo/client";
+import { useHistory } from "react-router";
+import { useUserContext } from "../../contexts/UserProvider";
+
+import AcknowledgementModal from "../AcknowledgementModal";
+
 import "./eventcard.css";
 
 const useStyles = makeStyles({
   root: {
-    width: 400,
+    maxWidth: 400,
+    maxHeight: 500,
     textAlign: "center",
     margin: 20,
   },
@@ -52,8 +60,36 @@ const EventCard = ({
   imageUrl,
 }) => {
   const classes = useStyles();
+  let history = useHistory();
+  const { state } = useUserContext();
+
+  const [signUpToEvent] = useMutation(SIGNUPTOEVENT, {
+    onCompleted: (data) => {
+      setOpen(true);
+    },
+    onError: (error) => {
+      console.log(error);
+    },
+  });
+
+  const handleSignUpToEvent = async (event) => {
+    await signUpToEvent({
+      variables: {
+        signUpToEventUserId: state.user.id,
+        signUpToEventEventId: event.currentTarget.id,
+      },
+    });
+  };
+
+  const [open, setOpen] = useState(false);
+
+  const onClose = () => {
+    setOpen(false);
+    history.push(`/event/${id}`);
+  };
+
   return (
-    <div>
+    <>
       <Card className={classes.root}>
         <CardMedia
           component="img"
@@ -109,18 +145,29 @@ const EventCard = ({
         </CardContent>
         <CardActions className={classes.links}>
           <Link style={{ textDecoration: "none" }}>
-            <Button size="small" style={{ color: "#f36b7f" }}>
+            <Button
+              id={id}
+              size="small"
+              onClick={handleSignUpToEvent}
+              style={{ color: "#f36b7f" }}
+            >
               Sign Up
             </Button>
           </Link>
-          <Link href={"/event/" + id} style={{ textDecoration: "none" }}>
+          <Link href={`/event/${id}`} style={{ textDecoration: "none" }}>
             <Button size="small" style={{ color: "#f36b7f" }}>
               See More
             </Button>
           </Link>
         </CardActions>
       </Card>
-    </div>
+      <AcknowledgementModal
+        open={open}
+        onClose={onClose}
+        title="Thank you for your participation"
+        subTitle="See you around"
+      />
+    </>
   );
 };
 

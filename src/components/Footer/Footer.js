@@ -1,29 +1,20 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import BottomNavigation from "@material-ui/core/BottomNavigation";
+import Typography from "@material-ui/core/Typography";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     width: 435,
-    margin: 20,
     backgroundColor: "#f8cf61",
     padding: 5,
   },
   footer: {
-    // padding: 3,
-    // width: "100%",
-    // textAlign: "center",
-    // backgroundColor: "black",
-    // color: "white",
-    // position: "absolute",
-    // bottom: 0,
-    background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
-    borderRadius: 3,
-    border: 0,
+    backgroundColor: "#353535",
     color: "white",
     textAlign: "center",
-    height: 48,
-    padding: "0 30px",
-    boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
+    padding: "20px 10px",
+    height: 70,
   },
 }));
 
@@ -31,8 +22,10 @@ export default function Footer() {
   const classes = useStyles();
 
   return (
-    <footer className={classes.footer}>
-      <p>Copyright &copy; 2021 All Rights Reserved by Cha-Cha-Charity</p>
-    </footer>
+    <BottomNavigation className={classes.footer}>
+      <Typography variant="body1">
+        Copyright &copy; 2021 All Rights Reserved by Cha-Cha-Charity
+      </Typography>
+    </BottomNavigation>
   );
 }

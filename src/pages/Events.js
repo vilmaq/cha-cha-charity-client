@@ -39,6 +39,7 @@ const Events = () => {
     };
 
     return (
+<<<<<<< HEAD
       <>
         HELLO WORLD
         <div className="background">
@@ -75,6 +76,31 @@ const Events = () => {
           </MainContainer>
         </div>
       </>
+=======
+      <div>
+        <MainContainer maxWidth={isMobile ? "sm" : "md"}>
+          {data.events &&
+            data.events.map((event) => (
+              <EventCard
+                id={event.id}
+                key={event.id}
+                name={event.name}
+                description={event.description}
+                day={event.day}
+                street={event.street}
+                postcode={event.postcode}
+                city={event.city}
+                country={event.country}
+                organizer={event.organizer}
+                creator={event.creator}
+                imageUrl={event.imageUrl}
+                // isMyEvent={state.user && event.user.id === state.user.id}
+                // participants: []
+              />
+            ))}
+        </MainContainer>
+      </div>
+>>>>>>> df3582a8a85268b237484f95333b8a4e0dee3050
     );
   }
 };
