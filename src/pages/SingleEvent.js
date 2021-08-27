@@ -1,5 +1,5 @@
-import { useQuery } from "@apollo/client";
-import { useParams } from "react-router";
+import { useMutation, useQuery } from "@apollo/client";
+import { useHistory, useParams } from "react-router";
 import { EVENT } from "../graphql/queries";
 import LoaderSpinner from "../components/Loader/LoaderSpinner";
 import { makeStyles } from "@material-ui/core/styles";
@@ -17,6 +17,10 @@ import AccessTimeRoundedIcon from "@material-ui/icons/AccessTimeRounded";
 import FaceRoundedIcon from "@material-ui/icons/FaceRounded";
 
 import "./singleevent.css";
+import { SIGNUPTOEVENT } from "../graphql/mutations";
+import { useUserContext } from "../contexts/UserProvider";
+import { useState } from "react";
+import AcknowledgementModal from "../components/AcknowledgementModal";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -75,10 +79,37 @@ const useStyles = makeStyles((theme) => ({
 
 const SingleEvent = () => {
   const classes = useStyles();
+  let history = useHistory();
   const { eventId } = useParams();
+  const { state } = useUserContext();
+  const [signUpToEvent] = useMutation(SIGNUPTOEVENT, {
+    onCompleted: (data) => {
+      setOpen(true);
+    },
+    onError: (error) => {
+      console.log(error);
+    },
+  });
+
+  const handleSignUpToEvent = async (event) => {
+    await signUpToEvent({
+      variables: {
+        signUpToEventUserId: state.user.id,
+        signUpToEventEventId: event.currentTarget.id,
+      },
+    });
+  };
+
+  const [open, setOpen] = useState(false);
+
+  const onClose = () => {
+    setOpen(false);
+  };
+
   const { data, loading, error } = useQuery(EVENT, {
     variables: { eventId },
   });
+
   if (loading) {
     return <div>Loading</div>;
   }
@@ -89,9 +120,9 @@ const SingleEvent = () => {
   // const attendants = data.event.participants;
   // console.log(attendants);
 
-  console.log(data);
-
-  const handleSignup = () => {};
+  const userSignedUp = data.event.participants.find((participant) => {
+    return participant.id === state.user.id;
+  });
 
   return (
     <div className={classes.root}>
@@ -107,16 +138,24 @@ const SingleEvent = () => {
 
           {/* this button will save the event for the user to my events */}
 
-          <Button
-            onClick={handleSignUp}
-            className={classes.eventButton}
-            variant="contained"
-            href="/signupfor"
-          >
-            Sign Up
-          </Button>
+          {!userSignedUp && (
+            <Button
+              onClick={handleSignUpToEvent}
+              className={classes.eventButton}
+              variant="contained"
+              id={eventId}
+            >
+              Sign Up
+            </Button>
+          )}
         </div>
       </section>
+      <AcknowledgementModal
+        open={open}
+        onClose={onClose}
+        title="Thank you for your participation"
+        subTitle="See you around"
+      />
       <Container>
         <div>
           <Grid>

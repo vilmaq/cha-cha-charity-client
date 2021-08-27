@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
@@ -13,10 +13,11 @@ import EventRoundedIcon from "@material-ui/icons/EventRounded";
 import { SIGNUPTOEVENT } from "../../graphql/mutations";
 import { useMutation } from "@apollo/client";
 import { useHistory } from "react-router";
-import { userContext, useUserContext } from "../../contexts/UserProvider";
+import { useUserContext } from "../../contexts/UserProvider";
+
+import AcknowledgementModal from "../AcknowledgementModal";
 
 import "./eventcard.css";
-import { identifier } from "stylis";
 
 const useStyles = makeStyles({
   root: {
@@ -64,8 +65,7 @@ const EventCard = ({
 
   const [signUpToEvent] = useMutation(SIGNUPTOEVENT, {
     onCompleted: (data) => {
-      console.log(data);
-      history.push(`/event/${data.signUpToEvent.id}`);
+      setOpen(true);
     },
     onError: (error) => {
       console.log(error);
@@ -81,8 +81,15 @@ const EventCard = ({
     });
   };
 
+  const [open, setOpen] = useState(false);
+
+  const onClose = () => {
+    setOpen(false);
+    history.push(`/event/${id}`);
+  };
+
   return (
-    <div>
+    <>
       <Card className={classes.root}>
         <CardMedia
           component="img"
@@ -154,7 +161,13 @@ const EventCard = ({
           </Link>
         </CardActions>
       </Card>
-    </div>
+      <AcknowledgementModal
+        open={open}
+        onClose={onClose}
+        title="Thank you for your participation"
+        subTitle="See you around"
+      />
+    </>
   );
 };
 
