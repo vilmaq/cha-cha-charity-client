@@ -71,12 +71,13 @@ const EventCard = ({
     },
   });
 
-  const handleSignUpToEvent = async () => {
-    const { data } = await signUpToEvent({
+  const handleSignUpToEvent = async (formData) => {
+    await signUpToEvent({
       variables: {
         signUpToEvent: {
-          userId: state.user.id,
-          eventId: id,
+          formData,
+          // userId: state.user.id,
+          // eventId: id,
         },
       },
     });
