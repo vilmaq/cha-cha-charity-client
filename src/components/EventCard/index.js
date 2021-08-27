@@ -10,6 +10,11 @@ import Typography from "@material-ui/core/Typography";
 import LocationOnRoundedIcon from "@material-ui/icons/LocationOn";
 import EventRoundedIcon from "@material-ui/icons/EventRounded";
 
+import { SIGNUPTOEVENT } from "../../graphql/mutations";
+import { useMutation } from "@apollo/client";
+import { useHistory } from "react-router";
+import { userContext, useUserContext } from "../../contexts/UserProvider";
+
 import "./eventcard.css";
 
 const useStyles = makeStyles({
@@ -53,6 +58,30 @@ const EventCard = ({
   imageUrl,
 }) => {
   const classes = useStyles();
+  let history = useHistory();
+  const { state } = useUserContext();
+
+  const [signUpToEvent] = useMutation(SIGNUPTOEVENT, {
+    onCompleted: (data) => {
+      console.log(data);
+      history.push(`event/${data.eventId}`);
+    },
+    onError: (error) => {
+      console.log(error);
+    },
+  });
+
+  const handleSignUpToEvent = async () => {
+    const { data } = await signUpToEvent({
+      variables: {
+        signUpToEvent: {
+          userId: state.user.id,
+          eventId: id,
+        },
+      },
+    });
+  };
+
   return (
     <div>
       <Card className={classes.root}>
@@ -110,7 +139,11 @@ const EventCard = ({
         </CardContent>
         <CardActions className={classes.links}>
           <Link style={{ textDecoration: "none" }}>
-            <Button size="small" style={{ color: "#f36b7f" }}>
+            <Button
+              size="small"
+              onClick={handleSignUpToEvent}
+              style={{ color: "#f36b7f" }}
+            >
               Sign Up
             </Button>
           </Link>
