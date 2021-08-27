@@ -14,7 +14,7 @@ import Button from "@material-ui/core/Button";
 
 import EventCard from "../components/EventCard";
 import { useQuery } from "@apollo/client";
-import { MY_EVENTS } from "../graphql/queries";
+import { MY_EVENTS_AND_USER } from "../graphql/queries";
 import { useUserContext } from "../contexts/UserProvider";
 
 const useStyles = makeStyles((theme) => ({
@@ -64,10 +64,11 @@ const Dashboard = () => {
   const classes = useStyles();
   const { state } = useUserContext();
 
-  const { data, loading, error } = useQuery(MY_EVENTS, {
+  const { data, loading, error } = useQuery(MY_EVENTS_AND_USER, {
     variables: {
       eventsCreatorId: state.user.id,
       eventsCategory: "all",
+      userId: state.user.id,
     },
   });
 
@@ -78,7 +79,6 @@ const Dashboard = () => {
   if (error) {
     return <div>Error</div>;
   }
-
   return (
     <Container className={classes.root}>
       <div>
@@ -114,38 +114,31 @@ const Dashboard = () => {
           <Grid className={classes.user} item xs={4} sm={3}>
             <Grid>
               <Paper className={classes.myInfo}>
-                {data.events.map((event) => (
-                  <Card>
-                    <CardContent>
-                      <Typography variant="subtitle1">
-                        My Info
-                        <EditRoundedIcon />
-                      </Typography>
-                    </CardContent>
-                    <CardMedia
-                      component="img"
-                      alt="event-image"
-                      height="250"
-                      image={event.creator.imageUrl}
-                      title="event-image"
-                    />
-                    <CardContent className={classes.details}>
-                      <Typography variant="h5">
-                        {event.creator.fullName}
-                      </Typography>
-                      <Typography variant="h6">
-                        {event.creator.phoneNumber}
-                      </Typography>
-                      <Typography variant="h6">{event.creator.city}</Typography>
-                      <Typography variant="h6">
-                        {event.creator.country}
-                      </Typography>
-                      <Typography variant="subtitle2">
-                        {event.creator.bio}
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                ))}
+                <Card>
+                  <CardContent>
+                    <Typography variant="subtitle1">
+                      My Info
+                      <EditRoundedIcon />
+                    </Typography>
+                  </CardContent>
+                  <CardMedia
+                    component="img"
+                    alt="event-image"
+                    height="250"
+                    image={data.user.imageUrl}
+                    title="event-image"
+                  />
+                  <CardContent className={classes.details}>
+                    <Typography variant="h5">{data.user.fullName}</Typography>
+                    <Typography variant="body1">{data.user.type}</Typography>
+                    <Typography variant="h6">
+                      {data.user.phoneNumber}
+                    </Typography>
+                    <Typography variant="h6">{data.user.city}</Typography>
+                    <Typography variant="h6">{data.user.country}</Typography>
+                    <Typography variant="subtitle2">{data.user.bio}</Typography>
+                  </CardContent>
+                </Card>
               </Paper>
             </Grid>
 
