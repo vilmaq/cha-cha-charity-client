@@ -36,6 +36,14 @@ Click [here]() to view the project on Heroku.
   - [Running the project](#running-the-project)
   - [Variables](#variables)
   - [Mutations](#mutations)
+  - [Project Documentation](#project-documentation)
+  - [Objectives](#objectives)
+  - [Getting started](#getting-started-1)
+  - [Project Charter](#project-charter)
+  - [User Journey](#user-journey)
+  - [Project Retrospective](#project-retrospective)
+  - [Improvements to be made](#improvements-to-be-made)
+  - [Results](#results)
 
 ## Link to deployed react app
 
@@ -85,6 +93,10 @@ $ npm i
 - Apollo GraphQL
 - Material UI
 - React Bootstrap
+- React Router Dom
+- React Hooks
+- React AWS
+- Apollo Express
 
 ## Running the project
 
@@ -204,3 +216,99 @@ mutation Mutation($updateEventInput: UpdateEvent!) {
 }
 
 ```
+
+## Project Documentation
+
+Cha-Cha-Charity is an interesting and connecting website.
+
+- Cha-Cha-Charity is an application which connects everyone together. Any volunteer, charity organization or any company could come on our website and save the events in which they are interested. They could save selected events in their homepage and view the details at any point of time.
+- Anyone could create events and see the day and date of that event and also the participants.
+
+## Objectives
+
+- Interesting create event with day and date.
+- Allow user to save their events for future.
+- Enhance user experience by adding and saving multiple events .
+
+## Getting started
+
+We started with the project with the following steps:
+
+```
+$ cd client
+$ npm i
+$ npm run start
+
+$ cd server
+$ npm i
+$ npm run dev
+
+```
+
+## Project Charter
+
+Cha-Cha-Charity is a wonderful website which brings everyone together. It gives an exposure to every individual and of any age.
+
+**Key requirement** - tasks, roles and responsibilities were allotted at the starting of the project.
+
+**We used:**
+
+- React
+- Apollo GraphQL
+- Material UI
+- React Bootstrap
+- React Router Dom
+- React Hooks
+- React AWS
+- Apollo Express
+
+## User Journey
+
+**Make a search** - User could use this website easily on his mobile, tablet or computer and play a quiz according to their interest.
+
+**Create Quizzes** - User could move to the dashboard and create quizzes by either using the API or by writing the questions.
+
+**Playing Quizzes** - User could click on the play button and he will be moved to the question's page where he could see the timer for the quiz.
+
+**Remove created quiz** - User could easily remove a quiz by clicking on "Delete" button.
+
+## Project Retrospective
+
+- Tri-via-hub is a wonderful platform which helps people learn more.
+- It is an interactive app which increases the knowledge and creates interest in various fields.
+- It depends on the interests and various activities which everyone used to do.-
+
+## Improvements to be made
+
+This project could be improved by adding
+
+- Rating of every quiz
+- Connect with other users.
+- API accessibility
+
+**Lessons learnt**
+
+We learned about various things:
+
+- Related to API - We looked into influence of an API on the project.
+- Stringify the answers in database as they were stored in an array.
+- Some features had to be cut due to time frame.
+
+**Timeline**
+Every task was given a limited time and whole team has been into the project. So, everyone completed the task and helped each other in a great manner.
+
+## Results
+
+**Objectives were achieved as below:**
+
+- Our website instantly grabs user towards various quizzes related to various streams.
+
+- It adds the cards to dashboard page after completing the quiz.
+
+- It removes a quiz easily from dashboard page by clicking on "Delete" button easily.
+
+- It shows created quiz and played quizzes on the same page.
+
+- It easily comes back to the home page.
+
+- It easily allows to sign up and logout.
