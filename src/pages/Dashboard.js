@@ -117,7 +117,7 @@ const Dashboard = () => {
                     <CardMedia
                       component="img"
                       alt="event-image"
-                      height="220"
+                      height="250"
                       image={event.creator.imageUrl}
                       title="event-image"
                     />
