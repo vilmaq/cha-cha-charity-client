@@ -10,8 +10,8 @@ import EditRoundedIcon from "@material-ui/icons/EditRounded";
 import MainContainer from "../components/MainContainer";
 import { useMediaQuery } from "react-responsive";
 import { MOBILE_BREAKPOINT } from "../mediaQueries";
+import Button from "@material-ui/core/Button";
 
-import example from "../assets/images/illustrations/whole-images/pablo-201.png";
 import EventCard from "../components/EventCard";
 import { useQuery } from "@apollo/client";
 import { MY_EVENTS } from "../graphql/queries";
@@ -20,7 +20,6 @@ import { useUserContext } from "../contexts/UserProvider";
 const useStyles = makeStyles((theme) => ({
   root: { margin: "auto" },
   paper: {
-    margin: 15,
     backgroundColor: "#f9d9eb",
     padding: theme.spacing(2),
   },
@@ -34,6 +33,8 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "row",
     backgroundColor: "#f8cf61",
   },
+  // info side grid
+  user: { marginBottom: 15 },
   myInfo: {
     backgroundColor: "#f8cf61",
     padding: theme.spacing(2),
@@ -44,10 +45,17 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
   },
   createEvent: {
-    backgroundColor: "#f9d9eb",
+    backgroundColor: "#f8cf61",
     padding: theme.spacing(2),
     textAlign: "center",
     margin: 10,
+  },
+  eventButton: {
+    backgroundColor: "#f36b7f",
+    "&:hover": {
+      backgroundColor: "#f68e9d",
+      color: "#353535",
+    },
   },
 }));
 
@@ -71,8 +79,6 @@ const Dashboard = () => {
     return <div>Error</div>;
   }
 
-  console.log(data.events);
-
   return (
     <Container className={classes.root}>
       <div>
@@ -84,7 +90,7 @@ const Dashboard = () => {
           </Paper>
         </Grid>
         <Grid container>
-          <Grid className={classes.events}>
+          <Grid item sm={9} className={classes.events}>
             <MainContainer maxWidth={isMobile ? "sm" : "md"}>
               {data.events &&
                 data.events.map((event) => (
@@ -105,13 +111,13 @@ const Dashboard = () => {
                 ))}
             </MainContainer>
           </Grid>
-          <Grid item xs={4} sm={3}>
+          <Grid className={classes.user} item xs={4} sm={3}>
             <Grid>
               <Paper className={classes.myInfo}>
                 {data.events.map((event) => (
                   <Card>
                     <CardContent>
-                      <Typography>
+                      <Typography variant="subtitle1">
                         My Info
                         <EditRoundedIcon />
                       </Typography>
@@ -119,7 +125,7 @@ const Dashboard = () => {
                     <CardMedia
                       component="img"
                       alt="event-image"
-                      height="180"
+                      height="250"
                       image={event.creator.imageUrl}
                       title="event-image"
                     />
@@ -134,7 +140,9 @@ const Dashboard = () => {
                       <Typography variant="h6">
                         {event.creator.country}
                       </Typography>
-                      <Typography variant="h6">{event.creator.bio}</Typography>
+                      <Typography variant="subtitle2">
+                        {event.creator.bio}
+                      </Typography>
                     </CardContent>
                   </Card>
                 ))}
@@ -143,9 +151,13 @@ const Dashboard = () => {
 
             <Grid>
               <Paper className={classes.createEvent}>
-                <Typography variant="h5" style={{ color: "#353535" }}>
-                  Create Event(?)
-                </Typography>
+                <Button
+                  className={classes.eventButton}
+                  variant="contained"
+                  href="/newEvent"
+                >
+                  <Typography variant="button">Create an Event</Typography>
+                </Button>
               </Paper>
             </Grid>
           </Grid>

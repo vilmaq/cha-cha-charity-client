@@ -23,7 +23,14 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
   },
   // top header
-  signUpButton: {},
+  eventButton: {
+    marginTop: 20,
+    backgroundColor: "#f36b7f",
+    "&:hover": {
+      backgroundColor: "#f68e9d",
+      color: "#353535",
+    },
+  },
   eventName: {
     color: "#f0f0f0",
     position: "absolute",
@@ -79,8 +86,11 @@ const SingleEvent = () => {
     console.log(error);
     return <div>error!!</div>;
   }
+  // const attendants = data.event.participants;
+  // console.log(attendants);
 
-  console.log(data.event.participants);
+  console.log(data);
+
   return (
     <div className={classes.root}>
       <section className={"header-container"}>
@@ -95,7 +105,11 @@ const SingleEvent = () => {
 
           {/* this button will save the event for the user to my events */}
 
-          <Button variant="contained" color="secondary" href="/signupfor">
+          <Button
+            className={classes.eventButton}
+            variant="contained"
+            href="/signupfor"
+          >
             Sign Up
           </Button>
         </div>
@@ -109,28 +123,30 @@ const SingleEvent = () => {
                   fontSize="large"
                   style={{ color: "#f36b7f" }}
                 />
-                <Typography variant="subtitle1">{data.event.day}</Typography>
+                <Typography variant="h6">{data.event.city}</Typography>
               </div>
               <div className={classes.infoDivs}>
                 <AccessTimeRoundedIcon
                   fontSize="large"
                   style={{ color: "#9fbfff" }}
                 />
-                <Typography variant="subtitle1">{data.event.day}</Typography>
+                <Typography variant="h6">{data.event.time}</Typography>
               </div>
               <div className={classes.infoDivs}>
                 <EventRoundedIcon
                   fontSize="large"
                   style={{ color: "#f36b7f" }}
                 />
-                <Typography variant="subtitle1">{data.event.city}</Typography>
+                <Typography variant="h6">{data.event.day}</Typography>
               </div>
               <div className={classes.infoDivs}>
                 <PeopleRoundedIcon
                   fontSize="large"
                   style={{ color: "#82b5a5" }}
                 />
-                <Typography variant="subtitle1">35 attending</Typography>
+                <Typography variant="h6">
+                  {data.event.participants.length} participating
+                </Typography>
               </div>
             </Paper>
           </Grid>
@@ -142,7 +158,7 @@ const SingleEvent = () => {
               <Paper>
                 <article className={classes.attendTitle}>
                   <Typography variant="h6">
-                    See some of the people who are attending this event!
+                    See who's already participating!
                   </Typography>
                 </article>
                 <article className={classes.attendants}>
@@ -170,12 +186,14 @@ const SingleEvent = () => {
             <Grid item xs={3}>
               <Paper className={classes.eventSidebar}>
                 <div>
-                  <Typography>Hosted by</Typography>
-                  <Typography>{data.event.organizer}</Typography>
-                  <Typography>_______</Typography>
-                  <Typography> {data.event.city}</Typography>
-                  <Typography> {data.event.street}</Typography>
-                  <Typography> {data.event.postcode}</Typography>
+                  <Typography variant="h5">Hosted by</Typography>
+                  <Typography variant="h6">{data.event.organizer}</Typography>
+                  <Typography variant="h6">_______</Typography>
+                  <Typography variant="subtitle1">
+                    {data.event.street}
+                  </Typography>
+                  <Typography variant="h6">{data.event.city}</Typography>
+                  <Typography variant="h5"> {data.event.postcode}</Typography>
                 </div>
               </Paper>
             </Grid>

@@ -31,7 +31,7 @@ const Events = () => {
     console.log(data.events);
 
     return (
-      <div className="background">
+      <div>
         <MainContainer maxWidth={isMobile ? "sm" : "md"}>
           {data.events &&
             data.events.map((event) => (
