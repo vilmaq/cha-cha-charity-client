@@ -39,44 +39,6 @@ const Events = () => {
     };
 
     return (
-<<<<<<< HEAD
-      <>
-        HELLO WORLD
-        <div className="background">
-          <MainContainer maxWidth={isMobile ? "sm" : "md"}>
-            {/* <div>
-            <input
-              type="text"
-              value={search}
-              onChange={e => handleSearch(e)}
-              placeholder="Search by Event Type"
-            ></input>
-          </div> */}
-            <br></br>
-            {dynamicSearch().map((event) => {
-              return (
-                <EventCard
-                  id={event.id}
-                  key={event.id}
-                  name={event.name}
-                  description={event.description}
-                  day={event.day}
-                  street={event.street}
-                  postcode={event.postcode}
-                  city={event.city}
-                  country={event.country}
-                  organizer={event.organizer}
-                  creator={event.creator}
-                  imageUrl={event.imageUrl}
-                  isMyEvent={state.user && event.user.id === state.user.id}
-                  // participants: []
-                />
-              );
-            })}
-          </MainContainer>
-        </div>
-      </>
-=======
       <div>
         <MainContainer maxWidth={isMobile ? "sm" : "md"}>
           {data.events &&
@@ -100,7 +62,6 @@ const Events = () => {
             ))}
         </MainContainer>
       </div>
->>>>>>> df3582a8a85268b237484f95333b8a4e0dee3050
     );
   }
 };
