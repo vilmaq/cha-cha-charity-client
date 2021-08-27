@@ -12,9 +12,9 @@ export const eventCategories = [
     image: "environmental",
   },
   {
-    title: "Art and Culture",
-    value: "Art Culture",
-    description: "Art and Culture",
+    title: "Art",
+    value: "Art",
+    description: "Art",
     image: "arts",
   },
   {
