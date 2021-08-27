@@ -74,6 +74,7 @@ export const EVENT = gql`
       name
       description
       day
+      time
       street
       postcode
       city
