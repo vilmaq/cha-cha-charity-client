@@ -90,7 +90,7 @@ const Dashboard = () => {
           </Paper>
         </Grid>
         <Grid container>
-          <Grid className={classes.events}>
+          <Grid item sm={9} className={classes.events}>
             <MainContainer maxWidth={isMobile ? "sm" : "md"}>
               {data.events &&
                 data.events.map((event) => (
