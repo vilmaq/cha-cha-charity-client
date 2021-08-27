@@ -95,8 +95,7 @@ const Dashboard = () => {
     return <div>Error</div>;
   }
 
-  console.log(data1, data2);
-  console.log(data2.user.fullName);
+  console.log(data1 && data2);
   return (
     <Container className={classes.root}>
       <div>
