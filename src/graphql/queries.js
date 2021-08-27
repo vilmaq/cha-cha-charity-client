@@ -143,29 +143,13 @@ export const MY_EVENTS_AND_USER = gql`
       name
       description
       day
-      time
-      street
-      postcode
       city
-      country
       organizer
       creator {
         id
         type
-        fullName
-        phoneNumber
-        city
-        country
-        bio
-        imageUrl
       }
       imageUrl
-      participants {
-        id
-        type
-        fullName
-        email
-      }
     }
     user(id: $userId) {
       id
@@ -173,8 +157,6 @@ export const MY_EVENTS_AND_USER = gql`
       fullName
       email
       phoneNumber
-      street
-      postcode
       city
       country
       imageUrl

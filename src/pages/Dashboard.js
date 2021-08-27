@@ -79,9 +79,6 @@ const Dashboard = () => {
   if (error) {
     return <div>Error</div>;
   }
-
-  console.log(data);
-  console.log(data.user.fullName);
   return (
     <Container className={classes.root}>
       <div>
@@ -133,6 +130,7 @@ const Dashboard = () => {
                   />
                   <CardContent className={classes.details}>
                     <Typography variant="h5">{data.user.fullName}</Typography>
+                    <Typography variant="body1">{data.user.type}</Typography>
                     <Typography variant="h6">
                       {data.user.phoneNumber}
                     </Typography>
