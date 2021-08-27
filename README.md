@@ -36,7 +36,6 @@ Click [here]() to view the project on Heroku.
   - [Running the project](#running-the-project)
   - [Variables](#variables)
   - [Mutations](#mutations)
-  - [Screenshots](#screenshots)
 
 ## Link to deployed react app
 
@@ -59,11 +58,26 @@ $ npm i
 - This is a website on which any user, any company or any charity organization could come and enter the details of any event or participate in any event.
 
 - Homepage - Whenever anyone comes to the homepage, they could see the categories with a button "Learn More". As per their choice, they could click on the button of the category of their choice and they will be moved to the next page where various events related to that category will be rendered.
+
+- ![image](./public/assets/images/homepage-cha.png)
+
 - Events page - On this page, anyone could see the various events related to the category clicked.
 - Category - In the navbar, you could see a button named category. If you click on that, then it shows a dropdown list of various categories. You just need to click on any category and it will show the events related to that category.
--
+- See More - If any user clicks on the see more button, they will move to a new page where they could see full details related to that category.
+- Sign up - If anyone clicks on sign up button,they will be moved to the sign up page.
+- Event Detail Page - On this page, anyone could see the day, date and time about the event and they could register for the same by clicking on the sign up button on that page.
+- Sign up page - If anyone comes to this page, they have to enter the personal/official details and also the categories about which they want to get information.
 
-![image](./public/assets/images/create-quiz.png)
+- ![image](./public/assets/images/signup-cha.png)
+
+- Login page - After sign up, user comes to the login page where they just have to enter their username and password and click on login button.
+
+- ![image](./public/assets/images/login-cha.png)
+
+- Dashboard - Whenever user is logged in, they reach dashboard page where they could see create event button and various events for which they have shown their interest.
+- Any user could enjoy adding on events to their homepage and they could create multiple events. If there us a charity company or an organization who wants to organize and event and see how many participants are there. It will be easy for them through this website.
+
+- ![image](./public/assets/images/dashboard-cha.png)
 
 ## Technology/Framework used
 
@@ -190,5 +204,3 @@ mutation Mutation($updateEventInput: UpdateEvent!) {
 }
 
 ```
-
-## Screenshots
