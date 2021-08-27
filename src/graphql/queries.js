@@ -134,3 +134,51 @@ export const USER = gql`
     }
   }
 `;
+
+export const MY_EVENTS_AND_USER = gql`
+  query Query($eventsCategory: String!, $eventsCreatorId: ID, $userId: ID!) {
+    events(category: $eventsCategory, creatorId: $eventsCreatorId) {
+      id
+      type
+      name
+      description
+      day
+      time
+      street
+      postcode
+      city
+      country
+      organizer
+      creator {
+        id
+        type
+        fullName
+        phoneNumber
+        city
+        country
+        bio
+        imageUrl
+      }
+      imageUrl
+      participants {
+        id
+        type
+        fullName
+        email
+      }
+    }
+    user(id: $userId) {
+      id
+      type
+      fullName
+      email
+      phoneNumber
+      street
+      postcode
+      city
+      country
+      imageUrl
+      bio
+    }
+  }
+`;
