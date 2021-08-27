@@ -91,6 +91,8 @@ const SingleEvent = () => {
 
   console.log(data);
 
+  const handleSignup = () => {};
+
   return (
     <div className={classes.root}>
       <section className={"header-container"}>
@@ -106,6 +108,7 @@ const SingleEvent = () => {
           {/* this button will save the event for the user to my events */}
 
           <Button
+            onClick={handleSignUp}
             className={classes.eventButton}
             variant="contained"
             href="/signupfor"

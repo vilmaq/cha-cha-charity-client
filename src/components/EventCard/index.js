@@ -16,6 +16,7 @@ import { useHistory } from "react-router";
 import { userContext, useUserContext } from "../../contexts/UserProvider";
 
 import "./eventcard.css";
+import { identifier } from "stylis";
 
 const useStyles = makeStyles({
   root: {
@@ -64,21 +65,18 @@ const EventCard = ({
   const [signUpToEvent] = useMutation(SIGNUPTOEVENT, {
     onCompleted: (data) => {
       console.log(data);
-      history.push(`event/${data.eventId}`);
+      history.push(`/event/${data.signUpToEvent.id}`);
     },
     onError: (error) => {
       console.log(error);
     },
   });
 
-  const handleSignUpToEvent = async (formData) => {
+  const handleSignUpToEvent = async (event) => {
     await signUpToEvent({
       variables: {
-        signUpToEvent: {
-          formData,
-          // userId: state.user.id,
-          // eventId: id,
-        },
+        signUpToEventUserId: state.user.id,
+        signUpToEventEventId: event.currentTarget.id,
       },
     });
   };
@@ -141,6 +139,7 @@ const EventCard = ({
         <CardActions className={classes.links}>
           <Link style={{ textDecoration: "none" }}>
             <Button
+              id={id}
               size="small"
               onClick={handleSignUpToEvent}
               style={{ color: "#f36b7f" }}
@@ -148,7 +147,7 @@ const EventCard = ({
               Sign Up
             </Button>
           </Link>
-          <Link href={"/event/" + id} style={{ textDecoration: "none" }}>
+          <Link href={`/event/${id}`} style={{ textDecoration: "none" }}>
             <Button size="small" style={{ color: "#f36b7f" }}>
               See More
             </Button>
