@@ -65,16 +65,16 @@ $ npm i
 - Cha-Cha-Charity is an application which helps to connect and bring together everyone in multiple events.
 - This is a website on which any user, any company or any charity organization could come and enter the details of any event or participate in any event.
 
-- Homepage - Whenever anyone comes to the homepage, they could see the categories with a button "Learn More". As per their choice, they could click on the button of the category of their choice and they will be moved to the next page where various events related to that category will be rendered.
+- **Homepage** - Whenever anyone comes to the homepage, they could see the categories with a button "Learn More". As per their choice, they could click on the button of the category of their choice and they will be moved to the next page where various events related to that category will be rendered.
 
 ![image](./public/assets/images/homepage-cha.png)
 
-- Events page - On this page, anyone could see the various events related to the category clicked.
-- Category - In the navbar, you could see a button named category. If you click on that, then it shows a dropdown list of various categories. You just need to click on any category and it will show the events related to that category.
-- See More - If any user clicks on the see more button, they will move to a new page where they could see full details related to that category.
-- Sign up - If anyone clicks on sign up button,they will be moved to the sign up page.
-- Event Detail Page - On this page, anyone could see the day, date and time about the event and they could register for the same by clicking on the sign up button on that page.
-- Sign up page - If anyone comes to this page, they have to enter the personal/official details and also the categories about which they want to get information.
+- **Events page** - On this page, anyone could see the various events related to the category clicked.
+- **Category** - In the navbar, you could see a button named category. If you click on that, then it shows a dropdown list of various categories. You just need to click on any category and it will show the events related to that category.
+- **See More Button** - If any user clicks on the see more button, they will move to a new page where they could see full details related to the category they clicked.
+- **Sign up** - If anyone clicks on sign up button,they will be moved to the sign up page.
+- **Event Detail Page** - On this page, anyone could see the day, date and time about the event and they could register for the same by clicking on the sign up button on that page.
+- **Dashboard page** - If anyone comes to this page, they have to enter the personal/official details and also the categories about which they want to get information.
 
 ![image](./public/assets/images/signup-cha.png)
 
@@ -219,29 +219,29 @@ mutation Mutation($updateEventInput: UpdateEvent!) {
 
 ## Project Documentation
 
-Cha-Cha-Charity is an interesting and connecting website.
+Cha-Cha-Charity is interesting and it connects everyone in a single website.
 
 - Cha-Cha-Charity is an application which connects everyone together. Any volunteer, charity organization or any company could come on our website and save the events in which they are interested. They could save selected events in their homepage and view the details at any point of time.
-- Anyone could create events and see the day and date of that event and also the participants.
+- Anyone could create events and see the day and date of that event, participate in an event and also see the number of participants in that event.
 
 ## Objectives
 
-- Interesting create event with day and date.
+- Interesting - let user to create event with day and date.
 - Allow user to save their events for future.
-- Enhance user experience by adding and saving multiple events .
+- Enhance user experience by adding and saving multiple events.
 
 ## Getting started
 
 We started with the project with the following steps:
 
 ```
-$ cd client
-$ npm i
-$ npm run start
-
 $ cd server
 $ npm i
 $ npm run dev
+
+$ cd client
+$ npm i
+$ npm run start
 
 ```
 
@@ -264,35 +264,38 @@ Cha-Cha-Charity is a wonderful website which brings everyone together. It gives 
 
 ## User Journey
 
-**Make a search** - User could use this website easily on his mobile, tablet or computer and play a quiz according to their interest.
+**Easier to use** - Our website is easily accessible and easy to user for any charity organization, volunteer and organization.
 
-**Create Quizzes** - User could move to the dashboard and create quizzes by either using the API or by writing the questions.
+**Make a search** - User could use this website easily on his mobile, tablet or computer and participate in any event according to their interest, by clicking on any category of event.
 
-**Playing Quizzes** - User could click on the play button and he will be moved to the question's page where he could see the timer for the quiz.
+**Personal Information** - User could see their name, address and contact number on the dashboard when hey sign in.
 
-**Remove created quiz** - User could easily remove a quiz by clicking on "Delete" button.
+**Create Events** - User could also create events in the dashboard by adding information related to the event details in an event form, image upload and then just ticking the terms and conditions and then clicking on "Create event" button.
+
+**Delete or upload an image** - It is easy to delete or upload an image while creating an event. User just needs to click on the button "Delete" or "upload and the same action will be done.
 
 ## Project Retrospective
 
-- Tri-via-hub is a wonderful platform which helps people learn more.
-- It is an interactive app which increases the knowledge and creates interest in various fields.
-- It depends on the interests and various activities which everyone used to do.-
+- Cha-Cha-Charity is a wonderful platform which helps people come together and collect for a charity.
+- It is an interactive app which depends on the interest of people in charity.
+- It connects human of any age and organizations and bring them together.
 
 ## Improvements to be made
 
 This project could be improved by adding
 
-- Rating of every quiz
-- Connect with other users.
-- API accessibility
+- Connect to stripe for donations.
+- Pre Process legal documentation of a registered charity.
+- Adding a delete and upload event button.
+- Connect with other website's like WhatsApp, Instagram and Twitter.
 
 **Lessons learnt**
 
 We learned about various things:
 
-- Related to API - We looked into influence of an API on the project.
-- Stringify the answers in database as they were stored in an array.
-- Some features had to be cut due to time frame.
+- Related to Apollo GraphQL.
+- Legal challenges
+- Creating models
 
 **Timeline**
 Every task was given a limited time and whole team has been into the project. So, everyone completed the task and helped each other in a great manner.
@@ -301,14 +304,16 @@ Every task was given a limited time and whole team has been into the project. So
 
 **Objectives were achieved as below:**
 
-- Our website instantly grabs user towards various quizzes related to various streams.
+- Any Volunteer,Charity or Business could easily access the application and participate or host into various events related to charity.
 
-- It adds the cards to dashboard page after completing the quiz.
+- Anyone could participate in various charitable events and can also create their own event.
 
-- It removes a quiz easily from dashboard page by clicking on "Delete" button easily.
+- It adds the selected events to the dashboard page.
 
-- It shows created quiz and played quizzes on the same page.
+- It easily delete or update the events by clicking on "Delete" button and "update" button while creating an event.
+
+- It shows selected events in which any user wants to participate or volunteer on the dashboard.
 
 - It easily comes back to the home page.
 
-- It easily allows to sign up and logout.
+- It easily allows to sign up, login and logout.
