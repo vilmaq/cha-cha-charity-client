@@ -29,7 +29,6 @@ Click [here]() to view the project on Heroku.
 - [Cha Cha Charity](#cha-cha-charity)
   - [Project link](#project-link)
   - [Table of Contents](#table-of-contents)
-  - [Link to deployed react app](#link-to-deployed-react-app)
   - [Getting started](#getting-started)
   - [About](#about)
   - [Technology/Framework used](#technologyframework-used)
@@ -44,8 +43,6 @@ Click [here]() to view the project on Heroku.
   - [Project Retrospective](#project-retrospective)
   - [Improvements to be made](#improvements-to-be-made)
   - [Results](#results)
-
-## Link to deployed react app
 
 ## Getting started
 
@@ -72,9 +69,10 @@ $ npm i
 - **Events page** - On this page, anyone could see the various events related to the category clicked.
 - **Category** - In the navbar, you could see a button named category. If you click on that, then it shows a dropdown list of various categories. You just need to click on any category and it will show the events related to that category.
 - **See More Button** - If any user clicks on the see more button, they will move to a new page where they could see full details related to the category they clicked.
-- **Sign up** - If anyone clicks on sign up button,they will be moved to the sign up page.
+
 - **Event Detail Page** - On this page, anyone could see the day, date and time about the event and they could register for the same by clicking on the sign up button on that page.
 - **Dashboard page** - If anyone comes to this page, they have to enter the personal/official details and also the categories about which they want to get information.
+- **Sign up page** - If anyone clicks on sign up button,they will be moved to the sign up page.
 
 ![image](./public/assets/images/signup-cha.png)
 
@@ -82,10 +80,18 @@ $ npm i
 
 ![image](./public/assets/images/login-cha.png)
 
-- Dashboard - Whenever user is logged in, they reach dashboard page where they could see create event button and various events for which they have shown their interest.
+- **Dashboard** - Whenever user is logged in, they reach dashboard page where they could see create event button and various events for which they have shown their interest.
 - Any user could enjoy adding on events to their homepage and they could create multiple events. If there us a charity company or an organization who wants to organize and event and see how many participants are there. It will be easy for them through this website.
 
 ![image](./public/assets/images/dashboard-cha.png)
+
+- **Create New Event** - Any user could click on the create event button on the dashboard. Then they will be moved to the form where they have to enter few details and click on the "create event" button and that event will be updated.
+
+![image](./public/assets/images/create-event.png)
+
+![image](./public/assets/images/create-event2.png)
+
+![image](./public/assets/images/create-event3.png)
 
 ## Technology/Framework used
 
