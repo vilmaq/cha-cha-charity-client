@@ -1,4 +1,4 @@
-# Cha cha charity
+# Cha Cha Charity
 
 - Cha-Cha-Charity is an application which connects everyone together.
 - Any volunteer, charity organization or any company could come on our website and click on any charity and they will be shown the related events.
@@ -26,7 +26,7 @@ Click [here]() to view the project on Heroku.
 
 ## Table of Contents
 
-- [Cha cha charity](#cha-cha-charity)
+- [Cha Cha Charity](#cha-cha-charity)
   - [Project link](#project-link)
   - [Table of Contents](#table-of-contents)
   - [Link to deployed react app](#link-to-deployed-react-app)
@@ -59,7 +59,7 @@ $ npm i
 
 - Homepage - Whenever anyone comes to the homepage, they could see the categories with a button "Learn More". As per their choice, they could click on the button of the category of their choice and they will be moved to the next page where various events related to that category will be rendered.
 
-- ![image](./public/assets/images/homepage-cha.png)
+![image](./public/assets/images/homepage-cha.png)
 
 - Events page - On this page, anyone could see the various events related to the category clicked.
 - Category - In the navbar, you could see a button named category. If you click on that, then it shows a dropdown list of various categories. You just need to click on any category and it will show the events related to that category.
@@ -68,16 +68,16 @@ $ npm i
 - Event Detail Page - On this page, anyone could see the day, date and time about the event and they could register for the same by clicking on the sign up button on that page.
 - Sign up page - If anyone comes to this page, they have to enter the personal/official details and also the categories about which they want to get information.
 
-- ![image](./public/assets/images/signup-cha.png)
+![image](./public/assets/images/signup-cha.png)
 
 - Login page - After sign up, user comes to the login page where they just have to enter their username and password and click on login button.
 
-- ![image](./public/assets/images/login-cha.png)
+![image](./public/assets/images/login-cha.png)
 
 - Dashboard - Whenever user is logged in, they reach dashboard page where they could see create event button and various events for which they have shown their interest.
 - Any user could enjoy adding on events to their homepage and they could create multiple events. If there us a charity company or an organization who wants to organize and event and see how many participants are there. It will be easy for them through this website.
 
-- ![image](./public/assets/images/dashboard-cha.png)
+![image](./public/assets/images/dashboard-cha.png)
 
 ## Technology/Framework used
 
