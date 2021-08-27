@@ -99,37 +99,38 @@ export const EVENT = gql`
   }
 `;
 
-//original EVENT query
-// export const EVENT = gql`
-//   query Query($id: ID!) {
-//     event(id: id) {
-//       id
-//       type
-//       name
-//       description
-//       day
-//       street
-//       postcode
-//       city
-//       country
-//       organizer
-//       creator {
-//         id
-//         type
-//         name
-//         fullName
-//         password
-//         email
-//       }
-//       imageUrl
-//       participants {
-//         id
-//         type
-//         name
-//         fullName
-//         password
-//         email
-//       }
-//     }
-//   }
-// `;
+export const USERS = gql`
+  query Query {
+    users {
+      id
+      type
+      fullName
+      email
+      phoneNumber
+      street
+      postcode
+      city
+      country
+      imageUrl
+      bio
+    }
+  }
+`;
+
+export const USER = gql`
+  query Query($userId: ID!) {
+    user(id: $userId) {
+      id
+      type
+      fullName
+      email
+      phoneNumber
+      street
+      postcode
+      city
+      country
+      imageUrl
+      bio
+    }
+  }
+`;
