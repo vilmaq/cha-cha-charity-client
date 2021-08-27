@@ -145,7 +145,7 @@ const SingleEvent = () => {
                   style={{ color: "#82b5a5" }}
                 />
                 <Typography variant="h6">
-                  {data.event.participants.length} attending
+                  {data.event.participants.length} participating
                 </Typography>
               </div>
             </Paper>
@@ -158,7 +158,7 @@ const SingleEvent = () => {
               <Paper>
                 <article className={classes.attendTitle}>
                   <Typography variant="h6">
-                    See who's already attending!
+                    See who's already participating!
                   </Typography>
                 </article>
                 <article className={classes.attendants}>
