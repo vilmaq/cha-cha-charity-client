@@ -7,7 +7,7 @@ import Typed from "react-typed";
 
 const Home = () => {
   return (
-    <div className="background">
+    <div>
       <div className="main">
         <h1 className="header">Cha-Cha-Charity!</h1>
         <Typed

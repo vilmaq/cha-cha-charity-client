@@ -8,7 +8,7 @@ const SignUp = () => {
   const isMobile = useMediaQuery(MOBILE_BREAKPOINT);
 
   return (
-    <div className="background">
+    <div>
       <Container
         maxWidth={isMobile ? "sm" : "md"}
         style={{ paddingTop: "16px" }}
