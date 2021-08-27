@@ -15,6 +15,7 @@ import Button from "@material-ui/core/Button";
 import EventCard from "../components/EventCard";
 import { useQuery } from "@apollo/client";
 import { MY_EVENTS } from "../graphql/queries";
+import { USER } from "../graphql/queries";
 import { useUserContext } from "../contexts/UserProvider";
 
 const useStyles = makeStyles((theme) => ({
@@ -64,21 +65,38 @@ const Dashboard = () => {
   const classes = useStyles();
   const { state } = useUserContext();
 
-  const { data, loading, error } = useQuery(MY_EVENTS, {
-    variables: {
-      eventsCreatorId: state.user.id,
-      eventsCategory: "all",
-    },
-  });
+  const Queries = () => {
+    const data1 = useQuery(MY_EVENTS, {
+      variables: {
+        eventsCreatorId: state.user.id,
+        eventsCategory: "all",
+      },
+    });
 
-  if (loading) {
+    const data2 = useQuery(USER, {
+      variables: {
+        userId: state.user.id,
+      },
+    });
+
+    return [data1, data2];
+  };
+
+  const [
+    { data: data1, loading: loading1, error: error1 },
+    { data: data2, loading: loading2, error: error2 },
+  ] = Queries();
+
+  if (loading1 && loading2) {
     return <div>Loading...</div>;
   }
 
-  if (error) {
+  if (error1 && error2) {
     return <div>Error</div>;
   }
 
+  console.log(data1, data2);
+  console.log(data2.user.fullName);
   return (
     <Container className={classes.root}>
       <div>
@@ -92,8 +110,8 @@ const Dashboard = () => {
         <Grid container>
           <Grid item sm={9} className={classes.events}>
             <MainContainer maxWidth={isMobile ? "sm" : "md"}>
-              {data.events &&
-                data.events.map((event) => (
+              {data1.events &&
+                data1.events.map((event) => (
                   <EventCard
                     id={event.id}
                     key={event.id}
@@ -114,38 +132,32 @@ const Dashboard = () => {
           <Grid className={classes.user} item xs={4} sm={3}>
             <Grid>
               <Paper className={classes.myInfo}>
-                {data.events.map((event) => (
-                  <Card>
-                    <CardContent>
-                      <Typography variant="subtitle1">
-                        My Info
-                        <EditRoundedIcon />
-                      </Typography>
-                    </CardContent>
-                    <CardMedia
-                      component="img"
-                      alt="event-image"
-                      height="250"
-                      image={event.creator.imageUrl}
-                      title="event-image"
-                    />
-                    <CardContent className={classes.details}>
-                      <Typography variant="h5">
-                        {event.creator.fullName}
-                      </Typography>
-                      <Typography variant="h6">
-                        {event.creator.phoneNumber}
-                      </Typography>
-                      <Typography variant="h6">{event.creator.city}</Typography>
-                      <Typography variant="h6">
-                        {event.creator.country}
-                      </Typography>
-                      <Typography variant="subtitle2">
-                        {event.creator.bio}
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                ))}
+                <Card>
+                  <CardContent>
+                    <Typography variant="subtitle1">
+                      My Info
+                      <EditRoundedIcon />
+                    </Typography>
+                  </CardContent>
+                  <CardMedia
+                    component="img"
+                    alt="event-image"
+                    height="250"
+                    image={data2.user.imageUrl}
+                    title="event-image"
+                  />
+                  <CardContent className={classes.details}>
+                    <Typography variant="h5">{data2.user.fullName}</Typography>
+                    <Typography variant="h6">
+                      {data2.user.phoneNumber}
+                    </Typography>
+                    <Typography variant="h6">{data2.user.city}</Typography>
+                    <Typography variant="h6">{data2.user.country}</Typography>
+                    <Typography variant="subtitle2">
+                      {data2.user.bio}
+                    </Typography>
+                  </CardContent>
+                </Card>
               </Paper>
             </Grid>
 
