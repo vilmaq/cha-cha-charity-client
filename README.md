@@ -6,7 +6,9 @@
 
 ## Project link
 
-Click [here]() to view the project on Heroku.
+Click [here](https://aqueous-caverns-38523.herokuapp.com/) to view the server side of the project on Heroku.
+
+Click [here](https://sheltered-ocean-02593.herokuapp.com/) to view the server side of the project on Heroku.
 
 **Contributors**
 
