@@ -30,6 +30,14 @@ const useStyles = makeStyles((theme) => ({
       color: "#D3D9D9",
     },
   },
+  endButton: {
+    position: "absolute",
+    right: 40,
+    color: "white",
+    "&:hover": {
+      color: "#D3D9D9",
+    },
+  },
   expButton: {
     color: "black",
     "&:hover": {
@@ -87,9 +95,15 @@ const NavigationBar = () => {
               onClose={handleClose}
             >
               <MenuItem>
-                <Link color="inherit" href="/">
-                  Home
-                </Link>
+                {state.user ? (
+                  <Link color="inherit" href="/dashboard">
+                    Home
+                  </Link>
+                ) : (
+                  <Link color="inherit" href="/">
+                    Home
+                  </Link>
+                )}
               </MenuItem>
               {state.user ? (
                 <>
@@ -141,7 +155,7 @@ const NavigationBar = () => {
 
             {state.user ? (
               <Button
-                className={classes.navButton}
+                className={classes.endButton}
                 color="inherit"
                 onClick={handleLogout}
               >
@@ -150,14 +164,14 @@ const NavigationBar = () => {
             ) : (
               <>
                 <Button
-                  className={classes.navButton}
+                  className={classes.endButton}
                   color="inherit"
                   href="/login"
                 >
                   Login
                 </Button>
                 <Button
-                  className={classes.navButton}
+                  className={classes.endButton}
                   color="inherit"
                   href="/signup"
                 >
