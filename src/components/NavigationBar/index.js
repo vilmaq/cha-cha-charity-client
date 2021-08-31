@@ -39,7 +39,7 @@ const NavigationBar = () => {
   return (
     <div>
       <AppBar position="static" className={classes.navbar}>
-        <Toolbar>
+        <Toolbar className={classes.tool}>
           <IconButton
             edge="start"
             className={classes.menuButton}
@@ -48,16 +48,28 @@ const NavigationBar = () => {
           >
             <MenuIcon />
           </IconButton>
-          <Link href="/">
-            <IconButton className={classes.title}>
-              <img
-                src={charityLogo}
-                alt="logo"
-                style={{ width: "40px", height: "40px" }}
-              />
-            </IconButton>
+          <Link className={classes.title}>
+            <img
+              src={charityLogo}
+              alt="logo"
+              style={{ width: "40px", height: "40px" }}
+            />
           </Link>
-          <Button color="inherit">Login</Button>
+
+          {state.user ? (
+            <Button href="/dashboard">Home</Button>
+          ) : (
+            <Button href="/">Home</Button>
+          )}
+          <CategoryMenu />
+          {state.user ? (
+            <Button onClick={handleLogout}>Logout</Button>
+          ) : (
+            <>
+              <Button href="/login">Login</Button>
+              <Button href="/signup">Sign Up</Button>
+            </>
+          )}
         </Toolbar>
       </AppBar>
 
