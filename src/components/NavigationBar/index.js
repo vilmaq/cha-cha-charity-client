@@ -126,6 +126,7 @@ const NavigationBar = () => {
                 </>
               )}
             </Menu>
+            <CategoryMenu />
           </Toolbar>
         ) : (
           <Toolbar>
