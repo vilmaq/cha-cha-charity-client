@@ -1,40 +1,48 @@
 import React from "react";
+import { useMediaQuery } from "react-responsive";
+import { MOBILE_BREAKPOINT } from "../../mediaQueries";
 
 // material-ui
-
 import { makeStyles } from "@material-ui/core/styles";
-import {
-  AppBar,
-  Link,
-  Toolbar,
-  Typography,
-  Button,
-  IconButton,
-} from "@material-ui/core";
+import { AppBar, Link, Toolbar, Typography, Button } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
 
 import { useUserContext } from "../../contexts/UserProvider";
 import CategoryMenu from "./CategoryMenu";
 import charityLogo from "../../images/charityLogo.png";
 
 const useStyles = makeStyles((theme) => ({
-  root: {},
+  root: {
+    backgroundColor: "yellow",
+  },
   navbar: {
     backgroundColor: "#353535",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-around",
   },
+  tool: {},
   navButton: {
     color: "white",
     "&:hover": {
       color: "#D3D9D9",
     },
   },
-  signNav: {
-    position: "absolute",
-    right: 30,
+  expButton: {
+    color: "black",
+    "&:hover": {
+      color: "#D3D9D9",
+    },
+  },
+  dropMenu: {
+    color: "black",
   },
 }));
 
 const NavigationBar = () => {
+  const isMobile = useMediaQuery(MOBILE_BREAKPOINT);
   const classes = useStyles();
   const { state, dispatch } = useUserContext();
 
@@ -43,42 +51,94 @@ const NavigationBar = () => {
     dispatch({ type: "LOGOUT" });
   };
 
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <div>
       <AppBar position="static" className={classes.navbar}>
-        <Toolbar className={classes.tool}>
-          <IconButton
-            color="inherit"
-            edge="start"
-            className={classes.menuButton}
-            aria-label="menu"
-          >
-            <MenuIcon />
-          </IconButton>
-          <Link>
+        {isMobile ? (
+          <Toolbar>
             <img
               src={charityLogo}
               alt="logo"
-              style={{ width: "40px", height: "40px" }}
+              style={{ width: "60px", height: "60px" }}
             />
-          </Link>
-
-          {state.user ? (
             <Button
-              className={classes.navButton}
               color="inherit"
-              href="/dashboard"
+              aria-controls="simple-menu"
+              aria-haspopup="true"
+              onClick={handleClick}
             >
-              Home
+              <MenuIcon />
             </Button>
-          ) : (
-            <Button className={classes.navButton} color="inherit" href="/">
-              Home
-            </Button>
-          )}
-          <Button color="inherit">See Events:</Button>
-          <CategoryMenu />
-          <div className={classes.signNav}>
+            <Menu
+              className={classes.dropMenu}
+              anchorEl={anchorEl}
+              keepMounted
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
+            >
+              <MenuItem>
+                <Link color="inherit" href="/">
+                  Home
+                </Link>
+              </MenuItem>
+              {state.user ? (
+                <>
+                  <MenuItem>
+                    <Link color="inherit" onClick={handleLogout}>
+                      Logout
+                    </Link>
+                  </MenuItem>
+                </>
+              ) : (
+                <>
+                  <MenuItem>
+                    <Link color="inherit" href="/login">
+                      Login
+                    </Link>
+                  </MenuItem>
+                  <MenuItem>
+                    <Link color="inherit" href="/signup">
+                      Sign Up
+                    </Link>
+                  </MenuItem>
+                </>
+              )}
+            </Menu>
+          </Toolbar>
+        ) : (
+          <Toolbar>
+            <img
+              src={charityLogo}
+              alt="logo"
+              style={{ width: "60px", height: "60px" }}
+            />
+
+            {state.user ? (
+              <Button
+                className={classes.navButton}
+                color="inherit"
+                href="/dashboard"
+              >
+                Home
+              </Button>
+            ) : (
+              <Button className={classes.navButton} color="inherit" href="/">
+                Home
+              </Button>
+            )}
+            <Button color="inherit">See Events:</Button>
+            <CategoryMenu />
+
             {state.user ? (
               <Button
                 className={classes.navButton}
@@ -105,8 +165,8 @@ const NavigationBar = () => {
                 </Button>
               </>
             )}
-          </div>
-        </Toolbar>
+          </Toolbar>
+        )}
       </AppBar>
     </div>
   );
