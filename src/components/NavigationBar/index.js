@@ -1,8 +1,4 @@
 import React from "react";
-// import Navbar from "react-bootstrap/Navbar";
-// import Container from "react-bootstrap/Container";
-// import Nav from "react-bootstrap/Nav";
-// import Button from "react-bootstrap/Button";
 
 // material-ui
 
@@ -22,8 +18,19 @@ import CategoryMenu from "./CategoryMenu";
 import charityLogo from "../../images/charityLogo.png";
 
 const useStyles = makeStyles((theme) => ({
+  root: {},
   navbar: {
     backgroundColor: "#353535",
+  },
+  navButton: {
+    color: "white",
+    "&:hover": {
+      color: "#D3D9D9",
+    },
+  },
+  signNav: {
+    position: "absolute",
+    right: 30,
   },
 }));
 
@@ -41,9 +48,9 @@ const NavigationBar = () => {
       <AppBar position="static" className={classes.navbar}>
         <Toolbar className={classes.tool}>
           <IconButton
+            color="inherit"
             edge="start"
             className={classes.menuButton}
-            color="inherit"
             aria-label="menu"
           >
             <MenuIcon />
@@ -57,65 +64,50 @@ const NavigationBar = () => {
           </Link>
 
           {state.user ? (
-            <Button href="/dashboard">Home</Button>
+            <Button
+              className={classes.navButton}
+              color="inherit"
+              href="/dashboard"
+            >
+              Home
+            </Button>
           ) : (
-            <Button href="/">Home</Button>
+            <Button className={classes.navButton} color="inherit" href="/">
+              Home
+            </Button>
           )}
+          <Button color="inherit">See Events:</Button>
           <CategoryMenu />
-          {state.user ? (
-            <Button onClick={handleLogout}>Logout</Button>
-          ) : (
-            <>
-              <Button href="/login">Login</Button>
-              <Button href="/signup">Sign Up</Button>
-            </>
-          )}
+          <div className={classes.signNav}>
+            {state.user ? (
+              <Button
+                className={classes.navButton}
+                color="inherit"
+                onClick={handleLogout}
+              >
+                Logout
+              </Button>
+            ) : (
+              <>
+                <Button
+                  className={classes.navButton}
+                  color="inherit"
+                  href="/login"
+                >
+                  Login
+                </Button>
+                <Button
+                  className={classes.navButton}
+                  color="inherit"
+                  href="/signup"
+                >
+                  Sign Up
+                </Button>
+              </>
+            )}
+          </div>
         </Toolbar>
       </AppBar>
-
-      {/* <Navbar
-        collapseOnSelect
-        expand="lg"
-        bg="dark"
-        variant="dark"
-        style={{ zIndex: "100" }}
-      >
-        <Container>
-          <Navbar.Brand href="/">
-            <img
-              src={charityLogo}
-              alt="logo"
-              style={{ width: "40px", height: "40px" }}
-            />
-          </Navbar.Brand>
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="me-auto">
-              <Nav.Link href="/">Home</Nav.Link>
-              <Nav.Link href="/events/all" page="events">
-                Events
-              </Nav.Link>
-
-              {state.user ? (
-                <Button
-                  variant="link"
-                  className="nav-link"
-                  onClick={handleLogout}
-                  style={{ textAlign: "left" }}
-                >
-                  Logout
-                </Button>
-              ) : (
-                <>
-                  <Nav.Link href="/login">Login</Nav.Link>
-                  <Nav.Link href="/signup">Sign Up</Nav.Link>
-                </>
-              )}
-            </Nav>
-            <CategoryMenu />
-          </Navbar.Collapse>
-        </Container>
-      </Navbar> */}
     </div>
   );
 };
