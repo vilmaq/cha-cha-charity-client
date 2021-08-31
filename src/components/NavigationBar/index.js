@@ -121,9 +121,7 @@ const NavigationBar = () => {
                     </Link>
                   </MenuItem>
                   <MenuItem>
-                    <Link color="inherit" href="/signup">
-                      Sign Up
-                    </Link>
+                    <Link href="/signup">Sign Up</Link>
                   </MenuItem>
                 </>
               )}
