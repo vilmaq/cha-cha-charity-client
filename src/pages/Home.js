@@ -1,4 +1,5 @@
 import { Container } from "@material-ui/core";
+import Typography from "@material-ui/core/Typography";
 import CategoryCard from "../components/CategoryCard/CategoryCard";
 import MainContainer from "../components/MainContainer";
 import { eventCategories } from "../data";
@@ -9,24 +10,33 @@ const Home = () => {
   return (
     <div>
       <div className="main">
-        <h1 className="header">Cha-Cha-Charity!</h1>
         <Typed
           className="text-typed"
           strings={[
-            "Cha Cha Charity, where charity begins!",
-            "Being human is given but keeping our humanity is a choice",
-            "Show compassion and the will to help others",
+            "We only have what we give",
+            "Cha-Cha-Charity, where charity begins!",
+            "Only a life lived for others is a life worthwhile",
+            "No act of kindness, no matter how small, is ever wasted",
+            "We can't help everyone, but everyone can help someone",
+            "It is when you give of yourself that you truly give",
+            "No one need wait a single moment to improve the world",
           ]}
           typeSpeed={40}
           backSpeed={50}
           loop
         />
         <section className="intro">
-          Welcome to cha-cha-charity and Enjoy connecting and meeting other's.
-          Cha-cha-charity is a website which connects a charity to a company and
-          volunteers. Anyone could click and add a charity event or participate
-          in any event easily through our website. Anyone could save the events
-          after completing the sign up or login.
+          <Typography variant="h5">Welcome to Cha-Cha-Charity! </Typography>
+          <Typography>
+            The best way to engage with charitable events, or even host your own
+            and support a worthy cause. Whether that might be as a Volunteer,
+            Business or a Charity.
+          </Typography>
+          <Typography>
+            Our main aim is to facilitate connections between those seeking to
+            make a positive difference in the world.
+          </Typography>
+          <Typography variant="h6">Join us in making it happen!</Typography>
         </section>
       </div>
       <MainContainer>
