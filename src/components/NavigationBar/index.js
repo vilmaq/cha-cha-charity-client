@@ -161,22 +161,14 @@ const NavigationBar = () => {
                 Logout
               </Button>
             ) : (
-              <>
-                <Button
-                  className={classes.endButton}
-                  color="inherit"
-                  href="/login"
-                >
+              <div className={classes.endButton}>
+                <Button color="inherit" href="/login">
                   Login
                 </Button>
-                <Button
-                  className={classes.endButton}
-                  color="inherit"
-                  href="/signup"
-                >
+                <Button color="inherit" href="/signup">
                   Sign Up
                 </Button>
-              </>
+              </div>
             )}
           </Toolbar>
         )}
