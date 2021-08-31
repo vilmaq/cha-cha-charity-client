@@ -55,7 +55,7 @@ const NavigationBar = () => {
           >
             <MenuIcon />
           </IconButton>
-          <Link className={classes.title}>
+          <Link>
             <img
               src={charityLogo}
               alt="logo"
