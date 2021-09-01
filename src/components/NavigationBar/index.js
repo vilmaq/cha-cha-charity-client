@@ -4,7 +4,7 @@ import { MOBILE_BREAKPOINT } from "../../mediaQueries";
 
 // material-ui
 import { makeStyles } from "@material-ui/core/styles";
-import { AppBar, Link, Toolbar, Typography, Button } from "@material-ui/core";
+import { AppBar, Link, Toolbar, Button } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
