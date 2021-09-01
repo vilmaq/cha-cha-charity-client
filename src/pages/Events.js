@@ -28,6 +28,7 @@ const Events = () => {
   }
 
   if (data) {
+    console.log(data.events);
     // const handleSearch = event => {
     //   setSearch(event.target.value);
     // };
