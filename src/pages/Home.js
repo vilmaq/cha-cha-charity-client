@@ -6,8 +6,16 @@ import MainContainer from "../components/MainContainer";
 import { eventCategories } from "../data";
 import "./home.css";
 import Typed from "react-typed";
+import connect from "../assets/images/illustrations/whole-images/connect.png";
 
 const useStyles = makeStyles((theme) => ({
+  main: {
+    paddingTop: 10,
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+  },
   intro: {
     width: 450,
     padding: 20,
@@ -23,7 +31,8 @@ const Home = () => {
   const classes = useStyles();
   return (
     <div>
-      <div className="main">
+      <div className={classes.main}>
+        <img src={connect} alt="connect"></img>
         <Typography>
           <Typed
             className="text-typed"
@@ -42,11 +51,10 @@ const Home = () => {
           />
         </Typography>
         <section className={classes.intro}>
-          <Typography variant="h5">Welcome to Cha-Cha-Charity! </Typography>
           <Typography>
-            The best way to engage with charitable events, or even host your own
-            and support a worthy cause. Whether that might be as a Volunteer,
-            Business or a Charity.
+            Engage with charitable events, or even host your own and support a
+            worthy cause. Whether that might be as a Volunteer, Business or a
+            Charity.
           </Typography>
           <Typography>
             Our main aim is to facilitate connections between those seeking to

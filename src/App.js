@@ -19,7 +19,7 @@ const theme = createTheme({
   typography: {
     fontFamily: ["Barlow", "sans-serif"].join(","),
     h6: {
-      fontWeight: 500,
+      fontWeight: 600,
     },
   },
 });
