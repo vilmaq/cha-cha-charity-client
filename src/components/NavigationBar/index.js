@@ -11,7 +11,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 
 import { useUserContext } from "../../contexts/UserProvider";
 import CategoryMenu from "./CategoryMenu";
-import charityLogo from "../../images/charityLogo.png";
+import charityLogo from "../../assets/images/charityLogo.png";
 
 const useStyles = makeStyles((theme) => ({
   root: {
