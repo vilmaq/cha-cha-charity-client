@@ -91,7 +91,7 @@ const steps = ["Event Form", "Image Upload", "Terms & Conditions"];
 export default function CreateNewEvent() {
   const { state } = useUserContext();
   let history = useHistory();
-  console.log(state);
+
   const classes = useStyles();
   const [activeStep, setActiveStep] = useState(0);
   const today = new Date();
