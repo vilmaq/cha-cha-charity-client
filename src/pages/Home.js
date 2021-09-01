@@ -1,5 +1,11 @@
 import { Container } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { useMediaQuery } from "react-responsive";
+import {
+  MOBILE_BREAKPOINT,
+  TABLET_BREAKPOINT,
+  DESKTOP_BREAKPOINT,
+} from "../mediaQueries";
 import Typography from "@material-ui/core/Typography";
 import CategoryCard from "../components/CategoryCard/CategoryCard";
 import MainContainer from "../components/MainContainer";
@@ -28,11 +34,16 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Home = () => {
+  const isMobile = useMediaQuery(MOBILE_BREAKPOINT);
+  const isTablet = useMediaQuery(TABLET_BREAKPOINT);
+  const isDesktop = useMediaQuery(DESKTOP_BREAKPOINT);
   const classes = useStyles();
   return (
     <div>
       <div className={classes.main}>
-        <img src={connect} alt="connect"></img>
+        {isMobile && <img src={connect} width="200" alt="connect" />}
+        {isTablet && <img src={connect} width="350" alt="connect" />}
+        {isDesktop && <img src={connect} alt="connect" />}
         <Typography>
           <Typed
             className="text-typed"
