@@ -23,21 +23,13 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     justifyContent: "space-around",
   },
-  tool: {},
   navButton: {
     color: "white",
     "&:hover": {
       color: "#D3D9D9",
     },
   },
-  endButton: {
-    position: "absolute",
-    right: 40,
-    color: "white",
-    "&:hover": {
-      color: "#D3D9D9",
-    },
-  },
+  endNavs: { position: "absolute", right: 40 },
   expButton: {
     color: "black",
     "&:hover": {
@@ -153,19 +145,29 @@ const NavigationBar = () => {
             <CategoryMenu />
 
             {state.user ? (
-              <Button
-                className={classes.endButton}
-                color="inherit"
-                onClick={handleLogout}
-              >
-                Logout
-              </Button>
+              <div className={classes.endNavs}>
+                <Button
+                  className={classes.navButton}
+                  color="inherit"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </Button>
+              </div>
             ) : (
-              <div className={classes.endButton}>
-                <Button color="inherit" href="/login">
+              <div className={classes.endNavs}>
+                <Button
+                  className={classes.navButton}
+                  color="inherit"
+                  href="/login"
+                >
                   Login
                 </Button>
-                <Button color="inherit" href="/signup">
+                <Button
+                  className={classes.navButton}
+                  color="inherit"
+                  href="/signup"
+                >
                   Sign Up
                 </Button>
               </div>
