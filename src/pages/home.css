@@ -10,20 +10,8 @@
   margin: 20px;
   text-transform: uppercase;
 }
-.intro {
-  width: 60%;
-  text-align: center;
-  padding: 20px;
-  margin: 20px;
-}
-.main {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
 
 .text-typed {
-  font-size: 2rem;
+  font-size: 2.5rem;
   color: #353535;
 }
